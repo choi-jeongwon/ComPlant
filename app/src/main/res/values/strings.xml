@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">ComPlant</string>
+
+
+    <!--    myPageMain-->
+    <string name="post">Post</string>
+    <string name="following">Following</string>
+    <string name="friends">Friends</string>
+    <string name="setting">Setting</string>
+    <string name="profile">Profile</string>
+    <string name="count_0">0</string>
+    <string name="profile_name">profile_name</string>
+
 </resources>
