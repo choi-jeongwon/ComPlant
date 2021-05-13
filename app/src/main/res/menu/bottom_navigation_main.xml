@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/action_home"
+        android:id="@+id/action_board"
         android:icon="@drawable/ic_nav_board"
         android:enabled="true"
         android:title="@string/board"/>
     <item
-        android:id="@+id/action_search"
+        android:id="@+id/action_dictionary"
         android:icon="@drawable/ic_nav_dictionary"
         android:enabled="true"
         android:title="@string/dictionary"/>
     <item
-        android:id="@+id/action_add_photo"
+        android:id="@+id/action_home"
         android:icon="@drawable/ic_nav_home"
         android:enabled="true"
         android:title="@string/home"/>
     <item
-        android:id="@+id/action_favorite_alarm"
+        android:id="@+id/action_alarm"
         android:icon="@drawable/ic_nav_alarm"
         android:enabled="true"
         android:title="@string/alarm"/>
     <item
-        android:id="@+id/action_account"
+        android:id="@+id/action_diary"
         android:icon="@drawable/ic_nav_diary"
         android:enabled="true"
         android:title="@string/diary"/>
