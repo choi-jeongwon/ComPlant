@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">ComPlant</string>
 
+    <!-- navigation bar-->
+    <string name="board">board</string>
+    <string name="alarm">alarm</string>
+    <string name="diary">diary</string>
+    <string name="dictionary">dictionary</string>
+    <string name="home">home</string>
 
     <!--    myPageMain-->
     <string name="post">Post</string>
