@@ -1,10 +1,14 @@
 package com.example.complant
 
+import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.complant.navigation.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,8 +28,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         bottom_navigation.selectedItemId = R.id.action_home
 
         //스토리지 접근 권한 요청
-//        ActivityCompat.requestPermissions(this,
-//        arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
+        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),1)
     }
 
     fun setToolbarDefault() {
@@ -79,6 +82,14 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             }
         }
         return false
+    }
+
+    fun onChangeAddPhotoActivity() {
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            startActivity(Intent(this, AddPhotoActivity::class.java))
+        } else {
+            Toast.makeText(this, "스토리지 읽기 권한이 없습니다.", Toast.LENGTH_LONG).show()
+        }
     }
 
 }
