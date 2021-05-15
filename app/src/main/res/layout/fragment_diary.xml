@@ -3,12 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#AA2244">
+    android:orientation="vertical">
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/fragment_diary_recyclerview"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
-<!--    </androidx.recyclerview.widget.RecyclerView>-->
+    // DiaryFragment 에 사용할 RecyclerView 를 만들어줌
+    // 안에 들어갈 item 은 item_diary.xml 파일
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_diary_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>
