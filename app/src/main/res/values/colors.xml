@@ -17,4 +17,6 @@
     <color name="complantFirstColor">#36AC3B</color>
     <color name="complantSecondColor">#1DA322</color>
     <color name="complantThirdColor">#1F6822</color>
+
+    <color name="colorBlack">#000000</color>
 </resources>
