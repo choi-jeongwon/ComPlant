@@ -90,13 +90,20 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/temp_back_button"
+            android:id="@+id/temp_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="뒤로"
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentRight="true"/>
+
+            <Button
+                android:id="@+id/temp_follow_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="뒤로"
-                android:layout_marginLeft="20dp"
+                android:text="follow"
+                android:layout_marginLeft="2dp"
                 android:layout_alignParentRight="true"/>
-
 
         </LinearLayout>
     </RelativeLayout>
