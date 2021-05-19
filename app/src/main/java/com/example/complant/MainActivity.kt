@@ -92,4 +92,15 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
     }
 
+    // HomeFragment <-> MyPageFragment 이동 함수
+    fun goMyPage() {
+        val myPageFragment = MyPageFragment()
+        val transaction = supportFragmentManager.beginTransaction().add(R.id.main_content, myPageFragment).addToBackStack("mypage").commit()
+    }
+
+    //뒤로가기 함수
+    fun goBack() {
+        onBackPressed()
+    }
+
 }
