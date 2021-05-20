@@ -11,6 +11,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.complant.navigation.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.jar.Manifest
 
@@ -96,7 +97,11 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     // HomeFragment <-> MyPageFragment 이동 함수
     fun goMyPage() {
         val myPageFragment = MyPageFragment()
-        val transaction = supportFragmentManager.beginTransaction().add(R.id.main_content, myPageFragment).addToBackStack("mypage").commit()
+        var bundle = Bundle()
+        var uid = FirebaseAuth.getInstance().currentUser?.uid
+        bundle.putString("destinationUid", uid)
+        myPageFragment.arguments = bundle
+        supportFragmentManager.beginTransaction().add(R.id.main_content, myPageFragment).addToBackStack("mypage").commit()
     }
 
     //뒤로가기 함수
