@@ -78,6 +78,10 @@ class DiaryFragment : Fragment() {
             firestore?.collection("images")?.orderBy("timestamp")?.addSnapshotListener { value: QuerySnapshot?, error: FirebaseFirestoreException? ->
                 contentDTOs.clear()
                 contentUidList.clear()
+
+                // Sometimes, This code return null of querySnapshot when it signoutd
+                if (value == null) return@addSnapshotListener
+
                 for (snapshot in value!!.documents){
                     var item = snapshot.toObject(ContentDTO::class.java)
                     contentDTOs.add(item!!)
@@ -130,7 +134,19 @@ class DiaryFragment : Fragment() {
 //            //ProfileImage
 //            Glide.with(holder.itemView.context).load(contentDTOs!![position].imageUrl).into(viewholder.diaryitem_profile_image)
 
+            // 상대방의 프로필 이미지를 클릭하면 상대방의 유저 정보로 이동
+            viewholder.diaryitem_profile_image.setOnClickListener {
+                var fragment = MyPageFragment()
+                var bundle = Bundle()
+                bundle.putString("destinationUid", contentDTOs[position].uid)   // 이전 페이지에서 넘어온 값
+                bundle.putString("userId", contentDTOs[position].userId)     // 이메일 값
+                fragment.arguments = bundle
+                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.main_content, fragment)?.commit()
+            }
+
         }
+
+
         fun favoriteEvent(position: Int){
             var tsDoc = firestore?.collection("images")?.document(contentUidList[position])
             firestore?.runTransaction { transaction ->
