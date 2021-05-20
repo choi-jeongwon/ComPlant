@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         //스토리지 접근 권한 요청
         ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),1)
+
     }
 
     fun setToolbarDefault() {
