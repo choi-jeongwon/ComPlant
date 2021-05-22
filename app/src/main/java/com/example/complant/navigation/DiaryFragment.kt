@@ -132,41 +132,32 @@ class DiaryFragment : Fragment() {
                 viewholder.diaryitem_favorite_imageview.setImageResource(R.drawable.ic_favorite_border)
             }
 
-//            //ProfileImage
-//            Glide.with(holder.itemView.context).load(contentDTOs!![position].imageUrl).into(viewholder.diaryitem_profile_image)
+
 
             //Profile Image 가져오기(14강 6:26)
-//            firestore?.collection("profileImages")?.document(contentDTOs[position].uid!!)
-//                ?.get()?.addOnCompleteListener { task ->
-//                    if (task.isSuccessful) {
-//
-//                        val url = task.result!!["image"]
-//                        Glide.with(holder.itemView.context)
-//                            .load(url)
-//                            .apply(
-//                                RequestOptions()
-//                                    .circleCrop()
-//                            )
-//                            .into(viewholder.diaryitem_profile_image)
-//                    }
-//                }
+            firestore?.collection("profileImages")?.document(contentDTOs[position].uid!!)
+                ?.get()?.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+
+                        val url = task.result!!["image"]
+                        Glide.with(holder.itemView.context).load(url).apply(RequestOptions().circleCrop()).into(viewholder.diaryitem_profile_image)
+                    }
+                }
 
 
-//            //MyPageFragment 로 이동
+            //MyPageFragment 로 이동
             // 상대방의 프로필 이미지를 클릭하면 상대방의 유저 정보로 이동
-//            viewholder.diaryitem_profile_image.setOnClickListener {
-//
-//                val fragment = MyPageFragment()
-//                val bundle = Bundle()
-//
-//                bundle.putString("destinationUid", contentDTOs[position].uid)  // 이전 페이지에서 넘어온 값
-//                bundle.putString("userId", contentDTOs[position].userId)   // 이메일 값
-//
-//                fragment.arguments = bundle
-//                activity?.supportFragmentManager?.beginTransaction()
-//                    ?.replace(R.id.main_content, fragment)
-//                    ?.commit()
-//            }
+            viewholder.diaryitem_profile_image.setOnClickListener {
+
+                val fragment = MyPageFragment()
+                val bundle = Bundle()
+
+                bundle.putString("destinationUid", contentDTOs[position].uid)  // 이전 페이지에서 넘어온 값
+                bundle.putString("userId", contentDTOs[position].userId)   // 이메일 값
+
+                fragment.arguments = bundle
+                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.main_content, fragment)?.commit()
+            }
 
 
             viewholder.diaryitem_comment_imageview.setOnClickListener { v ->

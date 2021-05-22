@@ -76,22 +76,18 @@ class CommentActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             var view = holder.itemView
             view.commentviewitem_textview_comment.text = comments[position].comment
-//            view.commentviewitem_textview_profile.text = comments[position].userId
-//
-//            FirebaseFirestore.getInstance()
-//                .collection("profileImages")
-//                .document(comments[position].uid!!)
-//                .get()
-//                .addOnCompleteListener { task ->
-//                    if (task.isSuccessful) {
-//                        var url = task.result!!["images"]
-//                        Glide.with(holder.itemView.context)
-//                        .load(url)
-//                        .apply(RequestOptions()
-//                        .circleCrop())
-//                        .into(view.commentviewitem_textview_profile)
-//                    }
-//                }
+            view.commentviewitem_textview_profile.text = comments[position].userId
+
+            FirebaseFirestore.getInstance()
+                .collection("profileImages")
+                .document(comments[position].uid!!)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        var url = task.result!!["images"]
+                        Glide.with(holder.itemView.context).load(url).apply(RequestOptions().circleCrop()).into(view.commentviewitem_imageview_profile)
+                    }
+                }
         }
 
     }
