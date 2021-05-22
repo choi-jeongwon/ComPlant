@@ -29,8 +29,8 @@ import kotlinx.android.synthetic.main.item_diary.view.*
 
 class DiaryFragment : Fragment() {
 
-    var firestore: FirebaseFirestore? = null
-    var uid: String? = null
+    var firestore : FirebaseFirestore? = null
+    var uid : String? = null
 
     //    일지작성 버튼 내용 시작
     var mainActivity: MainActivity? = null
@@ -69,9 +69,9 @@ class DiaryFragment : Fragment() {
     //    일지작성 버튼 내용 끝
 
     // diary RecyclerView
-    inner class DiaryRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-        var contentDTOs: ArrayList<ContentDTO> = arrayListOf()
-        var contentUidList: ArrayList<String> = arrayListOf()
+    inner class DiaryRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+        var contentDTOs : ArrayList<ContentDTO> = arrayListOf()
+        var contentUidList : ArrayList<String> = arrayListOf()
 
         init {
 
@@ -93,8 +93,7 @@ class DiaryFragment : Fragment() {
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            var view =
-                LayoutInflater.from(parent.context).inflate(R.layout.item_diary, parent, false)
+            var view = LayoutInflater.from(parent.context).inflate(R.layout.item_diary,parent,false)
             return CustomViewHolder(view)
         }
 
@@ -111,15 +110,13 @@ class DiaryFragment : Fragment() {
             viewholder.diaryitem_profile_textview.text = contentDTOs!![position].userId
 
             //Image
-            Glide.with(holder.itemView.context).load(contentDTOs!![position].imageUrl)
-                .into(viewholder.diaryitem_imageview_content)
+            Glide.with(holder.itemView.context).load(contentDTOs!![position].imageUrl).into(viewholder.diaryitem_imageview_content)
 
             //Explain of content
             viewholder.diaryitem_explain_textview.text = contentDTOs!![position].explain
 
             //likes
-            viewholder.diaryitem_favoritecounter_textview.text =
-                "Likes " + contentDTOs!![position].favoriteCount
+            viewholder.diaryitem_favoritecounter_textview.text = "Likes " + contentDTOs!![position].favoriteCount
 
             //'좋아요'버튼이 눌렸을 때의 이벤트
             viewholder.diaryitem_favorite_imageview.setOnClickListener {
@@ -127,15 +124,18 @@ class DiaryFragment : Fragment() {
             }
 
             //'좋아요'카운터와 하트가 색칠되거나 비어있는 이벤트
-            if (contentDTOs!![position].favorites.containsKey(uid)) {
+            if(contentDTOs!![position].favorites.containsKey(uid)){
                 //'좋아요'버튼 클릭한 부분
                 viewholder.diaryitem_favorite_imageview.setImageResource(R.drawable.ic_favorite)
-            } else {
+            }else{
                 //'좋아요'버튼 아직 클릭하지 않은 경우
                 viewholder.diaryitem_favorite_imageview.setImageResource(R.drawable.ic_favorite_border)
             }
 
-//            //Profile Image 가져오기(14강 6:26)
+//            //ProfileImage
+//            Glide.with(holder.itemView.context).load(contentDTOs!![position].imageUrl).into(viewholder.diaryitem_profile_image)
+
+            //Profile Image 가져오기(14강 6:26)
 //            firestore?.collection("profileImages")?.document(contentDTOs[position].uid!!)
 //                ?.get()?.addOnCompleteListener { task ->
 //                    if (task.isSuccessful) {
@@ -153,13 +153,14 @@ class DiaryFragment : Fragment() {
 
 
 //            //MyPageFragment 로 이동
+            // 상대방의 프로필 이미지를 클릭하면 상대방의 유저 정보로 이동
 //            viewholder.diaryitem_profile_image.setOnClickListener {
 //
 //                val fragment = MyPageFragment()
 //                val bundle = Bundle()
 //
-//                bundle.putString("destinationUid", contentDTOs[position].uid)
-//                bundle.putString("userId", contentDTOs[position].userId)
+//                bundle.putString("destinationUid", contentDTOs[position].uid)  // 이전 페이지에서 넘어온 값
+//                bundle.putString("userId", contentDTOs[position].userId)   // 이메일 값
 //
 //                fragment.arguments = bundle
 //                activity?.supportFragmentManager?.beginTransaction()
@@ -173,24 +174,25 @@ class DiaryFragment : Fragment() {
                 intent.putExtra("contentUid", contentUidList[position])
                 startActivity(intent)
             }
-        }
 
-        fun favoriteEvent(position: Int) {
+
+        }
+        fun favoriteEvent(position: Int){
             var tsDoc = firestore?.collection("images")?.document(contentUidList[position])
             firestore?.runTransaction { transaction ->
 
                 var contentDTO = transaction.get(tsDoc!!).toObject(ContentDTO::class.java)
 
-                if (contentDTO!!.favorites.containsKey(uid)) {
+                if(contentDTO!!.favorites.containsKey(uid)){
                     // '좋아요' 버튼이 클릭되어 있을 때(취소하는 이벤트 발생)
                     contentDTO?.favoriteCount = contentDTO?.favoriteCount - 1
                     contentDTO?.favorites.remove(uid)
-                } else {
+                }else {
                     // '좋아요' 버튼이 클릭되어 있지 않을 때(클릭하는 이벤트 발생)
                     contentDTO?.favoriteCount = contentDTO?.favoriteCount + 1
                     contentDTO?.favorites[uid!!] = true
                 }
-                transaction.set(tsDoc, contentDTO)
+                transaction.set(tsDoc,contentDTO)
             }
 
 
