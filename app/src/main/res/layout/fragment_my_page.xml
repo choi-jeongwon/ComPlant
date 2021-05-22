@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite">
@@ -43,9 +44,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
             android:layout_marginLeft="0dp"
-            android:layout_marginBottom="-6dp"
             android:layout_toRightOf="@+id/my_page_main_profile_image"
             android:paddingTop="50dp">
 
@@ -69,7 +68,7 @@
                     android:text="@string/count_0" />
             </LinearLayout>
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:id="@+id/friends"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,23 +86,62 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/count_0" />
+            </LinearLayout>-->
+
+            <LinearLayout
+                android:id="@+id/follower"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/follower" />
+
+                <TextView
+                    android:id="@+id/account_follower_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/count_0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/following"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/following" />
+
+                <TextView
+                    android:id="@+id/account_following_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/count_0" />
             </LinearLayout>
 
             <Button
-            android:id="@+id/temp_back_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="뒤로"
-            android:layout_marginLeft="20dp"
-            android:layout_alignParentRight="true"/>
+                android:id="@+id/temp_back_button"
+                android:layout_width="54dp"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="2dp"
+                android:text="뒤로" />
 
             <Button
                 android:id="@+id/temp_follow_button"
-                android:layout_width="wrap_content"
+                android:layout_width="64dp"
                 android:layout_height="wrap_content"
-                android:text="follow"
+                android:layout_alignParentRight="true"
                 android:layout_marginLeft="2dp"
-                android:layout_alignParentRight="true"/>
+                android:text="@string/follow" />
 
         </LinearLayout>
     </RelativeLayout>

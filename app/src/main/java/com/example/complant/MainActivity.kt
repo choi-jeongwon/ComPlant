@@ -1,5 +1,6 @@
 package com.example.complant
 
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +11,12 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.complant.navigation.*
+import com.google.android.gms.tasks.Task
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.jar.Manifest
 
@@ -32,7 +38,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     }
 
-    fun setToolbarDefault() {
+    // 툴바 기본 상태
+   fun setToolbarDefault() {
         toolbar_title_image.visibility = View.VISIBLE
         toolbar_btn_back.visibility = View.GONE
         toolbar_username.visibility = View.GONE
@@ -93,10 +100,14 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
     }
 
-    // HomeFragment <-> MyPageFragment 이동 함수
+    // HomeFragment -> MyPageFragment 이동 함수
     fun goMyPage() {
         val myPageFragment = MyPageFragment()
-        val transaction = supportFragmentManager.beginTransaction().add(R.id.main_content, myPageFragment).addToBackStack("mypage").commit()
+        var bundle = Bundle()
+        var uid = FirebaseAuth.getInstance().currentUser?.uid
+        bundle.putString("destinationUid", uid)
+        myPageFragment.arguments = bundle
+        supportFragmentManager.beginTransaction().add(R.id.main_content, myPageFragment).addToBackStack("mypage").commit()
     }
 
     //뒤로가기 함수
@@ -104,4 +115,21 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         onBackPressed()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // 원형 프로필 사진을 클릭했을 경우(프로필 사진 변경) 처리
+        if(requestCode == MyPageFragment.PICK_PROFILE_FROM_ALBUM && resultCode == Activity.RESULT_OK) {
+            var imageUri = data?.data
+            var uid = FirebaseAuth.getInstance().currentUser?.uid
+            var storageRef = FirebaseStorage.getInstance().reference.child("userProfileImages").child(uid!!) // 이미지를 저장할 폴더명 UserProfileImages
+            storageRef.putFile(imageUri!!).continueWithTask { task: Task<UploadTask.TaskSnapshot> ->
+                return@continueWithTask storageRef.downloadUrl
+            }.addOnSuccessListener { uri ->
+                var map = HashMap<String, Any>()
+                map["image"] = uri.toString()
+                FirebaseFirestore.getInstance().collection("profileImages").document(uid).set(map)
+            }
+        }
+    }
 }
