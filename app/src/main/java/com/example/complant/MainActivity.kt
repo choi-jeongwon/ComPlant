@@ -102,6 +102,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     // HomeFragment -> MyPageFragment 이동 함수
     fun goMyPage() {
+        //FragmentManager에 Bundle로 Data를 담아 전달
         val myPageFragment = MyPageFragment()
         var bundle = Bundle()
         var uid = FirebaseAuth.getInstance().currentUser?.uid
