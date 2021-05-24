@@ -133,7 +133,7 @@ class MyPageFragment : Fragment() {
             if(followDTO == null) { // followDTO 값이 아무것도 없을 때
                 followDTO = FollowDTO()
                 //followDTO!!.followingCount = 1
-               // followDTO!!.followings[uid!!] = true
+                //followDTO!!.followings[uid!!] = true
 
                 transaction.set(tsDocFollowing, followDTO) // 데이터가 DB에 담김
                 return@runTransaction
@@ -141,11 +141,12 @@ class MyPageFragment : Fragment() {
 
 
             if (followDTO.followings.containsKey(uid)) {
-                // 누군가가 나를 팔로우했을 때 이미 팔로우가 되어있으면 팔로우 취소가 됨
+                // 나의 follow 리스트에 상대방의 uid가 이미 있으면 팔로우 취소 처리
                // It remove following third person when a third person follow me
                 followDTO?.followingCount = followDTO?.followingCount - 1
                 followDTO?.followings.remove(uid!!)
-            } else { // 누군가가 나를 팔로우했을 때 처음이면 팔로우 됨
+            } else {
+                // 나의 follow 리스트에 상대방의 uid가 없으면 팔로우 처리
                 // It add following third person when a third person do not follow me
                 followDTO?.followingCount = followDTO?.followingCount + 1
                 followDTO?.followings[uid!!] = true
@@ -154,7 +155,6 @@ class MyPageFragment : Fragment() {
             return@runTransaction
         }
 
-        // 상대방 계정에 접속했을 경우
         // Save data to third person
         var tsDocFollower = firestore?.collection("users")?.document(uid!!)
         firestore?.runTransaction { transaction ->
@@ -162,20 +162,21 @@ class MyPageFragment : Fragment() {
 
             if(followDTO == null) {
                 followDTO = FollowDTO()
-               // followDTO!!.followerCount = 1
-             //   followDTO!!.followers[currentUserUid!!] = true
+                //followDTO!!.followerCount = 1
+                //followDTO!!.followers[currentUserUid!!] = true
 
                 transaction.set(tsDocFollower, followDTO!!)
                 return@runTransaction
             }
 
-            //상대방 계정에 내가 이미 팔로우 했을 경우 팔로우 취소
+            // 상대방의 follow 리스트에 나의 uid가 이미 있으면 팔로우 취소 처리
             if(followDTO!!.followers.containsKey(currentUserUid)) {
                 // It cancel my follower when I follow a third person
                 followDTO!!.followerCount = followDTO!!.followerCount - 1
                 followDTO!!.followers.remove(currentUserUid!!)
 
-            } else { // 내가 상대방 계정에 처음 팔로우 할 경우
+            } else {
+                // 상대방의 follow 리스트에 나의 uid가 없으면 팔로우 처리
                 // It add my follower when I don't follow a third person
                 followDTO!!.followerCount = followDTO!!.followerCount + 1
                 followDTO!!.followers[currentUserUid!!] = true
