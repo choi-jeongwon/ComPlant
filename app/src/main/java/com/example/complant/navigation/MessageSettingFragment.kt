@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.complant.MainActivity
 import com.example.complant.R
+import kotlinx.android.synthetic.main.fragment_message_setting.view.*
 
 class MessageSettingFragment : Fragment() {
     var mainActivity: MainActivity? = null
@@ -29,6 +31,12 @@ class MessageSettingFragment : Fragment() {
     ): View? {
         var view = LayoutInflater.from(activity).inflate(R.layout.fragment_message_setting, container, false)
 
+
+        view.btn_message_contents_update?.setOnClickListener {
+            // 수정하기
+           // mainActivity?.goMessageListFragment()
+            mainActivity?.goBack()
+        }
         return view
     }
 }

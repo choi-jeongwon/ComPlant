@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentManager
 import com.example.complant.navigation.*
 import com.google.android.gms.tasks.Task
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -40,12 +41,16 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             1
         )
 
+        toolbar_btn_back.setOnClickListener {
+            goBack()
+        }
+
     }
 
     // 툴바 기본 상태
     fun setToolbarDefault() {
         toolbar_title_image.visibility = View.VISIBLE
-        toolbar_btn_back.visibility = View.GONE
+        toolbar_btn_back.visibility = View.VISIBLE
         toolbar_username.visibility = View.GONE
     }
 
@@ -163,6 +168,15 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         val messageSettingFragment = MessageSettingFragment()
         supportFragmentManager.beginTransaction().add(R.id.main_content, messageSettingFragment)
             .addToBackStack("settingFragment").commit()
+
     }
 
+    //   MessageSettingFragment -> MessageListFragment 이동 함수
+//    fun goBackMessageListFragment() {
+//        val messageListFragment = MessageListFragment()
+//        var bundle = Bundle()
+//        //bundle.putString("")
+//        supportFragmentManager.beginTransaction().add(R.id.main_content, messageListFragment)
+//            .addToBackStack("settingFragment").commit()
+//    }
 }

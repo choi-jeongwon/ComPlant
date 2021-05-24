@@ -91,11 +91,6 @@ class MyPageFragment : Fragment() {
         fragmentView?.my_page_main_recyclerview?.adapter = MyPageFragmentRecyclerViewAdapter()
         fragmentView?.my_page_main_recyclerview?.layoutManager = GridLayoutManager(activity!!, 3) // 3개씩 뜨도록 설정
 
-        // 뒤로가기 버튼 클릭 시 뒤로 이동
-        fragmentView?.temp_back_button?.setOnClickListener{
-            mainActivity?.goBack()
-        }
-
         // 프로필 이미지 클릭 시 프로필 이미지 수정
         fragmentView?.my_page_main_profile_image?.setOnClickListener {
             var photoPickerIntent = Intent(Intent.ACTION_PICK) // 이미지 고르기
