@@ -126,15 +126,14 @@ class MyPageFragment : Fragment() {
 
     // 나중에 수정할 것. requestFollow(), getFollowerAndFollowing() 수정하기
     fun requestFollow() {
-        // 타인이 나를 팔로우
         // Save data to my account
         var tsDocFollowing = firestore?.collection("users")?.document(currentUserUid!!)
         firestore?.runTransaction { transaction ->
             var followDTO = transaction.get(tsDocFollowing!!).toObject(FollowDTO::class.java)
             if(followDTO == null) { // followDTO 값이 아무것도 없을 때
                 followDTO = FollowDTO()
-                followDTO!!.followingCount = 1
-                followDTO!!.followers[uid!!] = true
+                //followDTO!!.followingCount = 1
+               // followDTO!!.followings[uid!!] = true
 
                 transaction.set(tsDocFollowing, followDTO) // 데이터가 DB에 담김
                 return@runTransaction
@@ -145,11 +144,11 @@ class MyPageFragment : Fragment() {
                 // 누군가가 나를 팔로우했을 때 이미 팔로우가 되어있으면 팔로우 취소가 됨
                // It remove following third person when a third person follow me
                 followDTO?.followingCount = followDTO?.followingCount - 1
-                followDTO?.followers.remove(uid)
+                followDTO?.followings.remove(uid!!)
             } else { // 누군가가 나를 팔로우했을 때 처음이면 팔로우 됨
                 // It add following third person when a third person do not follow me
                 followDTO?.followingCount = followDTO?.followingCount + 1
-                followDTO?.followers[uid!!] = true
+                followDTO?.followings[uid!!] = true
             }
             transaction.set(tsDocFollowing, followDTO)
             return@runTransaction
@@ -163,8 +162,8 @@ class MyPageFragment : Fragment() {
 
             if(followDTO == null) {
                 followDTO = FollowDTO()
-                followDTO!!.followerCount = 1
-                followDTO!!.followers[currentUserUid!!] = true
+               // followDTO!!.followerCount = 1
+             //   followDTO!!.followers[currentUserUid!!] = true
 
                 transaction.set(tsDocFollower, followDTO!!)
                 return@runTransaction
