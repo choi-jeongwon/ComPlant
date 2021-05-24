@@ -38,6 +38,7 @@
             android:textSize="25dp" />
 
         <EditText
+            android:id="@+id/txt_message_date"
             android:layout_width="180dp"
             android:layout_height="60dp"
             android:freezesText="true"
@@ -46,6 +47,7 @@
             android:textSize="23dp" />
 
         <Button
+            android:id="@+id/btn_message_date"
             android:layout_width="60dp"
             android:layout_height="50dp"
             android:layout_marginLeft="20dp"
@@ -72,6 +74,7 @@
             android:textSize="25dp" />
 
         <EditText
+            android:id="@+id/txt_start_time"
             android:layout_width="180dp"
             android:layout_height="60dp"
             android:freezesText="true"
@@ -80,6 +83,7 @@
             android:textSize="23dp" />
 
         <Button
+            android:id="@+id/btn_start_time"
             android:layout_width="60dp"
             android:layout_height="50dp"
             android:layout_marginLeft="20dp"
@@ -107,6 +111,7 @@
             />
 
         <EditText
+            android:id="@+id/txt_end_time"
             android:layout_width="180dp"
             android:layout_height="60dp"
             android:freezesText="true"
@@ -115,6 +120,7 @@
             android:textSize="23dp" />
 
         <Button
+            android:id="@+id/btn_end_time"
             android:gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -134,9 +140,18 @@
         android:textSize="25dp"/>
 
     <EditText
+        android:id="@+id/message_contents_input"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="190dp"
         android:layout_margin="15dp"
         android:text="어쩌구 저쩌구"/>
+
+    <Button
+        android:id="@+id/btn_message_contents_update"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="변경" />
 
 </LinearLayout>

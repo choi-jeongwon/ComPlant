@@ -18,7 +18,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.complant.LoginActivity
 import com.example.complant.MainActivity
 import com.example.complant.R
-import com.example.complant.SettingActivity
 import com.example.complant.navigation.model.ContentDTO
 import com.example.complant.navigation.model.FollowDTO
 import com.google.firebase.auth.FirebaseAuth
@@ -40,7 +39,7 @@ class MyPageFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        mainActivity = activity as MainActivity?
+        mainActivity = context as MainActivity?
     }
 
     override fun onDetach() {
@@ -104,10 +103,9 @@ class MyPageFragment : Fragment() {
             activity?.startActivityForResult(photoPickerIntent, PICK_PROFILE_FROM_ALBUM)
         }
 
-        //setting 클릭 시 SettingActivity로 이동
-        fragmentView?.setting_button?.setOnClickListener { v ->
-            var intent = Intent(v.context, SettingActivity::class.java)
-            startActivity(intent)
+        //setting 클릭 시 SettingFragment로 이동
+        fragmentView?.setting_button?.setOnClickListener {
+            mainActivity?.goSettingFragment()
         }
 
         getProfileImage()

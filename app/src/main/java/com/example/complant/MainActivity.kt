@@ -34,12 +34,16 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         bottom_navigation.selectedItemId = R.id.action_home
 
         //스토리지 접근 권한 요청
-        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),1)
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
+            1
+        )
 
     }
 
     // 툴바 기본 상태
-   fun setToolbarDefault() {
+    fun setToolbarDefault() {
         toolbar_title_image.visibility = View.VISIBLE
         toolbar_btn_back.visibility = View.GONE
         toolbar_username.visibility = View.GONE
@@ -47,7 +51,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         setToolbarDefault()
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.action_board -> {
                 var boardFragment = BoardFragment()
                 supportFragmentManager
@@ -93,7 +97,11 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     fun onChangeAddPhotoActivity() {
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
             startActivity(Intent(this, AddPhotoActivity::class.java))
         } else {
             Toast.makeText(this, "스토리지 읽기 권한이 없습니다.", Toast.LENGTH_LONG).show()
@@ -108,7 +116,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         var uid = FirebaseAuth.getInstance().currentUser?.uid
         bundle.putString("destinationUid", uid)
         myPageFragment.arguments = bundle
-        supportFragmentManager.beginTransaction().add(R.id.main_content, myPageFragment).addToBackStack("mypage").commit()
+        supportFragmentManager.beginTransaction().add(R.id.main_content, myPageFragment)
+            .addToBackStack("mypage").commit()
     }
 
     //뒤로가기 함수
@@ -120,10 +129,11 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         super.onActivityResult(requestCode, resultCode, data)
 
         // 원형 프로필 사진을 클릭했을 경우(프로필 사진 변경) 처리
-        if(requestCode == MyPageFragment.PICK_PROFILE_FROM_ALBUM && resultCode == Activity.RESULT_OK) {
+        if (requestCode == MyPageFragment.PICK_PROFILE_FROM_ALBUM && resultCode == Activity.RESULT_OK) {
             var imageUri = data?.data
             var uid = FirebaseAuth.getInstance().currentUser?.uid
-            var storageRef = FirebaseStorage.getInstance().reference.child("userProfileImages").child(uid!!) // 이미지를 저장할 폴더명 UserProfileImages
+            var storageRef = FirebaseStorage.getInstance().reference.child("userProfileImages")
+                .child(uid!!) // 이미지를 저장할 폴더명 UserProfileImages
             storageRef.putFile(imageUri!!).continueWithTask { task: Task<UploadTask.TaskSnapshot> ->
                 return@continueWithTask storageRef.downloadUrl
             }.addOnSuccessListener { uri ->
@@ -133,4 +143,26 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             }
         }
     }
+
+    //   MyPageFragment -> SettingFragment 이동 함수
+    fun goSettingFragment() {
+        val settingFragment = SettingFragment()
+        supportFragmentManager.beginTransaction().add(R.id.main_content, settingFragment)
+            .addToBackStack("settingFragment").commit()
+    }
+
+    //   SettingFragment -> MessageListFragment 이동 함수
+    fun goMessageListFragment() {
+        val messageListFragment = MessageListFragment()
+        supportFragmentManager.beginTransaction().add(R.id.main_content, messageListFragment)
+            .addToBackStack("settingFragment").commit()
+    }
+
+    //   MessageListFragment -> MessageSettingFragment 이동 함수
+    fun goMessageSettingFragment() {
+        val messageSettingFragment = MessageSettingFragment()
+        supportFragmentManager.beginTransaction().add(R.id.main_content, messageSettingFragment)
+            .addToBackStack("settingFragment").commit()
+    }
+
 }
