@@ -23,23 +23,28 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_margin="10dp"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_setting_person"/>
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_setting_person" />
 
         <Button
-            android:layout_margin="10dp"
-            android:layout_gravity="center"
+            android:id="@+id/btn_id_pw_setting"
+            style="?android:borderlessButtonStyle"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
             android:text="ID / PW 변경"
-            android:textSize="19dp"
-            style="?android:borderlessButtonStyle"/>
+            android:textSize="19dp" />
     </LinearLayout>
 
     <View
@@ -49,20 +54,25 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_margin="10dp"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
             android:src="@drawable/ic_setting_person_dash"/>
 
         <Button
+            android:id="@+id/btn_quit_setting"
             android:layout_margin="10dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:text="회원 탈퇴"
             android:textSize="19dp"
             style="?android:borderlessButtonStyle"/>
@@ -79,19 +89,24 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_margin="10dp"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
             android:src="@drawable/ic_setting_main_message"/>
 
         <Button
-            android:layout_margin="10dp"
-            android:layout_gravity="center"
+            android:id="@+id/btn_main_message_setting"
+            style="?android:borderlessButtonStyle"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
             android:text="메인 메시지 설정"
-            android:textSize="19dp"
-            style="?android:borderlessButtonStyle"/>
+            android:textSize="19dp" />
     </LinearLayout>
 
     <View
@@ -101,20 +116,25 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
             android:src="@drawable/ic_setting_profile_image" />
 
         <Button
+            android:id="@+id/btn_profile_image_setting"
             android:layout_margin="10dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:text="프로필 사진 변경"
             android:textSize="19dp"
             style="?android:borderlessButtonStyle"/>
@@ -127,20 +147,25 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_margin="10dp"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
             android:src="@drawable/ic_setting_plant_name"/>
 
         <Button
+            android:id="@+id/btn_plant_name_setting"
             android:layout_margin="10dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:text="반려식물 별칭 변경"
             android:textSize="19dp"
             style="?android:borderlessButtonStyle"/>

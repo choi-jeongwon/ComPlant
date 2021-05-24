@@ -18,6 +18,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.complant.LoginActivity
 import com.example.complant.MainActivity
 import com.example.complant.R
+import com.example.complant.SettingActivity
 import com.example.complant.navigation.model.ContentDTO
 import com.example.complant.navigation.model.FollowDTO
 import com.google.firebase.auth.FirebaseAuth
@@ -98,9 +99,15 @@ class MyPageFragment : Fragment() {
 
         // 프로필 이미지 클릭 시 프로필 이미지 수정
         fragmentView?.my_page_main_profile_image?.setOnClickListener {
-            var photoPickerIntent = Intent(Intent.ACTION_PICK)
+            var photoPickerIntent = Intent(Intent.ACTION_PICK) // 이미지 고르기
             photoPickerIntent.type = "image/*"
             activity?.startActivityForResult(photoPickerIntent, PICK_PROFILE_FROM_ALBUM)
+        }
+
+        //setting 클릭 시 SettingActivity로 이동
+        fragmentView?.setting_button?.setOnClickListener { v ->
+            var intent = Intent(v.context, SettingActivity::class.java)
+            startActivity(intent)
         }
 
         getProfileImage()
