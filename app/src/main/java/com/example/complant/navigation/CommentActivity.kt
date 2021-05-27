@@ -13,8 +13,10 @@ import com.example.complant.R
 import com.example.complant.navigation.model.ContentDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_add_photo.view.*
 import kotlinx.android.synthetic.main.activity_comment.*
 import kotlinx.android.synthetic.main.item_comment.view.*
+import kotlinx.android.synthetic.main.item_diary.view.*
 
 class CommentActivity : AppCompatActivity() {
     var contentUid : String? = null
@@ -75,19 +77,22 @@ class CommentActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             var view = holder.itemView
+
             view.commentviewitem_textview_comment.text = comments[position].comment
             view.commentviewitem_textview_profile.text = comments[position].userId
 
-            FirebaseFirestore.getInstance()
-                .collection("profileImages")
-                .document(comments[position].uid!!)
-                .get()
-                .addOnCompleteListener { task ->
+            //댓글 옆에 Profile Image 가져오기
+            FirebaseFirestore.getInstance()?.collection("profileImages")?.document(comments[position].uid!!)
+                ?.get()?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        var url = task.result!!["images"]
+
+                        val url = task.result!!["image"]
                         Glide.with(holder.itemView.context).load(url).apply(RequestOptions().circleCrop()).into(view.commentviewitem_imageview_profile)
                     }
                 }
+
+
+
         }
 
     }

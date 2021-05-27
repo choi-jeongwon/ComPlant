@@ -1,5 +1,6 @@
 package com.example.complant.navigation
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Layout
 import android.view.LayoutInflater
@@ -85,6 +86,12 @@ class DictionaryFragment : Fragment() {
             var viewholder = (holder as CustomViewHolder).itemView
 
             viewholder.plant_name.text = dictionaryDTOs!![position].plant_name
+
+
+            viewholder.dictionary_cardview.setOnClickListener { v ->
+                var intent = Intent(v.context, DetailDictionaryActivity::class.java)
+                startActivity(intent)
+            }
         }
 
 

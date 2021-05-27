@@ -101,6 +101,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         return false
     }
 
+    // DiaryFragment -> AddphotoActivity 이동 함수
     fun onChangeAddPhotoActivity() {
         if (ContextCompat.checkSelfPermission(
                 this,
