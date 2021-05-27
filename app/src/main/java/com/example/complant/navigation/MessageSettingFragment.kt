@@ -34,7 +34,10 @@ class MessageSettingFragment : Fragment() {
 
         view.btn_message_contents_update?.setOnClickListener {
             // 수정하기
-           // mainActivity?.goMessageListFragment()
+
+            val bundle = Bundle()
+            //bundle.putString("")
+            //mainActivity?.goMessageListFragment()
             mainActivity?.goBack()
         }
         return view
