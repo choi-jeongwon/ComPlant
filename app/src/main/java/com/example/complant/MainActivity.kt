@@ -163,6 +163,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             .addToBackStack("settingFragment").commit()
     }
 
+    fun goMessageListFragment1(messageListFragment: MessageListFragment) {
+
+        supportFragmentManager.beginTransaction().add(R.id.main_content, messageListFragment)
+            .addToBackStack("settingFragment").commit()
+    }
+
     //   MessageListFragment -> MessageSettingFragment 이동 함수
     fun goMessageSettingFragment() {
         val messageSettingFragment = MessageSettingFragment()

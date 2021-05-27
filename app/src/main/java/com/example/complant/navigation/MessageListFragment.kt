@@ -14,12 +14,18 @@ import com.example.complant.navigation.model.ContentDTO
 import com.example.complant.navigation.model.MessageDTO
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_diary.view.*
+import kotlinx.android.synthetic.main.fragment_message_list.*
 import kotlinx.android.synthetic.main.fragment_message_list.view.*
 import kotlinx.android.synthetic.main.item_message.view.*
 
 class MessageListFragment : Fragment() {
     var mainActivity: MainActivity? = null
     var firestore : FirebaseFirestore? = null
+
+    var str1 : String? = null
+    var str2 : String? = null
+    var str3 : String? = null
+    var str4 : String? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -43,10 +49,21 @@ class MessageListFragment : Fragment() {
             mainActivity?.goMessageSettingFragment()
         }
 
+        str1 = arguments?.getString("message_date")
+        str2 = arguments?.getString("message_start_time")
+        str3 = arguments?.getString("message_end_time")
+        str4 = arguments?.getString("message_contents_input")
+
+        view.date.text = str1
+        view.start.text = str2
+        view.end.text = str3
+        view.contentssss.text = str4
 
 
-        view.fragment_message_recyclerview.adapter = MessageListRecyclerViewAdapter()
-        view.fragment_message_recyclerview.layoutManager = LinearLayoutManager(activity)
+
+
+       // view.fragment_message_recyclerview.adapter = MessageListRecyclerViewAdapter()
+      //  view.fragment_message_recyclerview.layoutManager = LinearLayoutManager(activity)
 
         return view
     }
