@@ -45,7 +45,14 @@ class MessageSettingFragment : Fragment() {
             var day = calendar.get(Calendar.DAY_OF_MONTH)
             
             var listener = DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
-                view.txt_message_date.setText("${i}-${i2 + 1}-${i3}")
+                if (i2 + 1 < 10 && i3 < 10)
+                    view.txt_message_date.setText("${i}-0${i2 + 1}-0${i3}")
+                else if (i2 + 1 < 10)
+                    view.txt_message_date.setText("${i}-0${i2 + 1}-${i3}")
+                else if (i3 < 10)
+                    view.txt_message_date.setText("${i}-${i2 + 1}-0${i3}")
+                else
+                    view.txt_message_date.setText("${i}-${i2 + 1}-${i3}")
             }
 
             var picker = DatePickerDialog(view.context, listener, year, month, day)
@@ -59,9 +66,24 @@ class MessageSettingFragment : Fragment() {
 
             var listener = TimePickerDialog.OnTimeSetListener { timePicker, i, i2 ->
                 if (i < 12) {
-                    view.txt_start_time.setText("오전 ${i}:${i2}")
+                    if (i < 10 && i2 < 10)
+                        view.txt_start_time.setText("오전 0${i}:0${i2}")
+                    else if (i < 10)
+                        view.txt_start_time.setText("오전 0${i}:${i2}")
+                    else if (i2 < 10)
+                        view.txt_start_time.setText("오전 ${i}:0${i2}")
+                    else
+                        view.txt_start_time.setText("오전 ${i}:${i2}")
+
                 } else {
-                    view.txt_start_time.setText("오후 ${i - 12}:${i2}")
+                    if (i - 12 < 10 && i2 < 10)
+                        view.txt_start_time.setText("오후 0${i - 12}:0${i2}")
+                    else if (i - 12 < 10)
+                        view.txt_start_time.setText("오후 0${i - 12}:${i2}")
+                    else if (i2 < 10)
+                        view.txt_start_time.setText("오후 ${i - 12}:0${i2}")
+                    else
+                        view.txt_start_time.setText("오후 ${i - 12}:${i2}")
                 }
             }
 
@@ -77,9 +99,24 @@ class MessageSettingFragment : Fragment() {
 
             var listener = TimePickerDialog.OnTimeSetListener { timePicker, i, i2 ->
                 if (i < 12) {
-                    view.txt_end_time.setText("오전 ${i}:${i2}")
+                    if (i < 10 && i2 < 10)
+                        view.txt_end_time.setText("오전 0${i}:0${i2}")
+                    else if (i < 10)
+                        view.txt_end_time.setText("오전 0${i}:${i2}")
+                    else if (i2 < 10)
+                        view.txt_end_time.setText("오전 ${i}:0${i2}")
+                    else
+                        view.txt_end_time.setText("오전 ${i}:${i2}")
+
                 } else {
-                    view.txt_end_time.setText("오후 ${i - 12}:${i2}")
+                    if (i - 12 < 10 && i2 < 10)
+                        view.txt_end_time.setText("오후 0${i - 12}:0${i2}")
+                    else if (i - 12 < 10)
+                        view.txt_end_time.setText("오후 0${i - 12}:${i2}")
+                    else if (i2 < 10)
+                        view.txt_end_time.setText("오후 ${i - 12}:0${i2}")
+                    else
+                        view.txt_end_time.setText("오후 ${i - 12}:${i2}")
                 }
             }
 
