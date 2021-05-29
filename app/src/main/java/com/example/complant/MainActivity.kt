@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         setToolbarDefault()
+
         when (item.itemId) {
             R.id.action_board -> {
                 var boardFragment = BoardFragment()
@@ -164,6 +165,15 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             .addToBackStack("settingFragment").commit()
     }
 
+    // MessageSettingFragment -> MessageListFragment 이동함수 (원하는 메시지 입력 후 데이터 보내기)
+    fun goMessageListFragment1(messageListFragment: MessageListFragment) {
+
+        supportFragmentManager.beginTransaction().add(R.id.main_content, messageListFragment)
+            .addToBackStack("settingFragment").commit()
+    }
+
+    // .hide(프래그먼트.this) 써보기
+
     //   MessageListFragment -> MessageSettingFragment 이동 함수
     fun goMessageSettingFragment() {
         val messageSettingFragment = MessageSettingFragment()
@@ -172,12 +182,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     }
 
-    //   MessageSettingFragment -> MessageListFragment 이동 함수
-//    fun goBackMessageListFragment() {
-//        val messageListFragment = MessageListFragment()
-//        var bundle = Bundle()
-//        //bundle.putString("")
-//        supportFragmentManager.beginTransaction().add(R.id.main_content, messageListFragment)
-//            .addToBackStack("settingFragment").commit()
-//    }
+    fun goHomeFragment(homeFragment: HomeFragment) {
+        supportFragmentManager.beginTransaction().add(R.id.main_content, homeFragment)
+            .addToBackStack("settingFragment").commit()
+    }
 }

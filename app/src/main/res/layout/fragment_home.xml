@@ -26,6 +26,36 @@
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_person_circle" />
+    <!--
+        <EditText
+            android:id="@+id/edit_timer"
+            android:inputType="number"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/main_account_button"
+            />
+
+        <Button
+            android:id="@+id/delete_create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="create"
+            android:layout_toRightOf="@id/edit_timer"
+            />
+        <Button
+            android:id="@+id/delete_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="update"
+            android:layout_toRightOf="@id/delete_create"
+            />
+        <Button
+            android:id="@+id/delete_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="cancel"
+            android:layout_toRightOf="@id/delete_update"
+            />-->
 
     <ImageView
         android:id="@+id/speech_box"
@@ -45,8 +75,11 @@
         android:layout_alignTop="@id/speech_box"
         android:layout_alignRight="@id/speech_box"
         android:layout_alignBottom="@id/speech_box"
-        android:gravity="center"
-        android:text="ddddddfdafdsafadfadddd" />
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="-3dp"
+        android:layout_marginBottom="0dp"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/plant_name"
