@@ -44,7 +44,7 @@
     <!--Contents-->
 
     <TextView
-        android:id="@+id/plant_name"
+        android:id="@+id/plant_name_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar_division"
@@ -55,10 +55,10 @@
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/plant_water_cycle"
+        android:id="@+id/plant_water_cycle_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/plant_name"
+        android:layout_below="@id/plant_name_layout"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:textSize="15sp"
@@ -66,17 +66,17 @@
 
 
     <ImageView
-        android:id="@+id/plant_image"
+        android:id="@+id/plant_image_layout"
         android:layout_width="400dp"
         android:layout_height="400dp"
-        android:layout_below="@id/plant_water_cycle"
+        android:layout_below="@id/plant_water_cycle_layout"
         android:src="@mipmap/ic_launcher"/>
     
     <TextView
-        android:id="@+id/plant_explain"
+        android:id="@+id/plant_explain_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/plant_image"
+        android:layout_below="@id/plant_image_layout"
         android:textSize="20sp"
         android:text="식물 설명" />
 

@@ -15,12 +15,16 @@ import com.example.complant.R
 import com.example.complant.navigation.model.ContentDTO
 import com.example.complant.navigation.model.DictionaryDTO
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_detail_dictionary.*
+import kotlinx.android.synthetic.main.activity_detail_dictionary.view.*
 import kotlinx.android.synthetic.main.fragment_dictionary.*
 import kotlinx.android.synthetic.main.fragment_dictionary.view.*
+import kotlinx.android.synthetic.main.item_dictionary.*
+import kotlinx.android.synthetic.main.item_dictionary.plant_name
 //import kotlinx.android.synthetic.main.fragment_dictionary.view.*
 //import kotlinx.android.synthetic.main.fragment_dictionary.view.*
 import kotlinx.android.synthetic.main.item_dictionary.view.*
-
+import kotlinx.android.synthetic.main.item_dictionary.view.plant_name
 
 
 class DictionaryFragment : Fragment() {
@@ -47,7 +51,6 @@ class DictionaryFragment : Fragment() {
     inner class DictionaryRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         // DictionaryDTO  클래스 ArrayList 생성
         var dictionaryDTOs: ArrayList<DictionaryDTO> = arrayListOf()
-
 
         init { // plantDictionary 의 문서를 불러온 뒤 DictionaryDTO 으로 변환해 ArrayList 에 담음
 
@@ -90,6 +93,10 @@ class DictionaryFragment : Fragment() {
 
             viewholder.dictionary_cardview.setOnClickListener { v ->
                 var intent = Intent(v.context, DetailDictionaryActivity::class.java)
+                intent.putExtra("plant_name", dictionaryDTOs!![position].plant_name)
+                intent.putExtra("plant_image", dictionaryDTOs!![position].plant_image)
+                intent.putExtra("plant_water_cycle", dictionaryDTOs!![position].plant_water_cycle)
+                intent.putExtra("plant_explain", dictionaryDTOs!![position].plant_explain)
                 startActivity(intent)
             }
         }

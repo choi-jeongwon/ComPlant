@@ -114,8 +114,8 @@ class DiaryFragment : Fragment() {
 
             //Explain of content
             viewholder.diaryitem_explain_textview.text = contentDTOs!![position].explain
-
-            //likes
+            //            //
+            //            //            //likes
             viewholder.diaryitem_favoritecounter_textview.text = "Likes " + contentDTOs!![position].favoriteCount
 
             //'좋아요'버튼이 눌렸을 때의 이벤트
