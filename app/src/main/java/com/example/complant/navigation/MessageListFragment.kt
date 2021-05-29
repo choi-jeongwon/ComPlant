@@ -15,7 +15,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_message_list.view.*
+import kotlinx.android.synthetic.main.item_message.*
 import kotlinx.android.synthetic.main.item_message.view.*
+import java.util.*
 import kotlin.collections.ArrayList
 
 class MessageListFragment : Fragment() {
@@ -112,6 +114,18 @@ class MessageListFragment : Fragment() {
             viewholder.message_start_time.text = messageDTOs!![position].startTime
             viewholder.message_end_time.text = messageDTOs!![position].endTime
             viewholder.message_contents.text = messageDTOs!![position].content
+
+            viewholder.message_contents.setOnClickListener {
+                var homeFragment = HomeFragment()
+                val bundle = Bundle()
+
+                bundle.putString("content", messageDTOs!![position].content)
+                homeFragment.arguments = bundle
+                mainActivity?.goHomeFragment(homeFragment)
+            }
+
+
+
         }
     }
 }
