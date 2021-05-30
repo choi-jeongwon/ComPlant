@@ -13,12 +13,23 @@
         app:mcv_selectionColor="@color/complantFourthColor"
         app:mcv_showOtherDates="all" />
 
-    <TextView
-        android:id="@+id/calendar_text"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="TextView"/>
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/calendar_text"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:text="TextView"/>
+        <Button
+            android:layout_marginLeft="20dp"
+            android:id="@+id/btn_watering_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="주기 설정"/>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

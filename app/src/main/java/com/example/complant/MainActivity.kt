@@ -186,4 +186,13 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         supportFragmentManager.beginTransaction().add(R.id.main_content, homeFragment)
             .addToBackStack("settingFragment").commit()
     }
+
+
+    // CalendarFragment -> WateringFragment 이동 함수
+    fun goWateringFragment() {
+        val wateringFragment = WateringFragment()
+        supportFragmentManager.beginTransaction().add(R.id.main_content, wateringFragment)
+            .addToBackStack("settingFragment").commit()
+    }
+
 }

@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".navigation.WateringFragment"></activity>
+        <activity android:name=".MainActivity2" />
         <activity android:name=".navigation.DetailDictionaryActivity" />
         <activity android:name=".navigation.CommentActivity" />
         <activity android:name=".navigation.AddPhotoActivity" />
