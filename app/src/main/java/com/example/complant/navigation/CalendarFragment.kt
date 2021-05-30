@@ -16,17 +16,25 @@ import android.widget.CalendarView
 import androidx.fragment.app.Fragment
 import com.example.complant.MainActivity
 import com.example.complant.R
+import com.example.complant.navigation.model.CalendarDTO
+import com.example.complant.navigation.model.MainPageDTO
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import com.prolificinteractive.materialcalendarview.spans.DotSpan
 import kotlinx.android.synthetic.main.fragment_calendar.view.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 import java.util.*
 import kotlin.collections.HashSet
 
 class CalendarFragment : Fragment() {
     var mainActivity: MainActivity? = null
+    var firestore: FirebaseFirestore? = null
+    var auth: FirebaseAuth? = null
+    var uid1 : String? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -45,9 +53,11 @@ class CalendarFragment : Fragment() {
     ): View? {
         var view =
             LayoutInflater.from(activity).inflate(R.layout.fragment_calendar, container, false)
+        firestore = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
+        uid1 = FirebaseAuth.getInstance().currentUser?.uid
 
         var timeCalendar = Calendar.getInstance()
-
         val currentYear = timeCalendar.get(Calendar.YEAR)
         val currentMonth = timeCalendar.get(Calendar.MONTH) + 1
         val currentDate = timeCalendar.get(Calendar.DATE)
@@ -78,8 +88,8 @@ class CalendarFragment : Fragment() {
                 var listener = object : DialogInterface.OnClickListener {
                     override fun onClick(p0: DialogInterface?, p1: Int) {
                         when (p1) {
-                            DialogInterface.BUTTON_POSITIVE ->
-                                view.calendar_text.text = "positive"
+//                            DialogInterface.BUTTON_POSITIVE ->
+//                                view.calendar_text.text = "positive"
                             DialogInterface.BUTTON_NEGATIVE ->
                                 mainActivity?.goWateringFragment()
                         }
@@ -92,45 +102,34 @@ class CalendarFragment : Fragment() {
                 builder.show()
             }
 
-//            if (date != CalendarDay.today()) { // 오늘이 아닌 다른 날짜를 클릭했을 때
-//                var selection: String? = date.toString()
-//                var selectedYear: String? = selection?.slice(IntRange(12, 15))
-//                var selectedMonth: String? = selection?.slice(IntRange(17, 19))
-//                var selectedDay: String? = selection?.slice(IntRange(21, 23))
-//
-//                var selectedDayTitle: String? =
-//                    selectedYear + "년 " + selectedMonth + "월 " + selectedDay + "일"
-//                // 다이얼로그
-//                var builder1 = AlertDialog.Builder(context)
-//                builder1.setTitle("1")
-//                builder1.setMessage("물 주기 시작 날짜를 변경하시겠습니까?")
-//                //builder.setIcon(R.mipmap.ic_launcher)
-//
-//                // 버튼 클릭시에 무슨 작업을 할 것인가!
-//                var listener2 = object : DialogInterface.OnClickListener {
-//                    override fun onClick(p0: DialogInterface?, p1: Int) {
-//                        when (p1) {
-//                            DialogInterface.BUTTON_POSITIVE ->
-//                                mainActivity?.goWateringFragment()
-//                            DialogInterface.BUTTON_NEGATIVE ->
-//                                view.calendar_text.text = "negative"
-//                        }
-//                    }
-//                }
-//
-//                builder1.setPositiveButton("예", listener2)
-//                builder1.setNegativeButton("아니오", listener2)
-//
-//                builder1.show()
-//            }
 
         }
 
 
-
+        // 주기 설정 버튼 클릭 시 wateringFragment로 이동
         view.btn_watering_setting.setOnClickListener {
             mainActivity?.goWateringFragment()
         }
+
+
+
+
+
+        firestore?.collection("calendar")?.document(uid1!!)?.addSnapshotListener { snapshot, e ->
+            if(snapshot == null) return@addSnapshotListener
+            var calendarDTO = snapshot.toObject(CalendarDTO::class.java)
+            if (calendarDTO?.wateringStartYear != null && calendarDTO?.wateringStartMonth != null && calendarDTO?.wateringStartDay != null && calendarDTO?.wateringIntervalDay != null) {
+                var date : String? = "물 주기 시작 날짜 : " + calendarDTO.wateringStartYear.toString() + "년 " + calendarDTO.wateringStartMonth.toString() + "월 " + calendarDTO.wateringStartDay.toString() + "일"
+                view.calendar_date.setText(date)
+
+                var interval : String? = calendarDTO.wateringIntervalDay.toString() + "일에 한 번 물을 줍니다."
+                view.calendar_interval.setText(interval)
+            }
+
+        }
+
+
+
 
         return view
     }

@@ -75,7 +75,7 @@ class WateringFragment : Fragment() {
         view.btn_watering_contents_update?.setOnClickListener {
             calendarInfo.wateringIntervalDay = Integer.parseInt(view.watering_interval.text.toString())
 
-            if (calendarInfo.wateringStartYear != null && calendarInfo.wateringStartMonth != null && calendarInfo.wateringStartDay != null) {
+            if (calendarInfo.wateringStartYear != null && calendarInfo.wateringStartMonth != null && calendarInfo.wateringStartDay != null && calendarInfo.wateringIntervalDay != null) {
                 firestore?.collection("calendar")?.document(calendarInfo?.uid.toString())
                     ?.set(calendarInfo)
 
