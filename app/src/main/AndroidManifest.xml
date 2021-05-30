@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <activity android:name=".navigation.DetailDictionaryActivity"></activity>
         <activity android:name=".navigation.CommentActivity" />
         <activity android:name=".navigation.AddPhotoActivity" />
         <activity android:name=".LoginActivity">
