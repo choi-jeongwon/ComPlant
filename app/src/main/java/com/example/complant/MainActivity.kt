@@ -115,6 +115,19 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
     }
 
+    // BoardFragment -> AddphotoActivity2 이동 함수
+    fun onChangeAddPhotoActivity2() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            startActivity(Intent(this, AddPhotoActivity2::class.java))
+        } else {
+            Toast.makeText(this, "스토리지 읽기 권한이 없습니다.", Toast.LENGTH_LONG).show()
+        }
+    }
+
     // HomeFragment -> MyPageFragment 이동 함수
     fun goMyPage() {
         //FragmentManager에 Bundle로 Data를 담아 전달

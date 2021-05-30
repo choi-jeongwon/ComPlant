@@ -1,13 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#291350">
+    android:orientation="vertical">
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/fragment_board_recyclerview"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
-<!--    </androidx.recyclerview.widget.RecyclerView>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Board"
+            android:textStyle="italic"
+            android:layout_marginRight="60dp"
+            android:textSize="30dp"/>
+        <Button
+            android:id="@+id/board_btn_write"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="게시판 작성" />
+    </LinearLayout>
+    <!-- item 들과 상단을 나누는 선-->
+    <LinearLayout
+        android:id="@+id/toolbar_division"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDivision"
+        android:orientation="horizontal"></LinearLayout>
+
+    // BoardFragment 에 사용할 RecyclerView 를 만들어줌
+    // 안에 들어갈 item 은 item_board.xml 파일
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_board_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>
+
+

@@ -12,8 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".navigation.DetailDictionaryActivity"></activity>
+        <activity android:name=".navigation.DetailBoardActivity"></activity>
+        <activity android:name=".navigation.CommentActivity2" />
+        <activity android:name=".navigation.AddPhotoActivity2" />
+        <activity android:name=".navigation.DetailDictionaryActivity" />
         <activity android:name=".navigation.CommentActivity" />
         <activity android:name=".navigation.AddPhotoActivity" />
         <activity android:name=".LoginActivity">

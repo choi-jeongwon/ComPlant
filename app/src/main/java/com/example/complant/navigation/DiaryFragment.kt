@@ -168,6 +168,8 @@ class DiaryFragment : Fragment() {
 
 
         }
+
+
         fun favoriteEvent(position: Int){
             var tsDoc = firestore?.collection("images")?.document(contentUidList[position])
             firestore?.runTransaction { transaction ->
