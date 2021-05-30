@@ -119,7 +119,7 @@ class CalendarFragment : Fragment() {
             if(snapshot == null) return@addSnapshotListener
             var wateringDTO = snapshot.toObject(WateringDTO::class.java)
             if (wateringDTO?.wateringStartYear != null && wateringDTO?.wateringStartMonth != null && wateringDTO?.wateringStartDay != null && wateringDTO?.wateringIntervalDay != null) {
-                var date : String? = "물 주기 시작 날짜 : " + wateringDTO.wateringStartYear.toString() + "-" + wateringDTO.wateringStartMonth.toString() + "-" + wateringDTO.wateringStartDay.toString() + "-"
+                var date : String? = "물 주기 시작 : " + wateringDTO.wateringStartYear.toString() + "-" + wateringDTO.wateringStartMonth.toString() + "-" + wateringDTO.wateringStartDay.toString()
                 view.calendar_date.setText(date)
 
                 var interval : String? = wateringDTO.wateringIntervalDay.toString() + "일에 한 번 물을 줍니다."
