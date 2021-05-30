@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         setContentView(R.layout.activity_main)
 
         // 로딩 바를 작동
-        progress_bar.visibility = View.VISIBLE
+        progress_bar.visibility = View.GONE
 
         // Bottom Navigation View
         bottom_navigation.setOnNavigationItemSelectedListener(this)
@@ -83,10 +83,10 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 return true
             }
             R.id.action_alarm -> {
-                var alarmFragment = AlarmFragment()
+                var calendarFragment = CalendarFragment()
                 supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.main_content, alarmFragment)
+                    .replace(R.id.main_content, calendarFragment)
                     .commit()
                 return true
             }
