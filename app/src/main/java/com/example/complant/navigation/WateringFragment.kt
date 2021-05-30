@@ -33,7 +33,6 @@ class WateringFragment : Fragment() {
         mainActivity = null
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -78,13 +77,10 @@ class WateringFragment : Fragment() {
             if (wateringDTO.wateringStartYear != null && wateringDTO.wateringStartMonth != null && wateringDTO.wateringStartDay != null && wateringDTO.wateringIntervalDay != null) {
                 firestore?.collection("watering")?.document(wateringDTO?.uid.toString())
                     ?.set(wateringDTO)
-
             }
 
             mainActivity?.goBack()
         }
-
-
         return view
     }
 }

@@ -68,8 +68,9 @@ class CalendarFragment : Fragment() {
         view.calendar_view.addDecorators(
             SundayDecorator(), // 일요일을 빨간색으로 표시
             SaturdayDecorator(), // 토요일은 파란색으로 표시
-            toDayDecorator(), // 오늘 날짜 크기를 키우고 굵은 색으로 표시
-            MinDecorator(CalendarDay.today()) // 같은 달 중에 이미 지난 날들은 회색처리
+            //MinDecorator(CalendarDay.today()). // 같은 달 중에 이미 지난 날들은 회색처리
+            toDayDecorator() // 오늘 날짜 크기를 키우고 굵은 색으로 표시
+
         )
 
         view.calendar_view.setOnDateChangedListener { widget, date, selected ->
@@ -101,19 +102,12 @@ class CalendarFragment : Fragment() {
 
                 builder.show()
             }
-
-
         }
-
 
         // 주기 설정 버튼 클릭 시 wateringFragment로 이동
         view.btn_watering_setting.setOnClickListener {
             mainActivity?.goWateringFragment()
         }
-
-
-
-
 
         firestore?.collection("watering")?.document(uid1!!)?.addSnapshotListener { snapshot, e ->
             if(snapshot == null) return@addSnapshotListener
@@ -125,11 +119,7 @@ class CalendarFragment : Fragment() {
                 var interval : String? = wateringDTO.wateringIntervalDay.toString() + "일에 한 번 물을 줍니다."
                 view.calendar_interval.setText(interval)
             }
-
         }
-
-
-
 
         return view
     }
@@ -149,7 +139,6 @@ class SaturdayDecorator : DayViewDecorator {
         view?.addSpan(ForegroundColorSpan(Color.BLUE))
     }
 }
-
 
 // 일요일을 빨간색으로 변경
 class SundayDecorator : DayViewDecorator {
@@ -184,29 +173,15 @@ class toDayDecorator : DayViewDecorator {
     }
 }
 
-// 특정 날짜에 점 표시 (잘 안됨. 삭제 예정)
-class EventDecorator : DayViewDecorator {
-    var color: Int? = null
-    var dates: HashSet<CalendarDay>? = null
-
-    override fun shouldDecorate(day: CalendarDay?): Boolean {
-        return dates!!.contains(day)
-    }
-
-    override fun decorate(view: DayViewFacade?) {
-        view?.addSpan(DotSpan(5F, color!!));
-    }
-}
-
 // 같은 달 중에 이미 지난 날들은 회색처리
-class MinDecorator(min: CalendarDay) : DayViewDecorator {
-    val minDay = min
-    override fun shouldDecorate(day: CalendarDay?): Boolean {
-        return day?.month == minDay.month && day.day < minDay.day
-    }
-
-    override fun decorate(view: DayViewFacade?) {
-        view?.addSpan(object : ForegroundColorSpan(Color.parseColor("#d2d2d2")) {})
-        view?.setDaysDisabled(true)
-    }
-}
+//class MinDecorator(min: CalendarDay) : DayViewDecorator {
+//    val minDay = min
+//    override fun shouldDecorate(day: CalendarDay?): Boolean {
+//        return day?.month == minDay.month && day.day < minDay.day
+//    }
+//
+//    override fun decorate(view: DayViewFacade?) {
+//        view?.addSpan(object : ForegroundColorSpan(Color.parseColor("#d2d2d2")) {})
+//        view?.setDaysDisabled(true)
+//    }
+//}
