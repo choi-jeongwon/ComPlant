@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.complant.MainActivity
 import com.example.complant.R
-import com.example.complant.navigation.model.CalendarDTO
+import com.example.complant.navigation.model.WateringDTO
 import com.example.complant.navigation.model.MessageDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -42,9 +42,9 @@ class WateringFragment : Fragment() {
         var view = LayoutInflater.from(activity).inflate(R.layout.fragment_watering, container, false)
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
-        var calendarInfo = CalendarDTO()
+        var wateringDTO = WateringDTO()
 
-        calendarInfo.uid = FirebaseAuth.getInstance().currentUser?.uid
+        wateringDTO.uid = FirebaseAuth.getInstance().currentUser?.uid
 
         view.btn_watering_start_date?.setOnClickListener {
             var calendar = Calendar.getInstance()
@@ -63,9 +63,9 @@ class WateringFragment : Fragment() {
                 else
                     view.btn_watering_start_date.setText("${i}-${i2 + 1}-${i3}")
 
-                calendarInfo.wateringStartYear = i
-                calendarInfo.wateringStartMonth = i2 + 1
-                calendarInfo.wateringStartDay = i3
+                wateringDTO.wateringStartYear = i
+                wateringDTO.wateringStartMonth = i2 + 1
+                wateringDTO.wateringStartDay = i3
             }
 
             var picker = DatePickerDialog(view.context, listener, year, month, day)
@@ -73,11 +73,11 @@ class WateringFragment : Fragment() {
         }
 
         view.btn_watering_contents_update?.setOnClickListener {
-            calendarInfo.wateringIntervalDay = Integer.parseInt(view.watering_interval.text.toString())
+            wateringDTO.wateringIntervalDay = Integer.parseInt(view.watering_interval.text.toString())
 
-            if (calendarInfo.wateringStartYear != null && calendarInfo.wateringStartMonth != null && calendarInfo.wateringStartDay != null && calendarInfo.wateringIntervalDay != null) {
-                firestore?.collection("calendar")?.document(calendarInfo?.uid.toString())
-                    ?.set(calendarInfo)
+            if (wateringDTO.wateringStartYear != null && wateringDTO.wateringStartMonth != null && wateringDTO.wateringStartDay != null && wateringDTO.wateringIntervalDay != null) {
+                firestore?.collection("watering")?.document(wateringDTO?.uid.toString())
+                    ?.set(wateringDTO)
 
             }
 

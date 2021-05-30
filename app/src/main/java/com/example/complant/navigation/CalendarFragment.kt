@@ -16,7 +16,7 @@ import android.widget.CalendarView
 import androidx.fragment.app.Fragment
 import com.example.complant.MainActivity
 import com.example.complant.R
-import com.example.complant.navigation.model.CalendarDTO
+import com.example.complant.navigation.model.WateringDTO
 import com.example.complant.navigation.model.MainPageDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -115,14 +115,14 @@ class CalendarFragment : Fragment() {
 
 
 
-        firestore?.collection("calendar")?.document(uid1!!)?.addSnapshotListener { snapshot, e ->
+        firestore?.collection("watering")?.document(uid1!!)?.addSnapshotListener { snapshot, e ->
             if(snapshot == null) return@addSnapshotListener
-            var calendarDTO = snapshot.toObject(CalendarDTO::class.java)
-            if (calendarDTO?.wateringStartYear != null && calendarDTO?.wateringStartMonth != null && calendarDTO?.wateringStartDay != null && calendarDTO?.wateringIntervalDay != null) {
-                var date : String? = "물 주기 시작 날짜 : " + calendarDTO.wateringStartYear.toString() + "년 " + calendarDTO.wateringStartMonth.toString() + "월 " + calendarDTO.wateringStartDay.toString() + "일"
+            var wateringDTO = snapshot.toObject(WateringDTO::class.java)
+            if (wateringDTO?.wateringStartYear != null && wateringDTO?.wateringStartMonth != null && wateringDTO?.wateringStartDay != null && wateringDTO?.wateringIntervalDay != null) {
+                var date : String? = "물 주기 시작 날짜 : " + wateringDTO.wateringStartYear.toString() + "-" + wateringDTO.wateringStartMonth.toString() + "-" + wateringDTO.wateringStartDay.toString() + "-"
                 view.calendar_date.setText(date)
 
-                var interval : String? = calendarDTO.wateringIntervalDay.toString() + "일에 한 번 물을 줍니다."
+                var interval : String? = wateringDTO.wateringIntervalDay.toString() + "일에 한 번 물을 줍니다."
                 view.calendar_interval.setText(interval)
             }
 
