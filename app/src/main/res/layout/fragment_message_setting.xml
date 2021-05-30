@@ -144,7 +144,7 @@
         android:layout_width="match_parent"
         android:layout_height="190dp"
         android:layout_margin="15dp"
-        android:text="어쩌구 저쩌구"/>
+        android:text="메시지를 입력하세요"/>
 
     <Button
         android:id="@+id/btn_message_contents_update"
