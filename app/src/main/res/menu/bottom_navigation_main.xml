@@ -16,10 +16,10 @@
         android:enabled="true"
         android:title="@string/home"/>
     <item
-        android:id="@+id/action_alarm"
-        android:icon="@drawable/ic_nav_alarm"
+        android:id="@+id/action_water"
+        android:icon="@drawable/ic_nav_droplet_half"
         android:enabled="true"
-        android:title="@string/alarm"/>
+        android:title="@string/water"/>
     <item
         android:id="@+id/action_diary"
         android:icon="@drawable/ic_nav_diary"

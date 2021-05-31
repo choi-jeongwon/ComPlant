@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     .commit()
                 return true
             }
-            R.id.action_alarm -> {
+            R.id.action_water -> {
                 var calendarFragment = CalendarFragment()
                 supportFragmentManager
                     .beginTransaction()
