@@ -74,11 +74,13 @@ class WateringFragment : Fragment() {
         view.btn_watering_contents_update?.setOnClickListener {
             wateringDTO.wateringIntervalDay = Integer.parseInt(view.watering_interval.text.toString())
 
+            // 파이어베이스 DB에 등록
             if (wateringDTO.wateringStartYear != null && wateringDTO.wateringStartMonth != null && wateringDTO.wateringStartDay != null && wateringDTO.wateringIntervalDay != null) {
                 firestore?.collection("watering")?.document(wateringDTO?.uid.toString())
                     ?.set(wateringDTO)
             }
 
+            // 완료 하며 뒤로 가기
             mainActivity?.goBack()
         }
         return view

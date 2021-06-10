@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -43,27 +44,10 @@ class MessageListFragment : Fragment() {
         var view = LayoutInflater.from(activity).inflate(R.layout.fragment_message_list, container, false)
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
-        var messageInfo = MessageDTO()
+        //var messageInfo = MessageDTO()
 
         view.btn_new_message?.setOnClickListener {
             mainActivity?.goMessageSettingFragment()
-
-        }
-
-        var str1: String? = arguments?.getString("message_date")
-        var str2: String? = arguments?.getString("message_start_time")
-        var str3: String? = arguments?.getString("message_end_time")
-        var str4: String? = arguments?.getString("message_contents_input")
-
-        messageInfo.date = str1
-        messageInfo.startTime = str2
-        messageInfo.endTime = str3
-        messageInfo.content = str4
-        messageInfo.timestamp = System.currentTimeMillis()
-
-        if (messageInfo.date != null && messageInfo.startTime != null && messageInfo.endTime != null && messageInfo.content != null) {
-            firestore?.collection("messages")?.document(messageInfo?.timestamp.toString())
-                ?.set(messageInfo)
 
         }
 
@@ -115,17 +99,38 @@ class MessageListFragment : Fragment() {
             viewholder.message_end_time.text = messageDTOs!![position].endTime
             viewholder.message_contents.text = messageDTOs!![position].content
 
-            viewholder.message_contents.setOnClickListener {
-                var homeFragment = HomeFragment()
-                val bundle = Bundle()
+//            viewholder.message_contents.setOnClickListener {
+//                var homeFragment = HomeFragment()
+//                val bundle = Bundle()
+//
+//                bundle.putString("content", messageDTOs!![position].content)
+//                homeFragment.arguments = bundle
+//                mainActivity?.goHomeFragment(homeFragment)
+//            }
 
-                bundle.putString("content", messageDTOs!![position].content)
-                homeFragment.arguments = bundle
-                mainActivity?.goHomeFragment(homeFragment)
+            //setMain이 true로 이미 설정되어 있는 것을 체크 표시 한다.
+            if (messageDTOs!![position!!].setMain == true) {
+                viewholder.message_check.visibility = View.VISIBLE
             }
 
+            viewholder.recycle_message_item.setOnClickListener {
+                var tsDoc = firestore?.collection("messages")?.document(messageDTOs!![position].timestamp.toString())
+                firestore?.runTransaction { transaction ->
 
+                    var messageDTO = transaction.get(tsDoc!!).toObject(MessageDTO::class.java)
 
+                    if (messageDTO!!.setMain == false) {
+                        messageDTO?.setMain = true
+                        viewholder.message_check.visibility = View.VISIBLE
+
+                    }
+                    else if (messageDTO!!.setMain == true) {
+                        messageDTO?.setMain = false
+                        viewholder.message_check.visibility = View.INVISIBLE
+                    }
+                    transaction.set(tsDoc, messageDTO)
+                }
+            }
         }
     }
 }

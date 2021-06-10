@@ -5,5 +5,6 @@ data class MessageDTO (
     var date : String? = null,
     var startTime : String? = null,
     var endTime : String? = null,
-    var content : String? = null
+    var content : String? = null,
+    var setMain : Boolean? = false
 )

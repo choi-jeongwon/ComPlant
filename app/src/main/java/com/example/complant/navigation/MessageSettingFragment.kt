@@ -8,14 +8,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.example.complant.MainActivity
 import com.example.complant.R
+import com.example.complant.navigation.model.MessageDTO
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_message_setting.view.*
 import java.util.*
 
 class MessageSettingFragment : Fragment() {
     var mainActivity: MainActivity? = null
+    var firestore: FirebaseFirestore? = null
+    var auth: FirebaseAuth? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -33,10 +37,11 @@ class MessageSettingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var view = LayoutInflater.from(activity).inflate(R.layout.fragment_message_setting, container, false)
-        var message_date : String? = null
-        var message_start_time : String? = null
-        var message_end_time : String? = null
-        var message_contents_input : String? = null
+
+        firestore = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
+
+        var messageInfo = MessageDTO()
 
         view.btn_message_date?.setOnClickListener {
             var calendar = Calendar.getInstance()
@@ -126,26 +131,18 @@ class MessageSettingFragment : Fragment() {
         }
 
         view.btn_message_contents_update?.setOnClickListener {
-            // 수정하기
-            var messageListFragment = MessageListFragment()
-            val bundle = Bundle()
+            messageInfo.date = view.txt_message_date.text.toString()
+            messageInfo.startTime = view.txt_start_time.text.toString()
+            messageInfo.endTime = view.txt_end_time.text.toString()
+            messageInfo.content = view.txt_message_contents_input.text.toString()
+            messageInfo.timestamp = System.currentTimeMillis()
 
-            message_date = view.txt_message_date.text.toString()
-            message_start_time = view.txt_start_time.text.toString()
-            message_end_time = view.txt_end_time.text.toString()
-            message_contents_input = view.txt_message_contents_input.text.toString()
+            if (messageInfo.date != null && messageInfo.startTime != null && messageInfo.endTime != null && messageInfo.content != null) {
+                firestore?.collection("messages")?.document(messageInfo?.timestamp.toString())
+                    ?.set(messageInfo)
+            }
 
-
-            bundle.putString("message_date", message_date)
-            bundle.putString("message_start_time", message_start_time)
-            bundle.putString("message_end_time", message_end_time)
-            bundle.putString("message_contents_input", message_contents_input)
-
-            messageListFragment.arguments = bundle
-
-
-             mainActivity?.goMessageListFragment1(messageListFragment)
-            //mainActivity?.goBack()
+            mainActivity?.goBack()
         }
         return view
     }

@@ -42,21 +42,21 @@ class HomeFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         uid1 = FirebaseAuth.getInstance().currentUser?.uid
 
-        var mainMessageInfo = MainPageDTO()
+        //var mainMessageInfo = MainPageDTO()
 
         view.main_account_button.setOnClickListener {
             mainActivity?.goMyPage()
         }
 
-        var str : String? = arguments?.getString("content")
-        mainMessageInfo.message = str
-        mainMessageInfo.uid = uid1
-
-        if (mainMessageInfo.message != null) {
-            firestore?.collection("mainPage")?.document(mainMessageInfo.uid.toString())
-                ?.set(mainMessageInfo)
-
-        }
+//        var str : String? = arguments?.getString("content")
+//        mainMessageInfo.message = str
+//        mainMessageInfo.uid = uid1
+//
+//        if (mainMessageInfo.message != null) {
+//            firestore?.collection("mainPage")?.document(mainMessageInfo.uid.toString())
+//                ?.set(mainMessageInfo)
+//
+//        }
 
         firestore?.collection("mainPage")?.document(uid1!!)?.addSnapshotListener { snapshot, e ->
             if(snapshot == null) return@addSnapshotListener
