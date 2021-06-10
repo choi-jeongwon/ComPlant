@@ -99,38 +99,40 @@ class MessageListFragment : Fragment() {
             viewholder.message_end_time.text = messageDTOs!![position].endTime
             viewholder.message_contents.text = messageDTOs!![position].content
 
-//            viewholder.message_contents.setOnClickListener {
-//                var homeFragment = HomeFragment()
-//                val bundle = Bundle()
-//
-//                bundle.putString("content", messageDTOs!![position].content)
-//                homeFragment.arguments = bundle
-//                mainActivity?.goHomeFragment(homeFragment)
-//            }
+            viewholder.recycle_message_item.setOnClickListener {
+                viewholder.message_check.visibility = View.VISIBLE
+                var homeFragment = HomeFragment()
+                val bundle = Bundle()
+
+                bundle.putString("content", messageDTOs!![position].content)
+                homeFragment.arguments = bundle
+                mainActivity?.goHomeFragment(homeFragment)
+            }
 
             //setMain이 true로 이미 설정되어 있는 것을 체크 표시 한다.
-            if (messageDTOs!![position!!].setMain == true) {
-                viewholder.message_check.visibility = View.VISIBLE
-            }
-
-            viewholder.recycle_message_item.setOnClickListener {
-                var tsDoc = firestore?.collection("messages")?.document(messageDTOs!![position].timestamp.toString())
-                firestore?.runTransaction { transaction ->
-
-                    var messageDTO = transaction.get(tsDoc!!).toObject(MessageDTO::class.java)
-
-                    if (messageDTO!!.setMain == false) {
-                        messageDTO?.setMain = true
-                        viewholder.message_check.visibility = View.VISIBLE
-
-                    }
-                    else if (messageDTO!!.setMain == true) {
-                        messageDTO?.setMain = false
-                        viewholder.message_check.visibility = View.INVISIBLE
-                    }
-                    transaction.set(tsDoc, messageDTO)
-                }
-            }
+//            if (messageDTOs!![position!!].setMain == true) {
+//                viewholder.message_check.visibility = View.VISIBLE
+//            }
+//
+            // 복수 선택 기능
+//            viewholder.recycle_message_item.setOnClickListener {
+//                var tsDoc = firestore?.collection("messages")?.document(messageDTOs!![position].timestamp.toString())
+//                firestore?.runTransaction { transaction ->
+//
+//                    var messageDTO = transaction.get(tsDoc!!).toObject(MessageDTO::class.java)
+//
+//                    if (messageDTO!!.setMain == false) {
+//                        messageDTO?.setMain = true
+//                        viewholder.message_check.visibility = View.VISIBLE
+//
+//                    }
+//                    else if (messageDTO!!.setMain == true) {
+//                        messageDTO?.setMain = false
+//                        viewholder.message_check.visibility = View.INVISIBLE
+//                    }
+//                    transaction.set(tsDoc, messageDTO)
+//                }
+//            }
         }
     }
 }
