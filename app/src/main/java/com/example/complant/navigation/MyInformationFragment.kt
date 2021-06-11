@@ -25,8 +25,8 @@ class MyInformationFragment : Fragment() {
     var uid : String? = null
    // var auth : FirebaseAuth? = null
     var currentUserId : String? = null
-    var currentProfileName : String? = null
-    var currentPlantName : String? = null
+//    var currentProfileName : String? = null
+//    var currentPlantName : String? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -48,7 +48,7 @@ class MyInformationFragment : Fragment() {
         uid = FirebaseAuth.getInstance().currentUser?.uid
         currentUserId = FirebaseAuth.getInstance().currentUser?.email
 
-        var userInfoDTO = UserInfoDTO.UserInfo()
+      //  var userInfoDTO = UserInfoDTO.UserInfo()
 
         // 프래그먼트에 들어오면 현재 정보(정보 변경 전)를 보여준다.
         view.my_info_current_id.setText(currentUserId)
@@ -67,8 +67,6 @@ class MyInformationFragment : Fragment() {
                 view.my_info_current_plant_name.setText(userInfoDTO?.plantName)
                 view.edit_plant_name_setting.setText(userInfoDTO?.plantName)
             }
-
-
 
 
         // 프로필 이미지 클릭 시 프로필 이미지 수정

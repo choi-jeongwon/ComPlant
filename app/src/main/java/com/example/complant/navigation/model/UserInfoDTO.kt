@@ -9,6 +9,7 @@ data class UserInfoDTO (
         var userId : String? = null,
         var password : String? = null,
         var profileName : String? = null,
-        var plantName : String? = null
+        var plantName : String? = null,
+        var plantType : String? = null
         )
 }

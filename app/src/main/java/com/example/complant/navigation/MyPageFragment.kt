@@ -20,9 +20,11 @@ import com.example.complant.MainActivity
 import com.example.complant.R
 import com.example.complant.navigation.model.ContentDTO
 import com.example.complant.navigation.model.FollowDTO
+import com.example.complant.navigation.model.UserInfoDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_my_infomation.view.*
 import kotlinx.android.synthetic.main.fragment_my_page.view.*
 
 class MyPageFragment : Fragment() {
@@ -102,6 +104,17 @@ class MyPageFragment : Fragment() {
         fragmentView?.setting_button?.setOnClickListener {
             mainActivity?.goSettingFragment()
         }
+
+        // DB에서 profile name을 가져와서 보여준다.
+        firestore?.collection("userInfo")
+            ?.document(uid!!)
+            ?.collection("info")
+            ?.document(uid!!)
+            ?.addSnapshotListener { snapshot, e ->
+                if(snapshot == null) return@addSnapshotListener
+                var userInfoDTO = snapshot.toObject(UserInfoDTO.UserInfo::class.java)
+                view?.profile_name?.setText(userInfoDTO?.profileName)
+            }
 
         getProfileImage()
         getFollowerAndFollowing()
