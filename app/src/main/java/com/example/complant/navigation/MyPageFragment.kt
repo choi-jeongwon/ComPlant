@@ -6,6 +6,7 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.widget.LinearLayoutCompat
@@ -62,12 +63,13 @@ class MyPageFragment : Fragment() {
 
         if (uid == currentUserUid) {
             // MyPage (본인의 MyPageFragment일 때)
-            fragmentView?.temp_follow_button?.text = getString(R.string.signout) // 로그아웃 버튼
-            fragmentView?.temp_follow_button?.setOnClickListener {
-                activity?.finish() // activity 종료
-                startActivity(Intent(activity, LoginActivity::class.java)) // 현재 activity를 종료하고 LoginActivity를 호출
-                auth?.signOut() // firebase signout
-            }
+//            fragmentView?.temp_follow_button?.text = getString(R.string.signout) // 로그아웃 버튼
+//            fragmentView?.temp_follow_button?.setOnClickListener {
+//                activity?.finish() // activity 종료
+//                startActivity(Intent(activity, LoginActivity::class.java)) // 현재 activity를 종료하고 LoginActivity를 호출
+//                auth?.signOut() // firebase signout
+//            }
+            fragmentView?.temp_follow_button?.visibility = GONE // 내 페이지에서는 버튼이 보이지 않음
         } else {
             // OtherUserPage (타인의 MyPagFragment일 때)
             fragmentView?.temp_follow_button?.text = getString(R.string.follow) // follow 버튼
