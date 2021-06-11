@@ -39,10 +39,10 @@ class SettingFragment : Fragment() {
 
         // 1. 내 정보 변경
         view.btn_my_info_setting.setOnClickListener {
-            mainActivity?.goMyInfomationFragment()
+            mainActivity?.goMyInformationFragment()
         }
         view.my_info_setting.setOnClickListener {
-            mainActivity?.goMyInfomationFragment()
+            mainActivity?.goMyInformationFragment()
         }
 
         // 2. 메인 메시지 설정

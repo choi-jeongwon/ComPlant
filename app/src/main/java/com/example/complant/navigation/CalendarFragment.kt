@@ -130,8 +130,6 @@ class CalendarFragment : Fragment() {
                                         ?.set(wateredCalendarInfo)
                                 }
 
-
-
                             }
 
                             DialogInterface.BUTTON_NEGATIVE -> {
