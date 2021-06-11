@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,7 +41,9 @@ class CalendarFragment : Fragment() {
     var mainActivity: MainActivity? = null
     var firestore: FirebaseFirestore? = null
     var auth: FirebaseAuth? = null
-    var userUid : String? = null
+    var uid : String? = null
+
+    var wateredCalendarInfo = CalendarDTO.Watered()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -61,7 +64,7 @@ class CalendarFragment : Fragment() {
             LayoutInflater.from(activity).inflate(R.layout.fragment_calendar, container, false)
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
-        userUid = FirebaseAuth.getInstance().currentUser?.uid
+        uid = FirebaseAuth.getInstance().currentUser?.uid
         var date : String? = null
 
         var timeCalendar = Calendar.getInstance()
@@ -76,9 +79,11 @@ class CalendarFragment : Fragment() {
             SundayDecorator(), // 일요일을 빨간색으로 표시
             SaturdayDecorator(), // 토요일은 파란색으로 표시
             //MinDecorator(CalendarDay.today()). // 같은 달 중에 이미 지난 날들은 회색처리
-            toDayDecorator(), // 오늘 날짜 크기를 키우고 굵은 색으로 표시
-            EventDecorator(Color.RED, Collections.singleton(CalendarDay.today())), // 특정 날짜 점 찍기
-            EventDecorator(Color.BLUE, Collections.singleton(CalendarDay.from(2021,6 - 1,12))) // 특정 날짜 점 찍기
+            toDayDecorator() // 오늘 날짜 크기를 키우고 굵은 색으로 표시
+            //EventDecorator(Color.RED, Collections.singleton(CalendarDay.today())), // 특정 날짜 점 찍기
+            //EventDecorator(Color.BLUE, Collections.singleton(CalendarDay.from(2021,6 - 1,12))) // 특정 날짜 점 찍기
+
+
 
         )
 
@@ -98,10 +103,41 @@ class CalendarFragment : Fragment() {
                 var listener = object : DialogInterface.OnClickListener {
                     override fun onClick(p0: DialogInterface?, p1: Int) {
                         when (p1) {
-//                            DialogInterface.BUTTON_POSITIVE ->
-//                                view.calendar_text.text = "positive"
-                            DialogInterface.BUTTON_NEGATIVE ->
-                                mainActivity?.goWateringFragment()
+                            DialogInterface.BUTTON_POSITIVE -> {
+                                wateredCalendarInfo.uid = uid
+                                wateredCalendarInfo.timestamp = System.currentTimeMillis()
+                                wateredCalendarInfo.wateredYear = currentYear
+                                wateredCalendarInfo.wateredMonth = currentMonth
+                                wateredCalendarInfo.wateredDay = currentDate
+
+                                if (currentMonth < 10 && currentDate < 10) {
+                                    wateredCalendarInfo.wateredString = currentYear.toString() + "0" + currentMonth.toString() + "0" +currentDate.toString()
+                                }
+                                else if (currentMonth < 10) {
+                                    wateredCalendarInfo.wateredString = currentYear.toString() + "0" + currentMonth.toString() + currentDate.toString()
+                                }
+                                else if (currentDate < 10) {
+                                    wateredCalendarInfo.wateredString = currentYear.toString() + currentMonth.toString() + "0" + currentDate.toString()
+                                }
+                                else {
+                                    wateredCalendarInfo.wateredString = currentYear.toString() + currentMonth.toString() + currentDate.toString()
+                                }
+
+
+                                if (wateredCalendarInfo.uid != null && wateredCalendarInfo.wateredYear != null && wateredCalendarInfo.wateredMonth != null && wateredCalendarInfo.wateredDay != null) {
+                                    firestore?.collection("calendar")?.document(uid!!)?.collection("userWatered")
+                                        ?.document(wateredCalendarInfo.wateredString!!)
+                                        ?.set(wateredCalendarInfo)
+                                }
+
+
+
+                            }
+
+                            DialogInterface.BUTTON_NEGATIVE -> {
+                            mainActivity?.goWateringFragment()
+                        }
+
                         }
                     }
                 }
@@ -118,9 +154,10 @@ class CalendarFragment : Fragment() {
             mainActivity?.goWateringFragment()
         }
 
-        firestore?.collection("watering")?.document(userUid!!)?.addSnapshotListener { snapshot, e ->
+        firestore?.collection("watering")?.document(uid!!)?.addSnapshotListener { snapshot, e ->
             if(snapshot == null) return@addSnapshotListener
             var wateringDTO = snapshot.toObject(WateringDTO::class.java)
+
             if (wateringDTO?.wateringStartYear != null && wateringDTO?.wateringStartMonth != null && wateringDTO?.wateringStartDay != null && wateringDTO?.wateringIntervalDay != null) {
 
                 if (wateringDTO?.wateringStartMonth!! < 10 && wateringDTO?.wateringStartDay!! < 10) {
@@ -129,13 +166,20 @@ class CalendarFragment : Fragment() {
                     date = "물 주기 시작 : " + wateringDTO.wateringStartYear.toString() + "-0" + wateringDTO.wateringStartMonth.toString() + "-" + wateringDTO.wateringStartDay.toString()
                 } else if (wateringDTO?.wateringStartDay!! < 10) {
                     date = "물 주기 시작 : " + wateringDTO.wateringStartYear.toString() + "-" + wateringDTO.wateringStartMonth.toString() + "-0" + wateringDTO.wateringStartDay.toString()
+                } else {
+                    date = "물 주기 시작 : " + wateringDTO.wateringStartYear.toString() + "-" + wateringDTO.wateringStartMonth.toString() + "-" + wateringDTO.wateringStartDay.toString()
+
                 }
 
                 view.calendar_date.setText(date)
 
                 var interval : String? = wateringDTO.wateringIntervalDay.toString() + "일에 한 번 물을 줍니다."
                 view.calendar_interval.setText(interval)
+
+
             }
+
+
         }
 
         view.fragment_calendar.adapter = CalendarRecyclerViewAdaper()
@@ -150,9 +194,9 @@ class CalendarFragment : Fragment() {
         var stringDate : String? = null
         init {
             firestore?.collection("calendar")
-                ?.document(userUid!!)
+                ?.document(uid!!)
                 ?.collection("userWatered")
-                ?.orderBy("timestamp")
+                ?.orderBy("wateredString", Query.Direction.DESCENDING)
                 ?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                     // 배열 비움
                     calendarDTOs.clear()
@@ -190,9 +234,12 @@ class CalendarFragment : Fragment() {
                 stringDate = calendarDTOs!![position].wateredYear.toString() + ".0" + calendarDTOs!![position].wateredMonth.toString() + "." + calendarDTOs!![position].wateredDay.toString();
             } else if (calendarDTOs!![position].wateredDay!! < 10) {
                 stringDate = calendarDTOs!![position].wateredYear.toString() + "." + calendarDTOs!![position].wateredMonth.toString() + ".0" + calendarDTOs!![position].wateredDay.toString();
+            } else {
+                stringDate = calendarDTOs!![position].wateredYear.toString() + "." + calendarDTOs!![position].wateredMonth.toString() + "." + calendarDTOs!![position].wateredDay.toString();
             }
 
             viewholder.watered_date.text = stringDate
+
         }
     }
 
