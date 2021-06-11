@@ -2,7 +2,7 @@
 <resources>
     <string-array name="option">
         <item>식물 이름</item>
-        <item>식물 Level</item>
+        <item>식물 영어이름</item>
     </string-array>
 </resources>
 

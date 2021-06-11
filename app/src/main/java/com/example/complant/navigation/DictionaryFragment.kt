@@ -84,7 +84,7 @@ class DictionaryFragment : Fragment() {
             var viewholder = (holder as CustomViewHolder).itemView
 
             viewholder.plant_name.text = plantDictionary[position].plant_name
-            viewholder.plant_level.text = plantDictionary[position].plant_level
+            viewholder.plant_eng_name.text = plantDictionary[position].plant_eng_name
 
 
             // 검색 옵션 변수
@@ -100,8 +100,8 @@ class DictionaryFragment : Fragment() {
                         "식물 이름" -> {
                             searchOption = "plant_name"
                         }
-                        "식물 Level" -> {
-                            searchOption = "plant_level"
+                        "식물 영어이름" -> {
+                            searchOption = "plant_eng_name"
                         }
                     }
                 }
