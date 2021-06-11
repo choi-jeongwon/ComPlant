@@ -10,10 +10,8 @@ import androidx.fragment.app.Fragment
 import com.example.complant.MainActivity
 import com.example.complant.R
 import com.example.complant.navigation.model.WateringDTO
-import com.example.complant.navigation.model.MessageDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.fragment_message_setting.view.*
 import kotlinx.android.synthetic.main.fragment_watering.view.*
 import java.util.*
 

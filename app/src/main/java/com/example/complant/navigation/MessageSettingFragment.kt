@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.complant.MainActivity
 import com.example.complant.R
-import com.example.complant.navigation.model.Message11
+import com.example.complant.navigation.model.MessageDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_message_setting.view.*
@@ -44,7 +44,7 @@ class MessageSettingFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         userUid = FirebaseAuth.getInstance().currentUser?.uid
 
-        var messageInfo = Message11.Messages()
+        var messageInfo = MessageDTO.Messages()
 
         view.btn_message_date?.setOnClickListener {
             var calendar = Calendar.getInstance()

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,15 +15,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_message_list.view.*
-import kotlinx.android.synthetic.main.item_message.*
 import kotlinx.android.synthetic.main.item_message.view.*
-import java.util.*
 import kotlin.collections.ArrayList
 
 class MessageListFragment : Fragment() {
     var mainActivity: MainActivity? = null
     var firestore: FirebaseFirestore? = null
     var auth: FirebaseAuth? = null
+    var userUid: String? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -44,6 +42,8 @@ class MessageListFragment : Fragment() {
         var view = LayoutInflater.from(activity).inflate(R.layout.fragment_message_list, container, false)
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
+        userUid = FirebaseAuth.getInstance().currentUser?.uid
+
         //var messageInfo = MessageDTO()
 
         view.btn_new_message?.setOnClickListener {
@@ -59,11 +59,17 @@ class MessageListFragment : Fragment() {
 
     inner class MessageListRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         // messageDTO 클래스 ArrayList 생성
-        var messageDTOs: ArrayList<MessageDTO> = arrayListOf()
+        var messageDTOs: ArrayList<MessageDTO.Messages> = arrayListOf()
 
         init {
-            firestore?.collection("messages")?.orderBy("timestamp", Query.Direction.DESCENDING)
+            firestore?.collection("messages")
+                ?.document(userUid!!)
+                ?.collection("userMessages")
+                ?.orderBy("timestamp", Query.Direction.DESCENDING)
                 ?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+
+//            firestore?.collection("messages")?.orderBy("timestamp", Query.Direction.DESCENDING)
+//                ?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                     // 배열 비움
                     messageDTOs.clear()
 
@@ -71,7 +77,7 @@ class MessageListFragment : Fragment() {
                     if (querySnapshot == null) return@addSnapshotListener
 
                     for (snapshot in querySnapshot!!.documents) {
-                        var item = snapshot.toObject(MessageDTO::class.java)
+                        var item = snapshot.toObject(MessageDTO.Messages::class.java)
                         messageDTOs.add(item!!)
                     }
                     notifyDataSetChanged()
