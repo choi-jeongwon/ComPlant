@@ -22,12 +22,13 @@
         android:background="#989898"/>
 
     <LinearLayout
+        android:id="@+id/my_info_setting"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/btn_img_id_pw_setting"
+        <ImageView
+            android:id="@+id/img_my_info_setting"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -35,19 +36,16 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
-            android:adjustViewBounds="true"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
             android:src="@drawable/ic_setting_person" />
 
         <Button
-            android:id="@+id/btn_id_pw_setting"
+            android:id="@+id/btn_my_info_setting"
             style="?android:borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:text="ID / PW 변경"
+            android:text="내 정보 변경"
             android:textSize="19dp" />
     </LinearLayout>
 
@@ -57,47 +55,13 @@
         android:background="#989898"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/btn_img_quit_setting"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:adjustViewBounds="true"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_setting_person_dash"/>
-
-        <Button
-            android:id="@+id/btn_quit_setting"
-            android:layout_margin="10dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="회원 탈퇴"
-            android:textSize="19dp"
-            style="?android:borderlessButtonStyle"/>
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#989898"/>
-
-    <LinearLayout
+        android:id="@+id/main_message_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/btn_img_main_message_setting"
+        <ImageView
+            android:id="@+id/img_main_message_setting"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -105,9 +69,6 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
-            android:adjustViewBounds="true"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
             android:src="@drawable/ic_setting_main_message"/>
 
         <Button
@@ -127,12 +88,13 @@
         android:background="#989898"/>
 
     <LinearLayout
+        android:id="@+id/profile_image_setting"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/btn_img_profile_image_setting"
+        <ImageView
+            android:id="@+id/img_profile_image_setting"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -140,9 +102,6 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
-            android:adjustViewBounds="true"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
             android:src="@drawable/ic_setting_profile_image" />
 
         <Button
@@ -162,12 +121,13 @@
         android:background="#989898"/>
 
     <LinearLayout
+        android:id="@+id/plant_name_setting"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/btn_img_plant_name_setting"
+        <ImageView
+            android:id="@+id/img_plant_name_setting"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -175,9 +135,6 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
-            android:adjustViewBounds="true"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
             android:src="@drawable/ic_setting_plant_name"/>
 
         <Button
@@ -187,6 +144,72 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="반려식물 별칭 변경"
+            android:textSize="19dp"
+            style="?android:borderlessButtonStyle"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#989898"/>
+
+    <LinearLayout
+        android:id="@+id/quit_setting"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_quit_setting"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_setting_person_dash"/>
+
+        <Button
+            android:id="@+id/btn_quit_setting"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="회원 탈퇴"
+            android:textSize="19dp"
+            style="?android:borderlessButtonStyle"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#989898"/>
+
+    <LinearLayout
+        android:id="@+id/logout_setting"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_logout_setting"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_setting_logout"/>
+
+        <Button
+            android:id="@+id/btn_logout_setting"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="로그아웃"
             android:textSize="19dp"
             style="?android:borderlessButtonStyle"/>
     </LinearLayout>

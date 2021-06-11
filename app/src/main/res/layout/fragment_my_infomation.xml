@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <TextView
+        android:id="@+id/my_info_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="내 정보 변경"
+        android:layout_margin="10dp"
+        android:textColor="@color/colorBlack"
+        android:textSize="30dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#989898"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp">
+        <ImageView
+            android:id="@+id/profile_image_setting"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:src="@drawable/ic_account" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/profile_image_setting">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorBlack"
+                    android:text="ID : "/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorBlack"
+                    android:text="abcd1111@sungshin.ac.kr"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorBlack"
+                    android:text="Profile name : "/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorBlack"
+                    android:text="WeLoveRose"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorBlack"
+                    android:text="Plant name : "/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorBlack"
+                    android:text="우리 장미"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#989898"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="61dp"
+            android:layout_marginRight="62dp"
+            android:text="ID"
+            android:textColor="@color/colorBlack"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/edit_id_setting"
+            android:layout_width="180dp"
+            android:layout_height="60dp"
+            android:freezesText="true"
+            android:textSize="23dp" />
+
+        <Button
+            android:id="@+id/btn_id_duplicate"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="중복 확인" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="Password"
+            android:textColor="@color/colorBlack"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/edit_pw_setting"
+            android:layout_width="180dp"
+            android:layout_height="60dp"
+            android:freezesText="true"
+            android:textSize="23dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="19dp"
+            android:text="Profile name"
+            android:textColor="@color/colorBlack"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/edit_profile_name_setting"
+            android:layout_width="180dp"
+            android:layout_height="60dp"
+            android:freezesText="true"
+            android:textSize="23dp" />
+
+        <Button
+            android:id="@+id/btn_profile_name_duplicate"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="중복 확인" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="24dp"
+            android:text="Plant name"
+            android:textColor="@color/colorBlack"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/edit_plant_name_setting"
+            android:layout_width="180dp"
+            android:layout_height="60dp"
+            android:freezesText="true"
+            android:textSize="23dp" />
+    </LinearLayout>
+
+
+
+
+
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/btn_message_contents_update"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="완료" />
+
+</LinearLayout>

@@ -1,19 +1,23 @@
 package com.example.complant.navigation
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.complant.LoginActivity
 import com.example.complant.MainActivity
 import com.example.complant.R
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_my_page.view.*
 import kotlinx.android.synthetic.main.fragment_setting.*
 import kotlinx.android.synthetic.main.fragment_setting.view.*
 
 class SettingFragment : Fragment() {
     var mainActivity: MainActivity? = null
+    var auth : FirebaseAuth? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -31,31 +35,48 @@ class SettingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var view = LayoutInflater.from(activity).inflate(R.layout.fragment_setting, container, false)
+        auth = FirebaseAuth.getInstance()
 
-        // 1. ID / PW 변경
-        view.btn_img_id_pw_setting.setOnClickListener {  }
-        view.btn_id_pw_setting.setOnClickListener {  }
-
-        // 2. 회원 탈퇴
-        view.btn_img_quit_setting.setOnClickListener {  }
-        view.btn_quit_setting.setOnClickListener {  }
-
-        // 3. 메인 메시지 설정
-        view.btn_img_main_message_setting.setOnClickListener {
-            mainActivity?.goMessageListFragment()
+        // 1. 내 정보 변경
+        view.btn_my_info_setting.setOnClickListener {
+            mainActivity?.goMyInfomationFragment()
         }
+        view.my_info_setting.setOnClickListener {
+            mainActivity?.goMyInfomationFragment()
+        }
+
+        // 2. 메인 메시지 설정
         view.btn_main_message_setting.setOnClickListener {
             mainActivity?.goMessageListFragment()
         }
 
-        // 4. 프로필 사진 변경
-        view.btn_img_profile_image_setting.setOnClickListener {  }
+        view.main_message_setting.setOnClickListener {
+            mainActivity?.goMessageListFragment()
+        }
+
+        // 3. 프로필 사진 변경
         view.btn_profile_image_setting.setOnClickListener {  }
+        view.profile_image_setting.setOnClickListener {  }
 
-        // 5. 반려식물 별칭 변경
-        view.btn_img_plant_name_setting.setOnClickListener {  }
-        view.btn_img_plant_name_setting.setOnClickListener {  }
+        // 4. 반려식물 별칭 변경
+        view.btn_plant_name_setting.setOnClickListener {  }
+        view.plant_name_setting.setOnClickListener {  }
 
+        // 5. 회원 탈퇴
+        view.btn_quit_setting.setOnClickListener {  }
+        view.quit_setting.setOnClickListener {  }
+
+        // 6. 로그아웃
+        view.btn_logout_setting.setOnClickListener {
+            activity?.finish() // activity 종료
+            startActivity(Intent(activity, LoginActivity::class.java)) // 현재 activity를 종료하고 LoginActivity를 호출
+            auth?.signOut() // firebase signout
+        }
+        view.logout_setting.setOnClickListener {
+            activity?.finish() // activity 종료
+            startActivity(Intent(activity, LoginActivity::class.java)) // 현재 activity를 종료하고 LoginActivity를 호출
+            auth?.signOut() // firebase signout
+        }
 
         return view
     }
