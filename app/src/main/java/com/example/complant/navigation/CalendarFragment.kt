@@ -14,12 +14,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.complant.MainActivity
 import com.example.complant.R
+import com.example.complant.navigation.model.CalendarDTO
 import com.example.complant.navigation.model.WateringDTO
 import com.example.complant.navigation.model.MainPageDTO
+import com.example.complant.navigation.model.MessageDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
@@ -27,6 +32,7 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import com.prolificinteractive.materialcalendarview.spans.DotSpan
 import kotlinx.android.synthetic.main.fragment_calendar.view.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.item_calendar.view.*
 import java.util.*
 import kotlin.collections.HashSet
 
@@ -34,7 +40,7 @@ class CalendarFragment : Fragment() {
     var mainActivity: MainActivity? = null
     var firestore: FirebaseFirestore? = null
     var auth: FirebaseAuth? = null
-    var uid1 : String? = null
+    var userUid : String? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -55,7 +61,7 @@ class CalendarFragment : Fragment() {
             LayoutInflater.from(activity).inflate(R.layout.fragment_calendar, container, false)
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
-        uid1 = FirebaseAuth.getInstance().currentUser?.uid
+        userUid = FirebaseAuth.getInstance().currentUser?.uid
 
         var timeCalendar = Calendar.getInstance()
         val currentYear = timeCalendar.get(Calendar.YEAR)
@@ -69,7 +75,9 @@ class CalendarFragment : Fragment() {
             SundayDecorator(), // 일요일을 빨간색으로 표시
             SaturdayDecorator(), // 토요일은 파란색으로 표시
             //MinDecorator(CalendarDay.today()). // 같은 달 중에 이미 지난 날들은 회색처리
-            toDayDecorator() // 오늘 날짜 크기를 키우고 굵은 색으로 표시
+            toDayDecorator(), // 오늘 날짜 크기를 키우고 굵은 색으로 표시
+            EventDecorator(Color.RED, Collections.singleton(CalendarDay.today())), // 특정 날짜 점 찍기
+            EventDecorator(Color.BLUE, Collections.singleton(CalendarDay.from(2021,6 - 1,12))) // 특정 날짜 점 찍기
 
         )
 
@@ -109,7 +117,7 @@ class CalendarFragment : Fragment() {
             mainActivity?.goWateringFragment()
         }
 
-        firestore?.collection("watering")?.document(uid1!!)?.addSnapshotListener { snapshot, e ->
+        firestore?.collection("watering")?.document(userUid!!)?.addSnapshotListener { snapshot, e ->
             if(snapshot == null) return@addSnapshotListener
             var wateringDTO = snapshot.toObject(WateringDTO::class.java)
             if (wateringDTO?.wateringStartYear != null && wateringDTO?.wateringStartMonth != null && wateringDTO?.wateringStartDay != null && wateringDTO?.wateringIntervalDay != null) {
@@ -121,8 +129,56 @@ class CalendarFragment : Fragment() {
             }
         }
 
+        view.fragment_calendar.adapter = CalendarRecyclerViewAdaper()
+        view.fragment_calendar.layoutManager = LinearLayoutManager(activity)
+
         return view
     }
+
+    inner class CalendarRecyclerViewAdaper : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+        // CalendarDTO 클래스 ArrayList 생성
+        var calendarDTOs : ArrayList<CalendarDTO.Watered> = arrayListOf()
+        var stringDate : String? = null
+        init {
+            firestore?.collection("calendar")
+                ?.document(userUid!!)
+                ?.collection("userWatered")
+                ?.orderBy("timestamp", Query.Direction.DESCENDING)
+                ?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+                    // 배열 비움
+                    calendarDTOs.clear()
+
+                    // querySnapshot이 null일 경우, 바로 종료시킨다.
+                    if (querySnapshot == null) return@addSnapshotListener
+
+                    for (snapshot in querySnapshot!!.documents) {
+                        var item = snapshot.toObject(CalendarDTO.Watered::class.java)
+                        calendarDTOs.add(item!!)
+                    }
+                    notifyDataSetChanged()
+                }
+        }
+
+        // xml 파일을 inflate하여 ViewHolder를 생성
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+            var view =
+                LayoutInflater.from(parent.context).inflate(R.layout.item_calendar, parent, false)
+            return CustomViewHolder(view)
+        }
+
+        inner class CustomViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
+        override fun getItemCount(): Int {
+            return calendarDTOs.size
+        }
+
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+            var viewholder = (holder as MessageListFragment.MessageListRecyclerViewAdapter.CustomViewHolder).itemView
+            stringDate = calendarDTOs!![position].wateredYear.toString() + "." + calendarDTOs!![position].wateredMonth.toString() + "." + calendarDTOs!![position].wateredDay.toString();
+            viewholder.watered_date.text = calendarDTOs!![position].wateredYear.toString()
+        }
+    }
+
 }
 
 // 토요일을 파란색으로 변경
@@ -173,7 +229,7 @@ class toDayDecorator : DayViewDecorator {
     }
 }
 
-// 같은 달 중에 이미 지난 날들은 회색처리
+// 같은 달 중에 오늘보다 지난 날들은 회색처리
 //class MinDecorator(min: CalendarDay) : DayViewDecorator {
 //    val minDay = min
 //    override fun shouldDecorate(day: CalendarDay?): Boolean {
@@ -185,3 +241,16 @@ class toDayDecorator : DayViewDecorator {
 //        view?.setDaysDisabled(true)
 //    }
 //}
+
+// 특정 날짜에 점 표시
+class EventDecorator(var color: Int?, var dates: Set<CalendarDay>?) : DayViewDecorator {
+
+    override fun shouldDecorate(day: CalendarDay?): Boolean {
+        return dates!!.contains(day)
+    }
+
+    override fun decorate(view: DayViewFacade?) {
+        view?.addSpan(DotSpan(5F, color!!))
+    }
+}
+

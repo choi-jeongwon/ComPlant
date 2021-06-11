@@ -67,9 +67,6 @@ class MessageListFragment : Fragment() {
                 ?.collection("userMessages")
                 ?.orderBy("timestamp", Query.Direction.DESCENDING)
                 ?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-
-//            firestore?.collection("messages")?.orderBy("timestamp", Query.Direction.DESCENDING)
-//                ?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                     // 배열 비움
                     messageDTOs.clear()
 
