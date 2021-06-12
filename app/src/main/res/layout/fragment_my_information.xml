@@ -246,7 +246,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/btn_message_contents_update"
+                android:id="@+id/btn_my_info_update"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"

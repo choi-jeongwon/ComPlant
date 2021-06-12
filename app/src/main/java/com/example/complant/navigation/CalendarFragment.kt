@@ -41,7 +41,7 @@ class CalendarFragment : Fragment() {
     var mainActivity: MainActivity? = null
     var firestore: FirebaseFirestore? = null
     var auth: FirebaseAuth? = null
-    var uid : String? = null
+    var uid: String? = null
 
     var wateredCalendarInfo = CalendarDTO.Watered()
 
@@ -65,7 +65,7 @@ class CalendarFragment : Fragment() {
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
         uid = FirebaseAuth.getInstance().currentUser?.uid
-        var date : String? = null
+        var date: String? = null
 
         var timeCalendar = Calendar.getInstance()
         val currentYear = timeCalendar.get(Calendar.YEAR)
@@ -82,7 +82,6 @@ class CalendarFragment : Fragment() {
             toDayDecorator() // 오늘 날짜 크기를 키우고 굵은 색으로 표시
             //EventDecorator(Color.RED, Collections.singleton(CalendarDay.today())), // 특정 날짜 점 찍기
             //EventDecorator(Color.BLUE, Collections.singleton(CalendarDay.from(2021,6 - 1,12))) // 특정 날짜 점 찍기
-
 
 
         )
@@ -111,30 +110,31 @@ class CalendarFragment : Fragment() {
                                 wateredCalendarInfo.wateredDay = currentDate
 
                                 if (currentMonth < 10 && currentDate < 10) {
-                                    wateredCalendarInfo.wateredString = currentYear.toString() + "0" + currentMonth.toString() + "0" +currentDate.toString()
-                                }
-                                else if (currentMonth < 10) {
-                                    wateredCalendarInfo.wateredString = currentYear.toString() + "0" + currentMonth.toString() + currentDate.toString()
-                                }
-                                else if (currentDate < 10) {
-                                    wateredCalendarInfo.wateredString = currentYear.toString() + currentMonth.toString() + "0" + currentDate.toString()
-                                }
-                                else {
-                                    wateredCalendarInfo.wateredString = currentYear.toString() + currentMonth.toString() + currentDate.toString()
+                                    wateredCalendarInfo.wateredString =
+                                        currentYear.toString() + "0" + currentMonth.toString() + "0" + currentDate.toString()
+                                } else if (currentMonth < 10) {
+                                    wateredCalendarInfo.wateredString =
+                                        currentYear.toString() + "0" + currentMonth.toString() + currentDate.toString()
+                                } else if (currentDate < 10) {
+                                    wateredCalendarInfo.wateredString =
+                                        currentYear.toString() + currentMonth.toString() + "0" + currentDate.toString()
+                                } else {
+                                    wateredCalendarInfo.wateredString =
+                                        currentYear.toString() + currentMonth.toString() + currentDate.toString()
                                 }
 
 
                                 if (wateredCalendarInfo.uid != null && wateredCalendarInfo.wateredYear != null && wateredCalendarInfo.wateredMonth != null && wateredCalendarInfo.wateredDay != null) {
-                                    firestore?.collection("calendar")?.document(uid!!)?.collection("userWatered")
+                                    firestore?.collection("calendar")?.document(uid!!)
+                                        ?.collection("userWatered")
                                         ?.document(wateredCalendarInfo.wateredString!!)
                                         ?.set(wateredCalendarInfo)
                                 }
-
                             }
 
                             DialogInterface.BUTTON_NEGATIVE -> {
-                            mainActivity?.goWateringFragment()
-                        }
+                                mainActivity?.goWateringFragment()
+                            }
 
                         }
                     }
@@ -153,25 +153,30 @@ class CalendarFragment : Fragment() {
         }
 
         firestore?.collection("watering")?.document(uid!!)?.addSnapshotListener { snapshot, e ->
-            if(snapshot == null) return@addSnapshotListener
+            if (snapshot == null) return@addSnapshotListener
             var wateringDTO = snapshot.toObject(WateringDTO::class.java)
 
             if (wateringDTO?.wateringStartYear != null && wateringDTO?.wateringStartMonth != null && wateringDTO?.wateringStartDay != null && wateringDTO?.wateringIntervalDay != null) {
 
                 if (wateringDTO?.wateringStartMonth!! < 10 && wateringDTO?.wateringStartDay!! < 10) {
-                    date = "물 주기 시작 : " + wateringDTO.wateringStartYear.toString() + "-0" + wateringDTO.wateringStartMonth.toString() + "-0" + wateringDTO.wateringStartDay.toString()
+                    date =
+                        "물 주기 시작 : " + wateringDTO.wateringStartYear.toString() + "-0" + wateringDTO.wateringStartMonth.toString() + "-0" + wateringDTO.wateringStartDay.toString()
                 } else if (wateringDTO?.wateringStartMonth!! < 10) {
-                    date = "물 주기 시작 : " + wateringDTO.wateringStartYear.toString() + "-0" + wateringDTO.wateringStartMonth.toString() + "-" + wateringDTO.wateringStartDay.toString()
+                    date =
+                        "물 주기 시작 : " + wateringDTO.wateringStartYear.toString() + "-0" + wateringDTO.wateringStartMonth.toString() + "-" + wateringDTO.wateringStartDay.toString()
                 } else if (wateringDTO?.wateringStartDay!! < 10) {
-                    date = "물 주기 시작 : " + wateringDTO.wateringStartYear.toString() + "-" + wateringDTO.wateringStartMonth.toString() + "-0" + wateringDTO.wateringStartDay.toString()
+                    date =
+                        "물 주기 시작 : " + wateringDTO.wateringStartYear.toString() + "-" + wateringDTO.wateringStartMonth.toString() + "-0" + wateringDTO.wateringStartDay.toString()
                 } else {
-                    date = "물 주기 시작 : " + wateringDTO.wateringStartYear.toString() + "-" + wateringDTO.wateringStartMonth.toString() + "-" + wateringDTO.wateringStartDay.toString()
+                    date =
+                        "물 주기 시작 : " + wateringDTO.wateringStartYear.toString() + "-" + wateringDTO.wateringStartMonth.toString() + "-" + wateringDTO.wateringStartDay.toString()
 
                 }
 
                 view.calendar_date.setText(date)
 
-                var interval : String? = wateringDTO.wateringIntervalDay.toString() + "일에 한 번 물을 줍니다."
+                var interval: String? =
+                    wateringDTO.wateringIntervalDay.toString() + "일에 한 번 물을 줍니다."
                 view.calendar_interval.setText(interval)
 
 
@@ -188,8 +193,9 @@ class CalendarFragment : Fragment() {
 
     inner class CalendarRecyclerViewAdaper : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         // CalendarDTO 클래스 ArrayList 생성
-        var calendarDTOs : ArrayList<CalendarDTO.Watered> = arrayListOf()
-        var stringDate : String? = null
+        var calendarDTOs: ArrayList<CalendarDTO.Watered> = arrayListOf()
+        var stringDate: String? = null
+
         init {
             firestore?.collection("calendar")
                 ?.document(uid!!)
@@ -227,13 +233,17 @@ class CalendarFragment : Fragment() {
             var viewholder = (holder as CustomViewHolder).itemView
 
             if (calendarDTOs!![position].wateredMonth!! < 10 && calendarDTOs!![position].wateredDay!! < 10) {
-                stringDate = calendarDTOs!![position].wateredYear.toString() + ".0" + calendarDTOs!![position].wateredMonth.toString() + ".0" + calendarDTOs!![position].wateredDay.toString();
+                stringDate =
+                    calendarDTOs!![position].wateredYear.toString() + ".0" + calendarDTOs!![position].wateredMonth.toString() + ".0" + calendarDTOs!![position].wateredDay.toString();
             } else if (calendarDTOs!![position].wateredMonth!! < 10) {
-                stringDate = calendarDTOs!![position].wateredYear.toString() + ".0" + calendarDTOs!![position].wateredMonth.toString() + "." + calendarDTOs!![position].wateredDay.toString();
+                stringDate =
+                    calendarDTOs!![position].wateredYear.toString() + ".0" + calendarDTOs!![position].wateredMonth.toString() + "." + calendarDTOs!![position].wateredDay.toString();
             } else if (calendarDTOs!![position].wateredDay!! < 10) {
-                stringDate = calendarDTOs!![position].wateredYear.toString() + "." + calendarDTOs!![position].wateredMonth.toString() + ".0" + calendarDTOs!![position].wateredDay.toString();
+                stringDate =
+                    calendarDTOs!![position].wateredYear.toString() + "." + calendarDTOs!![position].wateredMonth.toString() + ".0" + calendarDTOs!![position].wateredDay.toString();
             } else {
-                stringDate = calendarDTOs!![position].wateredYear.toString() + "." + calendarDTOs!![position].wateredMonth.toString() + "." + calendarDTOs!![position].wateredDay.toString();
+                stringDate =
+                    calendarDTOs!![position].wateredYear.toString() + "." + calendarDTOs!![position].wateredMonth.toString() + "." + calendarDTOs!![position].wateredDay.toString();
             }
 
             viewholder.watered_date.text = stringDate

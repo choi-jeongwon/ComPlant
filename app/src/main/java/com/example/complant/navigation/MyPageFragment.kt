@@ -168,19 +168,19 @@ class MyPageFragment : Fragment() {
             }
             transaction.set(tsDocFollowing, followDTO)
             return@runTransaction
-        }
+            }
 
-        // Save data to third person
-        var tsDocFollower = firestore?.collection("users")?.document(uid!!)
-        firestore?.runTransaction { transaction ->
-            var followDTO = transaction.get(tsDocFollower!!).toObject(FollowDTO::class.java)
+            // Save data to third person
+            var tsDocFollower = firestore?.collection("users")?.document(uid!!)
+            firestore?.runTransaction { transaction ->
+                var followDTO = transaction.get(tsDocFollower!!).toObject(FollowDTO::class.java)
 
-            if(followDTO == null) {
-                followDTO = FollowDTO()
-                //followDTO!!.followerCount = 1
-                //followDTO!!.followers[currentUserUid!!] = true
+                if(followDTO == null) {
+                    followDTO = FollowDTO()
+                    //followDTO!!.followerCount = 1
+                    //followDTO!!.followers[currentUserUid!!] = true
 
-                transaction.set(tsDocFollower, followDTO!!)
+                    transaction.set(tsDocFollower, followDTO!!)
                 return@runTransaction
             }
 
