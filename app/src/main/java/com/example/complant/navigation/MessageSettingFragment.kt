@@ -141,7 +141,7 @@ class MessageSettingFragment : Fragment() {
             messageInfo.content = view.txt_message_contents_input.text.toString()
             messageInfo.timestamp = System.currentTimeMillis()
 
-            if (messageInfo.date != null && messageInfo.startTime != null && messageInfo.endTime != null && messageInfo.content != null) {
+            if (messageInfo.date != null && messageInfo.content != null) {
                 firestore?.collection("messages")?.document(userUid!!)?.collection("userMessages")
                     ?.document(messageInfo.timestamp.toString())
                     ?.set(messageInfo)

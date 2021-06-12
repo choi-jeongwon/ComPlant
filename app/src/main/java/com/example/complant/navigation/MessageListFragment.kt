@@ -98,8 +98,8 @@ class MessageListFragment : Fragment() {
             var viewholder = (holder as CustomViewHolder).itemView
 
             viewholder.message_day.text = messageDTOs!![position].date
-            viewholder.message_start_time.text = messageDTOs!![position].startTime
-            viewholder.message_end_time.text = messageDTOs!![position].endTime
+//            viewholder.message_start_time.text = messageDTOs!![position].startTime
+//            viewholder.message_end_time.text = messageDTOs!![position].endTime
             viewholder.message_contents.text = messageDTOs!![position].content
 
             viewholder.recycle_message_item.setOnClickListener {
