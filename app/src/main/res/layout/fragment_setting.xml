@@ -86,38 +86,38 @@
         android:layout_height="1dp"
         android:background="#989898" />
 
-    <LinearLayout
-        android:id="@+id/quit_setting"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:orientation="horizontal">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/quit_setting"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="70dp"-->
+<!--        android:orientation="horizontal">-->
 
-        <ImageView
-            android:id="@+id/img_quit_setting"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/ic_setting_person_dash" />
+<!--        <ImageView-->
+<!--            android:id="@+id/img_quit_setting"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:src="@drawable/ic_setting_person_dash" />-->
 
-        <Button
-            android:id="@+id/btn_quit_setting"
-            style="?android:borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:text="회원 탈퇴"
-            android:textSize="19dp" />
-    </LinearLayout>
+<!--        <Button-->
+<!--            android:id="@+id/btn_quit_setting"-->
+<!--            style="?android:borderlessButtonStyle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:text="회원 탈퇴"-->
+<!--            android:textSize="19dp" />-->
+<!--    </LinearLayout>-->
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#989898" />
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:background="#989898" />-->
 
     <LinearLayout
         android:id="@+id/logout_setting"
