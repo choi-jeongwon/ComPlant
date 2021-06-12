@@ -71,22 +71,22 @@ class MyInformationFragment : Fragment() {
                 view.my_info_current_plant_type.setText(userInfoDTO?.plantType)
                 view.edit_plant_type_setting.setText(userInfoDTO?.plantType)
 
-                if (userInfoDTO?.startMonth!! < 10 && userInfoDTO?.startDay!! < 10) {
-                    view.btn_start_day_setting.setText(userInfoDTO?.startYear.toString() + "-0" + userInfoDTO?.startMonth.toString() + "-0" + userInfoDTO?.startDay.toString())
-                    view.my_info_current_start_day.setText(userInfoDTO?.startYear.toString() + "-0" + userInfoDTO?.startMonth.toString() + "-0" + userInfoDTO?.startDay.toString())
-                }
-                else if (userInfoDTO?.startMonth!! + 1 < 10) {
-                    view.btn_start_day_setting.setText(userInfoDTO?.startYear.toString() + "-0" + userInfoDTO?.startMonth.toString() + "-" + userInfoDTO?.startDay.toString())
-                    view.my_info_current_start_day.setText(userInfoDTO?.startYear.toString() + "-0" + userInfoDTO?.startMonth.toString() + "-" + userInfoDTO?.startDay.toString())
-                }
-                else if (userInfoDTO?.startDay!! < 10) {
-                    view.btn_start_day_setting.setText(userInfoDTO?.startYear.toString() + "-" + userInfoDTO?.startMonth.toString() + "-0" + userInfoDTO?.startDay.toString())
-                    view.my_info_current_start_day.setText(userInfoDTO?.startYear.toString() + "-" + userInfoDTO?.startMonth.toString() + "-0" + userInfoDTO?.startDay.toString())
-                }
-                else {
-                    view.btn_start_day_setting.setText(userInfoDTO?.startYear.toString() + "-" + userInfoDTO?.startMonth.toString() + "-" + userInfoDTO?.startDay.toString())
-                    view.my_info_current_start_day.setText(userInfoDTO?.startYear.toString() + "-" + userInfoDTO?.startMonth.toString() + "-" + userInfoDTO?.startDay.toString())
-                }
+//                if (userInfoDTO?.startMonth!! < 10 && userInfoDTO?.startDay!! < 10) {
+//                    view.btn_start_day_setting.setText(userInfoDTO?.startYear.toString() + "-0" + userInfoDTO?.startMonth.toString() + "-0" + userInfoDTO?.startDay.toString())
+//                    view.my_info_current_start_day.setText(userInfoDTO?.startYear.toString() + "-0" + userInfoDTO?.startMonth.toString() + "-0" + userInfoDTO?.startDay.toString())
+//                }
+//                else if (userInfoDTO?.startMonth!! + 1 < 10) {
+//                    view.btn_start_day_setting.setText(userInfoDTO?.startYear.toString() + "-0" + userInfoDTO?.startMonth.toString() + "-" + userInfoDTO?.startDay.toString())
+//                    view.my_info_current_start_day.setText(userInfoDTO?.startYear.toString() + "-0" + userInfoDTO?.startMonth.toString() + "-" + userInfoDTO?.startDay.toString())
+//                }
+//                else if (userInfoDTO?.startDay!! < 10) {
+//                    view.btn_start_day_setting.setText(userInfoDTO?.startYear.toString() + "-" + userInfoDTO?.startMonth.toString() + "-0" + userInfoDTO?.startDay.toString())
+//                    view.my_info_current_start_day.setText(userInfoDTO?.startYear.toString() + "-" + userInfoDTO?.startMonth.toString() + "-0" + userInfoDTO?.startDay.toString())
+//                }
+//                else {
+//                    view.btn_start_day_setting.setText(userInfoDTO?.startYear.toString() + "-" + userInfoDTO?.startMonth.toString() + "-" + userInfoDTO?.startDay.toString())
+//                    view.my_info_current_start_day.setText(userInfoDTO?.startYear.toString() + "-" + userInfoDTO?.startMonth.toString() + "-" + userInfoDTO?.startDay.toString())
+//                }
             }
 
 
@@ -119,38 +119,38 @@ class MyInformationFragment : Fragment() {
         }
 
         // 식물 기르기 시작한 날짜 버튼 클릭
-        view.btn_start_day_setting?.setOnClickListener {
-            var calendar = Calendar.getInstance()
-            var year = calendar.get(Calendar.YEAR)
-            var month = calendar.get(Calendar.MONTH)
-            var day = calendar.get(Calendar.DAY_OF_MONTH)
-
-            var listener = DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
-                if (i2 + 1 < 10 && i3 < 10) {
-                    view.btn_start_day_setting.setText("${i}-0${i2 + 1}-0${i3}")
-                    view.my_info_current_start_day.setText("${i}-0${i2 + 1}-0${i3}")
-                }
-                else if (i2 + 1 < 10) {
-                    view.btn_start_day_setting.setText("${i}-0${i2 + 1}-${i3}")
-                    view.my_info_current_start_day.setText("${i}-0${i2 + 1}-${i3}")
-                }
-                else if (i3 < 10) {
-                    view.btn_start_day_setting.setText("${i}-${i2 + 1}-0${i3}")
-                    view.my_info_current_start_day.setText("${i}-${i2 + 1}-0${i3}")
-                }
-                else {
-                    view.btn_start_day_setting.setText("${i}-${i2 + 1}-${i3}")
-                    view.my_info_current_start_day.setText("${i}-${i2 + 1}-${i3}")
-                }
-
-                userInfoDTOs?.startYear = i
-                userInfoDTOs?.startMonth = i2 + 1
-                userInfoDTOs?.startDay = i3
-            }
-
-            var picker = DatePickerDialog(view.context, listener, year, month, day)
-            picker.show()
-        }
+//        view.btn_start_day_setting?.setOnClickListener {
+//            var calendar = Calendar.getInstance()
+//            var year = calendar.get(Calendar.YEAR)
+//            var month = calendar.get(Calendar.MONTH)
+//            var day = calendar.get(Calendar.DAY_OF_MONTH)
+//
+//            var listener = DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
+//                if (i2 + 1 < 10 && i3 < 10) {
+//                    view.btn_start_day_setting.setText("${i}-0${i2 + 1}-0${i3}")
+//                    view.my_info_current_start_day.setText("${i}-0${i2 + 1}-0${i3}")
+//                }
+//                else if (i2 + 1 < 10) {
+//                    view.btn_start_day_setting.setText("${i}-0${i2 + 1}-${i3}")
+//                    view.my_info_current_start_day.setText("${i}-0${i2 + 1}-${i3}")
+//                }
+//                else if (i3 < 10) {
+//                    view.btn_start_day_setting.setText("${i}-${i2 + 1}-0${i3}")
+//                    view.my_info_current_start_day.setText("${i}-${i2 + 1}-0${i3}")
+//                }
+//                else {
+//                    view.btn_start_day_setting.setText("${i}-${i2 + 1}-${i3}")
+//                    view.my_info_current_start_day.setText("${i}-${i2 + 1}-${i3}")
+//                }
+//
+//                userInfoDTOs?.startYear = i
+//                userInfoDTOs?.startMonth = i2 + 1
+//                userInfoDTOs?.startDay = i3
+//            }
+//
+//            var picker = DatePickerDialog(view.context, listener, year, month, day)
+//            picker.show()
+//        }
 
         return view
     }
