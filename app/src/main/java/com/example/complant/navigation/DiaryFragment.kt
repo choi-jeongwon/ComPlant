@@ -132,7 +132,7 @@ class DiaryFragment : Fragment() {
                 viewholder.diaryitem_favorite_imageview.setImageResource(R.drawable.ic_favorite_border)
             }
 
-            //Profile Image 가져오기(14강 6:26)
+            //Profile Image 가져오기
             firestore?.collection("profileImages")?.document(contentDTOs[position].uid!!)
                 ?.get()?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
