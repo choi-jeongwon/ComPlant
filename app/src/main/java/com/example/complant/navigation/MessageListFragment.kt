@@ -46,7 +46,10 @@ class MessageListFragment : Fragment() {
         userUid = FirebaseAuth.getInstance().currentUser?.uid
 
         view.btn_new_message?.setOnClickListener {
-            mainActivity?.goMessageSettingFragment()
+            var messageSettingFragment = MessageSettingFragment()
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.add(R.id.main_content, messageSettingFragment)
+                ?.addToBackStack("settingFragment")?.commit()
         }
 
         view.fragment_message_recyclerview.adapter = MessageListRecyclerViewAdapter()
@@ -105,7 +108,9 @@ class MessageListFragment : Fragment() {
 
                 bundle.putString("content", messageDTOs!![position].content)
                 homeFragment.arguments = bundle
-                mainActivity?.goHomeFragment(homeFragment)
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.add(R.id.main_content, homeFragment)
+                    ?.addToBackStack("settingFragment")?.commit()
             }
         }
     }

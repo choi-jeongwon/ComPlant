@@ -47,7 +47,16 @@ class HomeFragment : Fragment() {
         var mainMessageInfo = MainPageDTO()
 
         view.main_account_button.setOnClickListener {
-            mainActivity?.goMyPage()
+            // HomeFragment -> MyPageFragment 이동
+            //FragmentManager에 Bundle로 Data를 담아 전달
+            var myPageFragment = MyPageFragment()
+            var bundle = Bundle()
+            var uid = FirebaseAuth.getInstance().currentUser?.uid
+            bundle.putString("destinationUid", uid)
+            myPageFragment.arguments = bundle
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.add(R.id.main_content, myPageFragment)
+                ?.addToBackStack("mypage")?.commit()
         }
 
         var str: String? = arguments?.getString("content")

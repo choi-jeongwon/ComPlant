@@ -40,19 +40,33 @@ class SettingFragment : Fragment() {
 
         // 1. 내 정보 변경
         view.btn_my_info_setting.setOnClickListener {
-            mainActivity?.goMyInformationFragment()
+            // SettingFragment -> MyInformationFragment 이동
+            var myInformationFragment = MyInformationFragment()
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.add(R.id.main_content, myInformationFragment)
+                ?.addToBackStack("settingFragment")?.commit()
         }
         view.my_info_setting.setOnClickListener {
-            mainActivity?.goMyInformationFragment()
+            // SettingFragment -> MyInformationFragment 이동
+            var myInformationFragment = MyInformationFragment()
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.add(R.id.main_content, myInformationFragment)
+                ?.addToBackStack("settingFragment")?.commit()
         }
 
         // 2. 메인 메시지 설정
         view.btn_main_message_setting.setOnClickListener {
-            mainActivity?.goMessageListFragment()
+            var messageListFragment = MessageListFragment()
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.add(R.id.main_content, messageListFragment)
+                ?.addToBackStack("settingFragment")?.commit()
         }
 
         view.main_message_setting.setOnClickListener {
-            mainActivity?.goMessageListFragment()
+            var messageListFragment = MessageListFragment()
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.add(R.id.main_content, messageListFragment)
+                ?.addToBackStack("settingFragment")?.commit()
         }
 
         // 회원 탈퇴

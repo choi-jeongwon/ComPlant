@@ -128,18 +128,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
     }
 
-    // HomeFragment -> MyPageFragment 이동 함수
-    fun goMyPage() {
-        //FragmentManager에 Bundle로 Data를 담아 전달
-        val myPageFragment = MyPageFragment()
-        var bundle = Bundle()
-        var uid = FirebaseAuth.getInstance().currentUser?.uid
-        bundle.putString("destinationUid", uid)
-        myPageFragment.arguments = bundle
-        supportFragmentManager.beginTransaction().add(R.id.main_content, myPageFragment)
-            .addToBackStack("mypage").commit()
-    }
-
     //뒤로가기 함수
     fun goBack() {
         onBackPressed()
@@ -162,54 +150,5 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 FirebaseFirestore.getInstance().collection("profileImages").document(uid).set(map)
             }
         }
-    }
-
-    //   MyPageFragment -> SettingFragment 이동 함수
-    fun goSettingFragment() {
-        val settingFragment = SettingFragment()
-        supportFragmentManager.beginTransaction().add(R.id.main_content, settingFragment)
-            .addToBackStack("settingFragment").commit()
-    }
-
-    //   SettingFragment -> MessageListFragment 이동 함수
-    fun goMessageListFragment() {
-        val messageListFragment = MessageListFragment()
-        supportFragmentManager.beginTransaction().add(R.id.main_content, messageListFragment)
-            .addToBackStack("settingFragment").commit()
-    }
-
-    // MessageSettingFragment -> MessageListFragment 이동함수 (원하는 메시지 입력 후 데이터 보내기)
-    fun goMessageListFragment1(messageListFragment: MessageListFragment) {
-
-        supportFragmentManager.beginTransaction().add(R.id.main_content, messageListFragment)
-            .addToBackStack("settingFragment").commit()
-    }
-
-    //   MessageListFragment -> MessageSettingFragment 이동 함수
-    fun goMessageSettingFragment() {
-        val messageSettingFragment = MessageSettingFragment()
-        supportFragmentManager.beginTransaction().add(R.id.main_content, messageSettingFragment)
-            .addToBackStack("settingFragment").commit()
-
-    }
-
-    fun goHomeFragment(homeFragment: HomeFragment) {
-        supportFragmentManager.beginTransaction().add(R.id.main_content, homeFragment)
-            .addToBackStack("settingFragment").commit()
-    }
-
-
-    // CalendarFragment -> WateringFragment 이동 함수
-    fun goWateringFragment() {
-        val wateringFragment = WateringFragment()
-        supportFragmentManager.beginTransaction().add(R.id.main_content, wateringFragment)
-            .addToBackStack("settingFragment").commit()
-    }
-
-    // SettingFragment -> MyInformationFragment 이동 함수
-    fun goMyInformationFragment() {
-        val myInformationFragment = MyInformationFragment()
-        supportFragmentManager.beginTransaction().add(R.id.main_content, myInformationFragment)
-            .addToBackStack("settingFragment").commit()
     }
 }

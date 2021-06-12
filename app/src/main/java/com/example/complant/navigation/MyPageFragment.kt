@@ -105,7 +105,11 @@ class MyPageFragment : Fragment() {
 
         //setting 클릭 시 SettingFragment로 이동
         fragmentView?.setting_button?.setOnClickListener {
-            mainActivity?.goSettingFragment()
+            //   MyPageFragment -> SettingFragment 이동
+            var settingFragment = SettingFragment()
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.add(R.id.main_content, settingFragment)
+                ?.addToBackStack("settingFragment")?.commit()
         }
 
         // DB에서 profile name을 가져와서 보여준다.

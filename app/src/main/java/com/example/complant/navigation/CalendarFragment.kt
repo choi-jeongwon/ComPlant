@@ -130,7 +130,11 @@ class CalendarFragment : Fragment() {
                             }
 
                             DialogInterface.BUTTON_NEGATIVE -> {
-                                mainActivity?.goWateringFragment()
+                                // CalendarFragment -> WateringFragment 이동
+                                var wateringFragment = WateringFragment()
+                                activity?.supportFragmentManager?.beginTransaction()
+                                    ?.add(R.id.main_content, wateringFragment)
+                                    ?.addToBackStack("settingFragment")?.commit()
                             }
                         }
                     }
@@ -145,7 +149,11 @@ class CalendarFragment : Fragment() {
 
         // 주기 설정 버튼 클릭 시 wateringFragment로 이동
         view.btn_watering_setting.setOnClickListener {
-            mainActivity?.goWateringFragment()
+            // CalendarFragment -> WateringFragment 이동
+            var wateringFragment = WateringFragment()
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.add(R.id.main_content, wateringFragment)
+                ?.addToBackStack("settingFragment")?.commit()
         }
 
         firestore?.collection("watering")?.document(uid!!)?.addSnapshotListener { snapshot, e ->
