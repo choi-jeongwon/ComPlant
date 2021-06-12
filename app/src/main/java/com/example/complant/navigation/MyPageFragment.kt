@@ -25,7 +25,7 @@ import com.example.complant.navigation.model.UserInfoDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_my_infomation.view.*
+import kotlinx.android.synthetic.main.fragment_my_information.view.*
 import kotlinx.android.synthetic.main.fragment_my_page.view.*
 
 class MyPageFragment : Fragment() {

@@ -96,6 +96,7 @@ class BoardFragment : Fragment() {
         inner class CustomViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
         override fun getItemCount(): Int {
+
             return contentDTOs2.size
         }
 

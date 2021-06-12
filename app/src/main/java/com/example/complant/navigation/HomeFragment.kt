@@ -15,7 +15,7 @@ import com.example.complant.navigation.model.UserInfoDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_home.view.*
-import kotlinx.android.synthetic.main.fragment_my_infomation.view.*
+import kotlinx.android.synthetic.main.fragment_my_information.view.*
 
 class HomeFragment : Fragment() {
     var mainActivity: MainActivity? = null

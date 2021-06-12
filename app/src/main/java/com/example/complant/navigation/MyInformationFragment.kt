@@ -16,7 +16,7 @@ import com.example.complant.navigation.model.UserInfoDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_home.view.*
-import kotlinx.android.synthetic.main.fragment_my_infomation.view.*
+import kotlinx.android.synthetic.main.fragment_my_information.view.*
 import kotlinx.android.synthetic.main.fragment_my_page.view.*
 
 class MyInformationFragment : Fragment() {
@@ -43,7 +43,7 @@ class MyInformationFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view = LayoutInflater.from(activity).inflate(R.layout.fragment_my_infomation, container, false)
+        var view = LayoutInflater.from(activity).inflate(R.layout.fragment_my_information, container, false)
         firestore = FirebaseFirestore.getInstance()
         uid = FirebaseAuth.getInstance().currentUser?.uid
         currentUserId = FirebaseAuth.getInstance().currentUser?.email
