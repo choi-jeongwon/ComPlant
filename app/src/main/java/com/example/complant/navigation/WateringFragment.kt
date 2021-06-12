@@ -10,10 +10,8 @@ import androidx.fragment.app.Fragment
 import com.example.complant.MainActivity
 import com.example.complant.R
 import com.example.complant.navigation.model.WateringDTO
-import com.example.complant.navigation.model.MessageDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.fragment_message_setting.view.*
 import kotlinx.android.synthetic.main.fragment_watering.view.*
 import java.util.*
 
@@ -74,11 +72,13 @@ class WateringFragment : Fragment() {
         view.btn_watering_contents_update?.setOnClickListener {
             wateringDTO.wateringIntervalDay = Integer.parseInt(view.watering_interval.text.toString())
 
+            // 파이어베이스 DB에 등록
             if (wateringDTO.wateringStartYear != null && wateringDTO.wateringStartMonth != null && wateringDTO.wateringStartDay != null && wateringDTO.wateringIntervalDay != null) {
                 firestore?.collection("watering")?.document(wateringDTO?.uid.toString())
                     ?.set(wateringDTO)
             }
 
+            // 완료 하며 뒤로 가기
             mainActivity?.goBack()
         }
         return view

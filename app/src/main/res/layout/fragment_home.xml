@@ -79,6 +79,8 @@
         android:layout_marginTop="0dp"
         android:layout_marginRight="-3dp"
         android:layout_marginBottom="0dp"
+        android:textColor="@color/colorBlack"
+        android:textSize="18dp"
         android:gravity="center" />
 
     <TextView
@@ -105,35 +107,46 @@
         android:layout_alignRight="@id/plant_name"
         android:text="장미(Rose)"/>
 
-    <androidx.cardview.widget.CardView
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:layout_marginTop="195dp"-->
+<!--        android:layout_marginLeft="40dp"-->
+<!--        android:id="@+id/card_view"-->
+<!--        app:cardCornerRadius="170dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_width="350dp"-->
+<!--        android:layout_height="350dp">-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/plant_photo"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:scaleType="fitXY"-->
+<!--            android:src="@drawable/ic_account" />-->
+<!--    </androidx.cardview.widget.CardView>-->
+
+    <ImageView
+        android:id="@+id/plant_photo"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
         android:layout_marginTop="195dp"
         android:layout_marginLeft="40dp"
-        android:id="@+id/card_view"
-        app:cardCornerRadius="170dp"
         android:layout_gravity="center"
-        android:layout_width="350dp"
-        android:layout_height="350dp">
+        android:layout_centerHorizontal="true"/>
 
-        <ImageView
-            android:id="@+id/plant_photo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:src="@drawable/rose" />
-    </androidx.cardview.widget.CardView>
+
 
     <!--Bottom Navigation View 화면 하단 탭 버튼-->
 
 
     <TextView
-        android:id="@+id/user_nickname"
+        android:id="@+id/profile_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="WeLoveRose"
         android:textSize="28dp"
         android:layout_marginTop="33dp"
         android:layout_marginLeft="14dp"
-        android:layout_below="@id/card_view"
+        android:layout_below="@id/plant_photo"
         android:textColor="@color/colorBlack"
         />
 
@@ -142,7 +155,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="님과"
-        android:layout_below="@id/card_view"
+        android:layout_below="@id/plant_photo"
         android:textSize="20dp"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="180dp"

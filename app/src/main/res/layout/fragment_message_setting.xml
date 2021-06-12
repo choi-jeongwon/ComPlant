@@ -1,157 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite">
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/setting_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="메시지 설정"
-        android:layout_margin="10dp"
-        android:textColor="@color/colorBlack"
-        android:textSize="30dp"
-        android:layout_gravity="center_horizontal"/>
-
-    <View
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#989898"/>
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="45dp"
-            android:layout_marginRight="45dp"
-            android:gravity="center"
-            android:text="날짜"
-            android:textColor="@color/colorBlack"
-            android:textSize="25dp" />
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/txt_message_date"
-            android:layout_width="180dp"
-            android:layout_height="60dp"
-            android:freezesText="true"
-            android:gravity="center"
-            android:text="2021-04-26"
-            android:textSize="23dp" />
+            <TextView
+                android:id="@+id/setting_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                android:text="메시지 설정"
+                android:textColor="@color/colorBlack"
+                android:textSize="30dp" />
 
-        <Button
-            android:id="@+id/btn_message_date"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:gravity="center"
-            android:text="변경" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#989898" />
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginRight="45dp"
+                    android:gravity="center"
+                    android:text="날짜"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="25dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:gravity="center"
-            android:text="시작 시간"
-            android:textColor="@color/colorBlack"
-            android:textSize="25dp" />
+                <EditText
+                    android:id="@+id/txt_message_date"
+                    android:layout_width="180dp"
+                    android:layout_height="60dp"
+                    android:freezesText="true"
+                    android:gravity="center"
+                    android:text="2021-04-26"
+                    android:textSize="23dp" />
 
-        <EditText
-            android:id="@+id/txt_start_time"
-            android:layout_width="180dp"
-            android:layout_height="60dp"
-            android:freezesText="true"
-            android:gravity="center"
-            android:text="오전 12:00"
-            android:textSize="23dp" />
+                <Button
+                    android:id="@+id/btn_message_date"
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:text="변경" />
 
-        <Button
-            android:id="@+id/btn_start_time"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:gravity="center"
-            android:text="변경" />
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:text="시작 시간"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="25dp" />
 
-        <TextView
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:text="종료 시간"
-            android:textColor="@color/colorBlack"
-            android:textSize="25dp"
-            />
+                <EditText
+                    android:id="@+id/txt_start_time"
+                    android:layout_width="180dp"
+                    android:layout_height="60dp"
+                    android:freezesText="true"
+                    android:gravity="center"
+                    android:text="오전 12:00"
+                    android:textSize="23dp" />
 
-        <EditText
-            android:id="@+id/txt_end_time"
-            android:layout_width="180dp"
-            android:layout_height="60dp"
-            android:freezesText="true"
-            android:gravity="center"
-            android:text="오후 11:59"
-            android:textSize="23dp" />
+                <Button
+                    android:id="@+id/btn_start_time"
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:text="변경" />
 
-        <Button
-            android:id="@+id/btn_end_time"
-            android:gravity="center"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:text="변경" />
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-    <TextView
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="메시지 내용 입력"
-        android:layout_marginLeft="10dp"
-        android:textColor="@color/colorBlack"
-        android:textSize="25dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:text="종료 시간"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="25dp" />
 
-    <EditText
-        android:id="@+id/txt_message_contents_input"
-        android:layout_width="match_parent"
-        android:layout_height="190dp"
-        android:layout_margin="15dp"
-        android:text="메시지를 입력하세요"/>
+                <EditText
+                    android:id="@+id/txt_end_time"
+                    android:layout_width="180dp"
+                    android:layout_height="60dp"
+                    android:freezesText="true"
+                    android:gravity="center"
+                    android:text="오후 11:59"
+                    android:textSize="23dp" />
 
-    <Button
-        android:id="@+id/btn_message_contents_update"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="완료" />
+                <Button
+                    android:id="@+id/btn_end_time"
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:text="변경" />
 
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="메시지 내용 입력"
+                android:textColor="@color/colorBlack"
+                android:textSize="25dp" />
+
+            <EditText
+                android:id="@+id/txt_message_contents_input"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="15dp"
+                android:text="" />
+
+            <Button
+                android:id="@+id/btn_message_contents_update"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="완료" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

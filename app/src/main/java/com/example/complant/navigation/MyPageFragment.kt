@@ -6,8 +6,10 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -20,9 +22,11 @@ import com.example.complant.MainActivity
 import com.example.complant.R
 import com.example.complant.navigation.model.ContentDTO
 import com.example.complant.navigation.model.FollowDTO
+import com.example.complant.navigation.model.UserInfoDTO
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_my_information.view.*
 import kotlinx.android.synthetic.main.fragment_my_page.view.*
 
 class MyPageFragment : Fragment() {
@@ -60,12 +64,13 @@ class MyPageFragment : Fragment() {
 
         if (uid == currentUserUid) {
             // MyPage (본인의 MyPageFragment일 때)
-            fragmentView?.temp_follow_button?.text = getString(R.string.signout) // 로그아웃 버튼
-            fragmentView?.temp_follow_button?.setOnClickListener {
-                activity?.finish() // activity 종료
-                startActivity(Intent(activity, LoginActivity::class.java)) // 현재 activity를 종료하고 LoginActivity를 호출
-                auth?.signOut() // firebase signout
-            }
+//            fragmentView?.temp_follow_button?.text = getString(R.string.signout) // 로그아웃 버튼
+//            fragmentView?.temp_follow_button?.setOnClickListener {
+//                activity?.finish() // activity 종료
+//                startActivity(Intent(activity, LoginActivity::class.java)) // 현재 activity를 종료하고 LoginActivity를 호출
+//                auth?.signOut() // firebase signout
+//            }
+            fragmentView?.temp_follow_button?.visibility = GONE // 내 페이지에서는 버튼이 보이지 않음
         } else {
             // OtherUserPage (타인의 MyPagFragment일 때)
             fragmentView?.temp_follow_button?.text = getString(R.string.follow) // follow 버튼
@@ -102,6 +107,17 @@ class MyPageFragment : Fragment() {
         fragmentView?.setting_button?.setOnClickListener {
             mainActivity?.goSettingFragment()
         }
+
+        // DB에서 profile name을 가져와서 보여준다.
+        firestore?.collection("userInfo")
+            ?.document(uid!!)
+            ?.collection("info")
+            ?.document(uid!!)
+            ?.addSnapshotListener { snapshot, e ->
+                if(snapshot == null) return@addSnapshotListener
+                var userInfoDTO = snapshot.toObject(UserInfoDTO.UserInfo::class.java)
+                view?.profile_name?.setText(userInfoDTO?.profileName)
+            }
 
         getProfileImage()
         getFollowerAndFollowing()
@@ -153,19 +169,19 @@ class MyPageFragment : Fragment() {
             }
             transaction.set(tsDocFollowing, followDTO)
             return@runTransaction
-        }
+            }
 
-        // Save data to third person
-        var tsDocFollower = firestore?.collection("users")?.document(uid!!)
-        firestore?.runTransaction { transaction ->
-            var followDTO = transaction.get(tsDocFollower!!).toObject(FollowDTO::class.java)
+            // Save data to third person
+            var tsDocFollower = firestore?.collection("users")?.document(uid!!)
+            firestore?.runTransaction { transaction ->
+                var followDTO = transaction.get(tsDocFollower!!).toObject(FollowDTO::class.java)
 
-            if(followDTO == null) {
-                followDTO = FollowDTO()
-                //followDTO!!.followerCount = 1
-                //followDTO!!.followers[currentUserUid!!] = true
+                if(followDTO == null) {
+                    followDTO = FollowDTO()
+                    //followDTO!!.followerCount = 1
+                    //followDTO!!.followers[currentUserUid!!] = true
 
-                transaction.set(tsDocFollower, followDTO!!)
+                    transaction.set(tsDocFollower, followDTO!!)
                 return@runTransaction
             }
 
@@ -234,11 +250,11 @@ class MyPageFragment : Fragment() {
                 notifyDataSetChanged() // 리사이클뷰 새로고침
             }
         }
-        override fun onCreateViewHolder(p0: ViewGroup, p1: Int): RecyclerView.ViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             // 화면 폭의 1/3 값을 가져옴.
             var width = resources.displayMetrics.widthPixels / 3
 
-            var imageview = ImageView(p0.context)
+            var imageview = ImageView(parent.context)
             imageview.layoutParams = LinearLayoutCompat.LayoutParams(width, width)
             return CustomViewHolder(imageview)
 
@@ -252,11 +268,30 @@ class MyPageFragment : Fragment() {
             return contentDTOs.size
         }
 
-        override fun onBindViewHolder(p0: RecyclerView.ViewHolder, p1: Int) {
-            var imageview = (p0 as CustomViewHolder).imageview
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+            var imageview = (holder as CustomViewHolder).imageview
 
             // Glide로 이미지 다운로드
-            Glide.with(p0.itemView.context).load(contentDTOs[p1].imageUrl).apply(RequestOptions().centerCrop()).into(imageview)
+            Glide.with(holder.itemView.context).load(contentDTOs[position].imageUrl).apply(RequestOptions().centerCrop()).into(imageview)
+
+            holder.imageview.setOnClickListener {
+
+                var myPagePostFragment = MyPagePostFragment()
+                val bundle = Bundle()
+
+                bundle.putString("explain", contentDTOs[position].explain)
+                bundle.putString("imageUrl", contentDTOs[position].imageUrl)
+                bundle.putString("userId", contentDTOs[position].userId)
+                bundle.putInt("favoriteCount", contentDTOs[position].favoriteCount)
+                bundle.putString("destinationUid", uid) // 각 유저 페이지의 정보 uid를 보낸다.
+                bundle.putLong("timestamp", contentDTOs[position].timestamp!!) // 구분자인 timestamp를 보낸다.
+                myPagePostFragment.arguments = bundle
+
+                activity?.supportFragmentManager?.beginTransaction()?.add(R.id.main_content, myPagePostFragment)
+                    ?.addToBackStack("settingFragment")?.commit()
+
+            }
+
         }
     }
 }

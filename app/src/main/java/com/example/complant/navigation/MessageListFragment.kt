@@ -15,15 +15,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_message_list.view.*
-import kotlinx.android.synthetic.main.item_message.*
 import kotlinx.android.synthetic.main.item_message.view.*
-import java.util.*
 import kotlin.collections.ArrayList
 
 class MessageListFragment : Fragment() {
     var mainActivity: MainActivity? = null
     var firestore: FirebaseFirestore? = null
     var auth: FirebaseAuth? = null
+    var userUid: String? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -43,27 +42,12 @@ class MessageListFragment : Fragment() {
         var view = LayoutInflater.from(activity).inflate(R.layout.fragment_message_list, container, false)
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
-        var messageInfo = MessageDTO()
+        userUid = FirebaseAuth.getInstance().currentUser?.uid
+
+        //var messageInfo = MessageDTO()
 
         view.btn_new_message?.setOnClickListener {
             mainActivity?.goMessageSettingFragment()
-
-        }
-
-        var str1: String? = arguments?.getString("message_date")
-        var str2: String? = arguments?.getString("message_start_time")
-        var str3: String? = arguments?.getString("message_end_time")
-        var str4: String? = arguments?.getString("message_contents_input")
-
-        messageInfo.date = str1
-        messageInfo.startTime = str2
-        messageInfo.endTime = str3
-        messageInfo.content = str4
-        messageInfo.timestamp = System.currentTimeMillis()
-
-        if (messageInfo.date != null && messageInfo.startTime != null && messageInfo.endTime != null && messageInfo.content != null) {
-            firestore?.collection("messages")?.document(messageInfo?.timestamp.toString())
-                ?.set(messageInfo)
 
         }
 
@@ -75,10 +59,13 @@ class MessageListFragment : Fragment() {
 
     inner class MessageListRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         // messageDTO 클래스 ArrayList 생성
-        var messageDTOs: ArrayList<MessageDTO> = arrayListOf()
+        var messageDTOs: ArrayList<MessageDTO.Messages> = arrayListOf()
 
         init {
-            firestore?.collection("messages")?.orderBy("timestamp", Query.Direction.DESCENDING)
+            firestore?.collection("messages")
+                ?.document(userUid!!)
+                ?.collection("userMessages")
+                ?.orderBy("timestamp", Query.Direction.DESCENDING)
                 ?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                     // 배열 비움
                     messageDTOs.clear()
@@ -87,7 +74,7 @@ class MessageListFragment : Fragment() {
                     if (querySnapshot == null) return@addSnapshotListener
 
                     for (snapshot in querySnapshot!!.documents) {
-                        var item = snapshot.toObject(MessageDTO::class.java)
+                        var item = snapshot.toObject(MessageDTO.Messages::class.java)
                         messageDTOs.add(item!!)
                     }
                     notifyDataSetChanged()
@@ -115,7 +102,8 @@ class MessageListFragment : Fragment() {
             viewholder.message_end_time.text = messageDTOs!![position].endTime
             viewholder.message_contents.text = messageDTOs!![position].content
 
-            viewholder.message_contents.setOnClickListener {
+            viewholder.recycle_message_item.setOnClickListener {
+                viewholder.message_check.visibility = View.VISIBLE
                 var homeFragment = HomeFragment()
                 val bundle = Bundle()
 
@@ -124,8 +112,30 @@ class MessageListFragment : Fragment() {
                 mainActivity?.goHomeFragment(homeFragment)
             }
 
-
-
+            //setMain이 true로 이미 설정되어 있는 것을 체크 표시 한다.
+//            if (messageDTOs!![position!!].setMain == true) {
+//                viewholder.message_check.visibility = View.VISIBLE
+//            }
+//
+            // 복수 선택 기능
+//            viewholder.recycle_message_item.setOnClickListener {
+//                var tsDoc = firestore?.collection("messages")?.document(messageDTOs!![position].timestamp.toString())
+//                firestore?.runTransaction { transaction ->
+//
+//                    var messageDTO = transaction.get(tsDoc!!).toObject(MessageDTO::class.java)
+//
+//                    if (messageDTO!!.setMain == false) {
+//                        messageDTO?.setMain = true
+//                        viewholder.message_check.visibility = View.VISIBLE
+//
+//                    }
+//                    else if (messageDTO!!.setMain == true) {
+//                        messageDTO?.setMain = false
+//                        viewholder.message_check.visibility = View.INVISIBLE
+//                    }
+//                    transaction.set(tsDoc, messageDTO)
+//                }
+//            }
         }
     }
 }

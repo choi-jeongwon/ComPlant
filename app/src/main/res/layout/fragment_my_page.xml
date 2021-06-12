@@ -25,9 +25,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/profile_name"
-            android:textSize="18dp"
+            android:textSize="20dp"
             android:paddingTop="15dp"
             android:paddingLeft="25dp"
+            android:textColor="@color/colorBlack"
             android:layout_toRightOf="@+id/my_page_main_profile_image"
             />
 
@@ -37,7 +38,7 @@
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginRight="20dp"
             android:text="@string/setting" />
 
 
@@ -54,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:paddingLeft="25dp">
+                android:layout_marginLeft="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -93,6 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_marginLeft="5dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -112,6 +114,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_marginLeft="5dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -126,15 +129,17 @@
                     android:text="@string/count_0" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/temp_follow_button"
-                android:layout_width="102dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="2dp"
-                android:text="@string/follow" />
+
 
         </LinearLayout>
+        <Button
+            android:layout_below="@+id/setting_button"
+            android:layout_alignParentRight="true"
+            android:id="@+id/temp_follow_button"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/follow" />
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView

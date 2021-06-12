@@ -208,4 +208,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             .addToBackStack("settingFragment").commit()
     }
 
+    // SettingFragment -> MyInformationFragment 이동 함수
+    fun goMyInformationFragment() {
+        val myInformationFragment = MyInformationFragment()
+        supportFragmentManager.beginTransaction().add(R.id.main_content, myInformationFragment)
+            .addToBackStack("settingFragment").commit()
+    }
+
+
 }
