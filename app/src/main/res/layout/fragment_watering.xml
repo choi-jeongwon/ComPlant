@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite">
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/setting_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="물 주기 변경"
+        android:layout_gravity="center_horizontal"
         android:layout_margin="10dp"
+        android:text="물 주기 변경"
         android:textColor="@color/colorBlack"
-        android:textSize="30dp"
-        android:layout_gravity="center_horizontal"/>
+        android:textSize="30dp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#989898"/>
+        android:background="#989898" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,27 +36,17 @@
             android:textColor="@color/colorBlack"
             android:textSize="25dp" />
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-<!--            <Button-->
-<!--                android:id="@+id/btn_watering_interval"-->
-<!--                style="?android:borderlessButtonStyle"-->
-<!--                android:layout_width="150dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginLeft="30dp"-->
-<!--                android:text="오늘 날짜"-->
-<!--                android:textSize="23dp" />-->
 
             <EditText
                 android:id="@+id/watering_interval"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:hint="날짜 주기 입력"
                 android:gravity="center_horizontal"
+                android:hint="날짜 주기 입력"
                 android:textSize="23dp" />
 
             <TextView
@@ -83,7 +72,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="45dp"
-
             android:text="물 주기 시작 날짜는"
             android:textColor="@color/colorBlack"
             android:textSize="25dp" />
@@ -98,6 +86,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
+                android:textColor="#8C8C8C"
                 android:text="날짜 선택"
                 android:textSize="23dp" />
 
@@ -105,10 +94,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="입니다."
-                android:textSize="25dp"
-                android:textColor="@color/colorBlack"/>
+                android:textColor="@color/colorBlack"
+                android:textSize="25dp" />
         </LinearLayout>
-
     </LinearLayout>
 
     <LinearLayout
@@ -122,9 +110,7 @@
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
-
             android:text="완료" />
 
     </LinearLayout>
-
 </LinearLayout>

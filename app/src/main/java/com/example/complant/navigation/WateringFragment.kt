@@ -19,7 +19,7 @@ class WateringFragment : Fragment() {
     var mainActivity: MainActivity? = null
     var firestore: FirebaseFirestore? = null
     var auth: FirebaseAuth? = null
-    var uid : String? = null
+    var uid: String? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -36,7 +36,8 @@ class WateringFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view = LayoutInflater.from(activity).inflate(R.layout.fragment_watering, container, false)
+        var view =
+            LayoutInflater.from(activity).inflate(R.layout.fragment_watering, container, false)
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
         var wateringDTO = WateringDTO()
@@ -52,8 +53,7 @@ class WateringFragment : Fragment() {
             var listener = DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
                 if (i2 + 1 < 10 && i3 < 10) {
                     view.btn_watering_start_date.setText("${i}-0${i2 + 1}-0${i3}")
-                }
-                else if (i2 + 1 < 10)
+                } else if (i2 + 1 < 10)
                     view.btn_watering_start_date.setText("${i}-0${i2 + 1}-${i3}")
                 else if (i3 < 10)
                     view.btn_watering_start_date.setText("${i}-${i2 + 1}-0${i3}")
@@ -70,7 +70,8 @@ class WateringFragment : Fragment() {
         }
 
         view.btn_watering_contents_update?.setOnClickListener {
-            wateringDTO.wateringIntervalDay = Integer.parseInt(view.watering_interval.text.toString())
+            wateringDTO.wateringIntervalDay =
+                Integer.parseInt(view.watering_interval.text.toString())
 
             // 파이어베이스 DB에 등록
             if (wateringDTO.wateringStartYear != null && wateringDTO.wateringStartMonth != null && wateringDTO.wateringStartDay != null && wateringDTO.wateringIntervalDay != null) {

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".navigation.DetailDictionaryActivity">
 
-
     <!--화면 로딩 진행바-->
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -166,6 +165,4 @@
 
         </LinearLayout>
     </ScrollView>
-
-
 </RelativeLayout>

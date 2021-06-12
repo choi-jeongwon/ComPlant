@@ -135,26 +135,6 @@
                             android:textSize="15dp" />
                     </LinearLayout>
 
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginBottom="5dp"-->
-<!--                        android:orientation="horizontal">-->
-
-<!--                        <TextView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Start day : "-->
-<!--                            android:textColor="@color/colorBlack"-->
-<!--                            android:textSize="15dp" />-->
-
-<!--                        <TextView-->
-<!--                            android:id="@+id/my_info_current_start_day"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:textColor="@color/colorBlack"-->
-<!--                            android:textSize="15dp" />-->
-<!--                    </LinearLayout>-->
 
                 </LinearLayout>
 
@@ -211,13 +191,13 @@
                     android:freezesText="true"
                     android:textSize="18dp" />
 
-                <Button
-                    android:id="@+id/btn_profile_name_duplicate"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:text="중복 확인" />
+<!--                <Button-->
+<!--                    android:id="@+id/btn_profile_name_duplicate"-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    android:layout_marginRight="20dp"-->
+<!--                    android:text="중복 확인" />-->
             </LinearLayout>
 
             <LinearLayout
@@ -266,30 +246,6 @@
                     android:textSize="18dp" />
             </LinearLayout>
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="70dp"-->
-<!--                android:gravity="center_vertical"-->
-<!--                android:orientation="horizontal">-->
-
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginLeft="34dp"-->
-<!--                    android:layout_marginRight="34dp"-->
-<!--                    android:text="Start day"-->
-<!--                    android:textColor="@color/colorBlack"-->
-<!--                    android:textSize="18dp" />-->
-
-<!--                <Button-->
-<!--                    android:id="@+id/btn_start_day_setting"-->
-<!--                    style="?android:borderlessButtonStyle"-->
-<!--                    android:layout_width="180dp"-->
-<!--                    android:layout_height="60dp"-->
-<!--                    android:text="날짜 선택"-->
-<!--                    android:textSize="18dp" />-->
-<!--            </LinearLayout>-->
-
             <Button
                 android:id="@+id/btn_my_info_update"
                 android:layout_width="100dp"
@@ -300,5 +256,4 @@
                 android:text="완료" />
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

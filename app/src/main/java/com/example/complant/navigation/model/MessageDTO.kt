@@ -7,7 +7,6 @@ var users : MutableMap<String, Boolean> = HashMap()) {
         var uid : String? = null,
         var timestamp : Long? = null,
         var date : String? = null,
-//        var startTime : String? = null,
-//        var endTime : String? = null,
-        var content : String? = null)
+        var content : String? = null
+    )
 }

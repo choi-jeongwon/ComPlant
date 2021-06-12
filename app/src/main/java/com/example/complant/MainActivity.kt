@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         // Bottom Navigation View
         bottom_navigation.setOnNavigationItemSelectedListener(this)
+
         // 페이지 시작 시 R.id.action_home 버튼이 작동되도록 설정
         bottom_navigation.selectedItemId = R.id.action_home
 
@@ -44,7 +45,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         toolbar_btn_back.setOnClickListener {
             goBack()
         }
-
     }
 
     // 툴바 기본 상태
@@ -185,8 +185,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             .addToBackStack("settingFragment").commit()
     }
 
-    // .hide(프래그먼트.this) 써보기
-
     //   MessageListFragment -> MessageSettingFragment 이동 함수
     fun goMessageSettingFragment() {
         val messageSettingFragment = MessageSettingFragment()
@@ -214,6 +212,4 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         supportFragmentManager.beginTransaction().add(R.id.main_content, myInformationFragment)
             .addToBackStack("settingFragment").commit()
     }
-
-
 }

@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_setting.view.*
 
 class SettingFragment : Fragment() {
     var mainActivity: MainActivity? = null
-    var auth : FirebaseAuth? = null
+    var auth: FirebaseAuth? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -34,7 +34,8 @@ class SettingFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view = LayoutInflater.from(activity).inflate(R.layout.fragment_setting, container, false)
+        var view =
+            LayoutInflater.from(activity).inflate(R.layout.fragment_setting, container, false)
         auth = FirebaseAuth.getInstance()
 
         // 1. 내 정보 변경
@@ -55,24 +56,31 @@ class SettingFragment : Fragment() {
         }
 
         // 3. 회원 탈퇴
-        view.btn_quit_setting.setOnClickListener {  }
-        view.quit_setting.setOnClickListener {  }
+        view.btn_quit_setting.setOnClickListener { }
+        view.quit_setting.setOnClickListener { }
 
         // 4. 로그아웃
         view.btn_logout_setting.setOnClickListener {
             activity?.finish() // activity 종료
-            startActivity(Intent(activity, LoginActivity::class.java)) // 현재 activity를 종료하고 LoginActivity를 호출
+            startActivity(
+                Intent(
+                    activity,
+                    LoginActivity::class.java
+                )
+            ) // 현재 activity를 종료하고 LoginActivity를 호출
             auth?.signOut() // firebase signout
         }
         view.logout_setting.setOnClickListener {
             activity?.finish() // activity 종료
-            startActivity(Intent(activity, LoginActivity::class.java)) // 현재 activity를 종료하고 LoginActivity를 호출
+            startActivity(
+                Intent(
+                    activity,
+                    LoginActivity::class.java
+                )
+            ) // 현재 activity를 종료하고 LoginActivity를 호출
             auth?.signOut() // firebase signout
         }
 
         return view
     }
-
-
-
 }

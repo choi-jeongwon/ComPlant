@@ -58,5 +58,4 @@
             android:layout_height="228dp"
             android:background="#00FFFFFF" />
     </ScrollView>
-
 </LinearLayout>
