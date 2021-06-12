@@ -47,22 +47,5 @@ class DetailDictionaryActivity : AppCompatActivity() {
         plant_explain_layout.setText(plant_explain)
 
         Glide.with(this).load(plant_image).into(plant_image_layout)
-
-
-
-
-//        FirebaseFirestore.getInstance()?.collection("plantDictionary")?.document()?.get()?.addOnCompleteListener { task ->
-//            if(task.isSuccessful) {
-//
-//                val plant_image = task.result!!["plant_image"]
-//                Glide.with(this).load(plant_image).into(plant_image_layout)
-//            }
-//        }
-//        plant_image_layout.setImageURI()
-
-
     }
-
-
-
 }

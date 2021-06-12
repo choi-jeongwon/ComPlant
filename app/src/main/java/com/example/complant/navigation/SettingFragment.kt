@@ -55,11 +55,11 @@ class SettingFragment : Fragment() {
             mainActivity?.goMessageListFragment()
         }
 
-        // 3. 회원 탈퇴
-        view.btn_quit_setting.setOnClickListener { }
-        view.quit_setting.setOnClickListener { }
+        // 회원 탈퇴
+//        view.btn_quit_setting.setOnClickListener { }
+//        view.quit_setting.setOnClickListener { }
 
-        // 4. 로그아웃
+        // 3. 로그아웃
         view.btn_logout_setting.setOnClickListener {
             activity?.finish() // activity 종료
             startActivity(
