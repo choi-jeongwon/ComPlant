@@ -62,7 +62,7 @@
         android:layout_width="256dp"
         android:layout_height="94dp"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="20dp"
         android:scaleType="fitXY"
         android:src="@drawable/main_speech_box" />
@@ -81,6 +81,7 @@
         android:layout_marginBottom="0dp"
         android:textColor="@color/colorBlack"
         android:textSize="18dp"
+        android:text="ddddddddddd"
         android:gravity="center" />
 
     <TextView
@@ -89,7 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/main_account_button"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:text="우리 장미"
         android:textColor="@color/colorBlack"
         android:textSize="27dp"
@@ -128,66 +129,102 @@
         android:id="@+id/plant_photo"
         android:layout_width="350dp"
         android:layout_height="350dp"
-        android:layout_marginTop="195dp"
+        android:layout_marginTop="185dp"
         android:layout_marginLeft="40dp"
         android:layout_gravity="center"
         android:layout_centerHorizontal="true"/>
 
-
-
-    <!--Bottom Navigation View 화면 하단 탭 버튼-->
-
-
-    <TextView
-        android:id="@+id/profile_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="WeLoveRose"
-        android:textSize="28dp"
-        android:layout_marginTop="33dp"
-        android:layout_marginLeft="14dp"
-        android:layout_below="@id/plant_photo"
-        android:textColor="@color/colorBlack"
-        />
-
-    <TextView
-        android:id="@+id/nimgwa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="님과"
-        android:layout_below="@id/plant_photo"
-        android:textSize="20dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="180dp"
-        android:textColor="@color/colorBlack"
-        />
-
 <LinearLayout
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    <TextView
-        android:id="@+id/plant_name2"
+    android:orientation="horizontal"
+    android:gravity="center_horizontal"
+    android:layout_below="@id/plant_photo">
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="우리 장미"
-        android:textSize="28dp"
-        android:layout_marginLeft="14dp"
-        android:layout_marginRight="4dp"
+        android:orientation="vertical"
+        >
 
-        android:layout_marginTop="630dp"
-        android:textColor="@color/colorBlack"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="40dp"
+            android:gravity="center_horizontal"
+            >
 
-    <TextView
-        android:id="@+id/hamge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="635dp"
-        android:text="가 함께한지"
-        android:textColor="@color/colorBlack"
-        android:textSize="20dp" />
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WeLoveRose"
+                android:textSize="20dp"
+                android:layout_marginLeft="14dp"
+
+                android:textColor="@color/colorBlack"
+                />
+
+            <TextView
+                android:id="@+id/nimeui"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="님의"
+                android:textSize="15dp"
+                android:layout_marginLeft="4dp"
+                android:textColor="@color/colorBlack"
+                />
+
+            <TextView
+                android:id="@+id/plant_name2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="4dp"
+                android:text="우리 장미"
+                android:textColor="@color/colorBlack"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/hamge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이(가)"
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="3dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="쑥쑥 자라고 있어요!"
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/ic_home_plant"></ImageView>
 </LinearLayout>
+
+
+
+
 
 
     <!--    <ImageView-->
