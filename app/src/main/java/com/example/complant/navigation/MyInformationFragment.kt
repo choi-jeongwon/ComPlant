@@ -71,6 +71,7 @@ class MyInformationFragment : Fragment() {
                 view.my_info_current_plant_type.setText(userInfoDTO?.plantType)
                 view.edit_plant_type_setting.setText(userInfoDTO?.plantType)
 
+                // satrt day 띄우기
 //                if (userInfoDTO?.startMonth!! < 10 && userInfoDTO?.startDay!! < 10) {
 //                    view.btn_start_day_setting.setText(userInfoDTO?.startYear.toString() + "-0" + userInfoDTO?.startMonth.toString() + "-0" + userInfoDTO?.startDay.toString())
 //                    view.my_info_current_start_day.setText(userInfoDTO?.startYear.toString() + "-0" + userInfoDTO?.startMonth.toString() + "-0" + userInfoDTO?.startDay.toString())

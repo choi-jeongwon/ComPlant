@@ -66,78 +66,78 @@ class MessageSettingFragment : Fragment() {
             var picker = DatePickerDialog(view.context, listener, year, month, day)
             picker.show()
         }
-
-        view.btn_start_time?.setOnClickListener {
-            var calendar = Calendar.getInstance()
-            var hour = calendar.get(Calendar.HOUR)
-            var minute = calendar.get(Calendar.MINUTE)
-
-            var listener = TimePickerDialog.OnTimeSetListener { timePicker, i, i2 ->
-                if (i < 12) {
-                    if (i < 10 && i2 < 10)
-                        view.txt_start_time.setText("오전 0${i}:0${i2}")
-                    else if (i < 10)
-                        view.txt_start_time.setText("오전 0${i}:${i2}")
-                    else if (i2 < 10)
-                        view.txt_start_time.setText("오전 ${i}:0${i2}")
-                    else
-                        view.txt_start_time.setText("오전 ${i}:${i2}")
-
-                } else {
-                    if (i - 12 < 10 && i2 < 10)
-                        view.txt_start_time.setText("오후 0${i - 12}:0${i2}")
-                    else if (i - 12 < 10)
-                        view.txt_start_time.setText("오후 0${i - 12}:${i2}")
-                    else if (i2 < 10)
-                        view.txt_start_time.setText("오후 ${i - 12}:0${i2}")
-                    else
-                        view.txt_start_time.setText("오후 ${i - 12}:${i2}")
-                }
-            }
-
-            // boolean is24HourView : true일 때 24시간으로 표기
-            var picker = TimePickerDialog(view.context, listener, hour, minute, false)
-            picker.show()
-        }
-
-        view.btn_end_time?.setOnClickListener {
-            var calendar = Calendar.getInstance()
-            var hour = calendar.get(Calendar.HOUR)
-            var minute = calendar.get(Calendar.MINUTE)
-
-            var listener = TimePickerDialog.OnTimeSetListener { timePicker, i, i2 ->
-                if (i < 12) {
-                    if (i < 10 && i2 < 10)
-                        view.txt_end_time.setText("오전 0${i}:0${i2}")
-                    else if (i < 10)
-                        view.txt_end_time.setText("오전 0${i}:${i2}")
-                    else if (i2 < 10)
-                        view.txt_end_time.setText("오전 ${i}:0${i2}")
-                    else
-                        view.txt_end_time.setText("오전 ${i}:${i2}")
-
-                } else {
-                    if (i - 12 < 10 && i2 < 10)
-                        view.txt_end_time.setText("오후 0${i - 12}:0${i2}")
-                    else if (i - 12 < 10)
-                        view.txt_end_time.setText("오후 0${i - 12}:${i2}")
-                    else if (i2 < 10)
-                        view.txt_end_time.setText("오후 ${i - 12}:0${i2}")
-                    else
-                        view.txt_end_time.setText("오후 ${i - 12}:${i2}")
-                }
-            }
-
-            // boolean is24HourView : true일 때 24시간으로 표기
-            var picker = TimePickerDialog(view.context, listener, hour, minute, false)
-            picker.show()
-        }
+//
+//        view.btn_start_time?.setOnClickListener {
+//            var calendar = Calendar.getInstance()
+//            var hour = calendar.get(Calendar.HOUR)
+//            var minute = calendar.get(Calendar.MINUTE)
+//
+//            var listener = TimePickerDialog.OnTimeSetListener { timePicker, i, i2 ->
+//                if (i < 12) {
+//                    if (i < 10 && i2 < 10)
+//                        view.txt_start_time.setText("오전 0${i}:0${i2}")
+//                    else if (i < 10)
+//                        view.txt_start_time.setText("오전 0${i}:${i2}")
+//                    else if (i2 < 10)
+//                        view.txt_start_time.setText("오전 ${i}:0${i2}")
+//                    else
+//                        view.txt_start_time.setText("오전 ${i}:${i2}")
+//
+//                } else {
+//                    if (i - 12 < 10 && i2 < 10)
+//                        view.txt_start_time.setText("오후 0${i - 12}:0${i2}")
+//                    else if (i - 12 < 10)
+//                        view.txt_start_time.setText("오후 0${i - 12}:${i2}")
+//                    else if (i2 < 10)
+//                        view.txt_start_time.setText("오후 ${i - 12}:0${i2}")
+//                    else
+//                        view.txt_start_time.setText("오후 ${i - 12}:${i2}")
+//                }
+//            }
+//
+//            // boolean is24HourView : true일 때 24시간으로 표기
+//            var picker = TimePickerDialog(view.context, listener, hour, minute, false)
+//            picker.show()
+//        }
+//
+//        view.btn_end_time?.setOnClickListener {
+//            var calendar = Calendar.getInstance()
+//            var hour = calendar.get(Calendar.HOUR)
+//            var minute = calendar.get(Calendar.MINUTE)
+//
+//            var listener = TimePickerDialog.OnTimeSetListener { timePicker, i, i2 ->
+//                if (i < 12) {
+//                    if (i < 10 && i2 < 10)
+//                        view.txt_end_time.setText("오전 0${i}:0${i2}")
+//                    else if (i < 10)
+//                        view.txt_end_time.setText("오전 0${i}:${i2}")
+//                    else if (i2 < 10)
+//                        view.txt_end_time.setText("오전 ${i}:0${i2}")
+//                    else
+//                        view.txt_end_time.setText("오전 ${i}:${i2}")
+//
+//                } else {
+//                    if (i - 12 < 10 && i2 < 10)
+//                        view.txt_end_time.setText("오후 0${i - 12}:0${i2}")
+//                    else if (i - 12 < 10)
+//                        view.txt_end_time.setText("오후 0${i - 12}:${i2}")
+//                    else if (i2 < 10)
+//                        view.txt_end_time.setText("오후 ${i - 12}:0${i2}")
+//                    else
+//                        view.txt_end_time.setText("오후 ${i - 12}:${i2}")
+//                }
+//            }
+//
+//            // boolean is24HourView : true일 때 24시간으로 표기
+//            var picker = TimePickerDialog(view.context, listener, hour, minute, false)
+//            picker.show()
+//        }
 
         view.btn_message_contents_update?.setOnClickListener {
             messageInfo.uid = userUid
             messageInfo.date = view.txt_message_date.text.toString()
-            messageInfo.startTime = view.txt_start_time.text.toString()
-            messageInfo.endTime = view.txt_end_time.text.toString()
+//            messageInfo.startTime = view.txt_start_time.text.toString()
+//            messageInfo.endTime = view.txt_end_time.text.toString()
             messageInfo.content = view.txt_message_contents_input.text.toString()
             messageInfo.timestamp = System.currentTimeMillis()
 
