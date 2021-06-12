@@ -104,23 +104,6 @@ class MyInformationFragment : Fragment() {
 
         // 완료 버튼을 누르면 정보 DB에 업데이트
         view.btn_my_info_update.setOnClickListener {
-//            var tsDocUserInfo = firestore?.collection("userInfo")
-//                ?.document(uid!!)
-//                ?.collection("info")
-//                ?.document(uid!!)
-
-//            firestore?.runTransaction { transaction ->
-//                var userInfoDTO = transaction.get(tsDocUserInfo!!).toObject(UserInfoDTO.UserInfo::class.java)
-//
-//                userInfoDTO?.profileName = edit_profile_name_setting.text.toString()
-//                userInfoDTO?.plantName = edit_plant_name_setting.text.toString()
-//                userInfoDTO?.plantType = edit_plant_type_setting.text.toString()
-//
-//                if (userInfoDTO != null) {
-//                    transaction.set(tsDocUserInfo, userInfoDTO)
-//                }
-//            }
-
             userInfoDTOs?.profileName = edit_profile_name_setting.text.toString()
             userInfoDTOs?.plantName = edit_plant_name_setting.text.toString()
             userInfoDTOs?.plantType = edit_plant_type_setting.text.toString()
@@ -133,7 +116,6 @@ class MyInformationFragment : Fragment() {
             }
 
             mainActivity?.goBack()
-
         }
 
         // 식물 기르기 시작한 날짜 버튼 클릭
@@ -164,10 +146,6 @@ class MyInformationFragment : Fragment() {
                 userInfoDTOs?.startYear = i
                 userInfoDTOs?.startMonth = i2 + 1
                 userInfoDTOs?.startDay = i3
-
-//                selectedYear = i
-//                selectedMonth = i2 + 1
-//                selectedDay = i3
             }
 
             var picker = DatePickerDialog(view.context, listener, year, month, day)

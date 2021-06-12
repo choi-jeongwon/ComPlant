@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.fragment_my_information.view.*
+import java.util.*
 
 class HomeFragment : Fragment() {
     var mainActivity: MainActivity? = null
@@ -44,6 +45,13 @@ class HomeFragment : Fragment() {
         uid = FirebaseAuth.getInstance().currentUser?.uid
 
         var mainMessageInfo = MainPageDTO()
+
+        var calendar = Calendar.getInstance()
+        var year = calendar.get(Calendar.YEAR)
+        var month = calendar.get(Calendar.MONTH)
+        var day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val ONE_DAY = 24 * 60 * 60 * 1000
 
         view.main_account_button.setOnClickListener {
             mainActivity?.goMyPage()
@@ -78,6 +86,7 @@ class HomeFragment : Fragment() {
                 view.plant_name.setText(userInfoDTO?.plantName)
                 view.plant_name2.setText(userInfoDTO?.plantName)
                 view.plant_type.setText("( " + userInfoDTO?.plantType+ " )")
+
             }
 
         // 올린 이미지 가져오기
