@@ -28,8 +28,6 @@ class DetailDictionaryActivity : AppCompatActivity() {
     var plant_explain: String? = null
     var plant_image: String? = null
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_dictionary)

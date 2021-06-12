@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.item_comment.view.*
 import kotlinx.android.synthetic.main.item_diary.view.*
 
 class CommentActivity : AppCompatActivity() {
-    var contentUid : String? = null
+    var contentUid: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comment)
@@ -46,32 +46,34 @@ class CommentActivity : AppCompatActivity() {
         }
     }
 
+    inner class CommentRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    inner class CommentRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+        var comments: ArrayList<ContentDTO.Comment> = arrayListOf()
 
-        var comments : ArrayList<ContentDTO.Comment> = arrayListOf()
         init {
             FirebaseFirestore.getInstance()
                 .collection("images")
                 .document(contentUid!!)
                 .collection("comments")
                 .orderBy("timestamp")
-                .addSnapshotListener { querySnapshot,  firebaseFirestoreException ->
+                .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                     comments.clear()
-                    if(querySnapshot == null)return@addSnapshotListener
+                    if (querySnapshot == null) return@addSnapshotListener
 
-                    for(snapshot in querySnapshot.documents!!){
+                    for (snapshot in querySnapshot.documents!!) {
                         comments.add(snapshot.toObject(ContentDTO.Comment::class.java)!!)
                     }
                     notifyDataSetChanged()
                 }
         }
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            var view = LayoutInflater.from(parent.context).inflate(R.layout.item_comment,parent,false)
+            var view =
+                LayoutInflater.from(parent.context).inflate(R.layout.item_comment, parent, false)
             return CustomViewHolder(view)
         }
 
-        private inner class CustomViewHolder(view : View) : RecyclerView.ViewHolder(view)
+        private inner class CustomViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
         override fun getItemCount(): Int {
             return comments.size
@@ -84,18 +86,17 @@ class CommentActivity : AppCompatActivity() {
             view.commentviewitem_textview_profile.text = comments[position].userId
 
             //댓글 옆에 Profile Image 가져오기
-            FirebaseFirestore.getInstance()?.collection("profileImages")?.document(comments[position].uid!!)
+            FirebaseFirestore.getInstance()?.collection("profileImages")
+                ?.document(comments[position].uid!!)
                 ?.get()?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
 
                         val url = task.result!!["image"]
-                        Glide.with(holder.itemView.context).load(url).apply(RequestOptions().circleCrop()).into(view.commentviewitem_imageview_profile)
+                        Glide.with(holder.itemView.context).load(url)
+                            .apply(RequestOptions().circleCrop())
+                            .into(view.commentviewitem_imageview_profile)
                     }
                 }
-
-
-
         }
-
     }
 }

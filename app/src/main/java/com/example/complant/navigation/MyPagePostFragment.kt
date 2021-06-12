@@ -20,7 +20,6 @@ import kotlinx.android.synthetic.main.fragment_my_page_post.view.my_page_diaryit
 import kotlinx.android.synthetic.main.fragment_my_page_post.view.my_page_diaryitem_profile_image
 import kotlinx.android.synthetic.main.fragment_my_page_post.view.my_page_diaryitem_profile_textview
 
-
 class MyPagePostFragment : Fragment() {
     var mainActivity: MainActivity? = null
     var firestore: FirebaseFirestore? = null
@@ -75,7 +74,6 @@ class MyPagePostFragment : Fragment() {
                 var userInfoDTO = documentSnapshot.toObject(UserInfoDTO.UserInfo::class.java)
                 view.my_page_diaryitem_profile_textview.setText(userInfoDTO?.profileName)
             }
-
 
         // 추후 수정 예정 (댓글과 좋아요 버튼을 diary fragment에 있는 내용과 연결해야 함.)
         view.my_page_diaryitem_comment_imageview.setOnClickListener { v ->

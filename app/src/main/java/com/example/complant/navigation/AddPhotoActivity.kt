@@ -21,11 +21,12 @@ import java.util.*
 class AddPhotoActivity : AppCompatActivity() {
 
     var PICK_IMAGE_FROM_ALBUM = 0
-    var storage : FirebaseStorage? = null
-    var photoUri : Uri? = null
+    var storage: FirebaseStorage? = null
+    var photoUri: Uri? = null
+
     // 유저의 정보를 가져올 수 있도록 FirebaseAuth 클래스를 추가
-    var auth : FirebaseAuth? = null
-    var firestore : FirebaseFirestore? = null
+    var auth: FirebaseAuth? = null
+    var firestore: FirebaseFirestore? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,18 +52,19 @@ class AddPhotoActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE_FROM_ALBUM) {
-            if(resultCode == Activity.RESULT_OK) {
+            if (resultCode == Activity.RESULT_OK) {
                 // 선택된 이미지의 경로가 여기로 넘어옴
                 photoUri = data?.data
                 addphoto_image.setImageURI(photoUri)
 
-            }else {
+            } else {
                 // 취소버튼 눌렀을 때 작동하는 부분. 액티비티를 닫아줌.
                 finish()
             }
         }
     }
-    fun contentUpload(){
+
+    fun contentUpload() {
         //Make filename
 
         var timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())

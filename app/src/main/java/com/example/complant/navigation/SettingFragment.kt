@@ -54,19 +54,11 @@ class SettingFragment : Fragment() {
             mainActivity?.goMessageListFragment()
         }
 
-        // 3. 프로필 사진 변경
-        view.btn_profile_image_setting.setOnClickListener {  }
-        view.profile_image_setting.setOnClickListener {  }
-
-        // 4. 반려식물 별칭 변경
-        view.btn_plant_name_setting.setOnClickListener {  }
-        view.plant_name_setting.setOnClickListener {  }
-
-        // 5. 회원 탈퇴
+        // 3. 회원 탈퇴
         view.btn_quit_setting.setOnClickListener {  }
         view.quit_setting.setOnClickListener {  }
 
-        // 6. 로그아웃
+        // 4. 로그아웃
         view.btn_logout_setting.setOnClickListener {
             activity?.finish() // activity 종료
             startActivity(Intent(activity, LoginActivity::class.java)) // 현재 activity를 종료하고 LoginActivity를 호출

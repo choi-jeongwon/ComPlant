@@ -24,9 +24,8 @@ import kotlinx.android.synthetic.main.item_board.view.*
 import kotlinx.android.synthetic.main.item_diary.view.*
 
 class BoardFragment : Fragment() {
-
-    var firestore : FirebaseFirestore? = null
-    var uid : String? = null
+    var firestore: FirebaseFirestore? = null
+    var uid: String? = null
 
     //    게시판 작성 버튼 내용 시작
     var mainActivity: MainActivity? = null
@@ -65,15 +64,15 @@ class BoardFragment : Fragment() {
     // 게시판 작성 버튼 내용 끝
 
     // board RecyclerView
-    inner class BoardRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
-        var contentDTOs2 : ArrayList<ContentDTO2> = arrayListOf()
-        var contentUidList : ArrayList<String> = arrayListOf()
+    inner class BoardRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+        var contentDTOs2: ArrayList<ContentDTO2> = arrayListOf()
+        var contentUidList: ArrayList<String> = arrayListOf()
 
         init {
 
 
             firestore?.collection("images2")?.orderBy("timestamp")
-                ?.addSnapshotListener { querySnapshot,  firebaseFirestoreException ->
+                ?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                     contentDTOs2.clear()
                     contentUidList.clear()
                     // Sometimes, This code return null of querySnapshot when it signout
@@ -89,7 +88,8 @@ class BoardFragment : Fragment() {
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            var view = LayoutInflater.from(parent.context).inflate(R.layout.item_board,parent,false)
+            var view =
+                LayoutInflater.from(parent.context).inflate(R.layout.item_board, parent, false)
             return CustomViewHolder(view)
         }
 
@@ -110,7 +110,8 @@ class BoardFragment : Fragment() {
             viewholder.boarditem_explain_textview_title.text = contentDTOs2!![position].explainTitle
 
             //likes
-            viewholder.boarditem_favoritecounter_textview.text = "공감 " + contentDTOs2!![position].favoriteCount + "개"
+            viewholder.boarditem_favoritecounter_textview.text =
+                "공감 " + contentDTOs2!![position].favoriteCount + "개"
 
             //'좋아요'버튼이 눌렸을 때의 이벤트
             viewholder.boarditem_favorite_imageview.setOnClickListener {
@@ -118,10 +119,10 @@ class BoardFragment : Fragment() {
             }
 
             //'좋아요'카운터와 하트가 색칠되거나 비어있는 이벤트
-            if(contentDTOs2!![position].favorites.containsKey(uid)){
+            if (contentDTOs2!![position].favorites.containsKey(uid)) {
                 //'좋아요'버튼 클릭한 부분
                 viewholder.boarditem_favorite_imageview.setImageResource(R.drawable.ic_favorite)
-            }else{
+            } else {
                 //'좋아요'버튼 아직 클릭하지 않은 경우
                 viewholder.boarditem_favorite_imageview.setImageResource(R.drawable.ic_favorite_border)
             }
@@ -133,7 +134,9 @@ class BoardFragment : Fragment() {
                     if (task.isSuccessful) {
 
                         val url = task.result!!["image"]
-                        Glide.with(holder.itemView.context).load(url).apply(RequestOptions().circleCrop()).into(viewholder.boarditem_profile_image)
+                        Glide.with(holder.itemView.context).load(url)
+                            .apply(RequestOptions().circleCrop())
+                            .into(viewholder.boarditem_profile_image)
                     }
                 }
 
@@ -149,14 +152,15 @@ class BoardFragment : Fragment() {
                 bundle.putString("userId", contentDTOs2[position].userId)   // 이메일 값
 
                 fragment.arguments = bundle
-                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.main_content, fragment)?.commit()
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.main_content, fragment)?.commit()
             }
 
             viewholder.boarditem_comment_imageview.setOnClickListener { v ->
-                    var intent = Intent(v.context, CommentActivity2::class.java)
-                    intent.putExtra("contentUid", contentUidList[position])
-                    startActivity(intent)
-                }
+                var intent = Intent(v.context, CommentActivity2::class.java)
+                intent.putExtra("contentUid", contentUidList[position])
+                startActivity(intent)
+            }
 
             viewholder.board_select.setOnClickListener { v ->
                 var intent = Intent(v.context, DetailBoardActivity::class.java)
@@ -169,22 +173,22 @@ class BoardFragment : Fragment() {
 
         }
 
-        fun favoriteEvent(position: Int){
+        fun favoriteEvent(position: Int) {
             var tsDoc = firestore?.collection("images2")?.document(contentUidList[position])
             firestore?.runTransaction { transaction ->
 
                 var contentDTO2 = transaction.get(tsDoc!!).toObject(ContentDTO2::class.java)
 
-                if(contentDTO2!!.favorites.containsKey(uid)){
+                if (contentDTO2!!.favorites.containsKey(uid)) {
                     // '좋아요' 버튼이 클릭되어 있을 때(취소하는 이벤트 발생)
                     contentDTO2?.favoriteCount = contentDTO2?.favoriteCount - 1
                     contentDTO2?.favorites.remove(uid)
-                }else {
+                } else {
                     // '좋아요' 버튼이 클릭되어 있지 않을 때(클릭하는 이벤트 발생)
                     contentDTO2?.favoriteCount = contentDTO2?.favoriteCount + 1
                     contentDTO2?.favorites[uid!!] = true
                 }
-                transaction.set(tsDoc,contentDTO2)
+                transaction.set(tsDoc, contentDTO2)
             }
 
 

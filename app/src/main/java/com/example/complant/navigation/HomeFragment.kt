@@ -22,7 +22,7 @@ class HomeFragment : Fragment() {
     var mainActivity: MainActivity? = null
     var firestore: FirebaseFirestore? = null
     var auth: FirebaseAuth? = null
-    var uid : String? = null
+    var uid: String? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -46,18 +46,11 @@ class HomeFragment : Fragment() {
 
         var mainMessageInfo = MainPageDTO()
 
-        var calendar = Calendar.getInstance()
-        var year = calendar.get(Calendar.YEAR)
-        var month = calendar.get(Calendar.MONTH)
-        var day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        val ONE_DAY = 24 * 60 * 60 * 1000
-
         view.main_account_button.setOnClickListener {
             mainActivity?.goMyPage()
         }
 
-        var str : String? = arguments?.getString("content")
+        var str: String? = arguments?.getString("content")
         mainMessageInfo.message = str
         mainMessageInfo.uid = uid
 
@@ -67,7 +60,7 @@ class HomeFragment : Fragment() {
         }
 
         firestore?.collection("mainPage")?.document(uid!!)?.addSnapshotListener { snapshot, e ->
-            if(snapshot == null) return@addSnapshotListener
+            if (snapshot == null) return@addSnapshotListener
             var mainPageDTO = snapshot.toObject(MainPageDTO::class.java)
             if (mainPageDTO?.message != null) {
                 view.speech_box_text.setText(mainPageDTO?.message)
@@ -80,13 +73,12 @@ class HomeFragment : Fragment() {
             ?.collection("info")
             ?.document(uid!!)
             ?.addSnapshotListener { snapshot, e ->
-                if(snapshot == null) return@addSnapshotListener
+                if (snapshot == null) return@addSnapshotListener
                 var userInfoDTO = snapshot.toObject(UserInfoDTO.UserInfo::class.java)
                 view.profile_name.setText(userInfoDTO?.profileName)
                 view.plant_name.setText(userInfoDTO?.plantName)
                 view.plant_name2.setText(userInfoDTO?.plantName)
-                view.plant_type.setText("( " + userInfoDTO?.plantType+ " )")
-
+                view.plant_type.setText("( " + userInfoDTO?.plantType + " )")
             }
 
         // 올린 이미지 가져오기
@@ -97,17 +89,18 @@ class HomeFragment : Fragment() {
 
     // 올린 이미지를 다운로드 받는 함수
     fun getProfileImage() {
-        firestore?.collection("profileImages")?.document(uid!!)?.addSnapshotListener {
-                documentSnapshot, firebaseFirestoreException ->
+        firestore?.collection("profileImages")?.document(uid!!)
+            ?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
 
-            // documentSnapshot이 null일 경우 바로 리턴
-            if(documentSnapshot == null) return@addSnapshotListener
+                // documentSnapshot이 null일 경우 바로 리턴
+                if (documentSnapshot == null) return@addSnapshotListener
 
-            // null이 아닐 경우 이미지 주소 값을 받아와서 Glide로 다운로드 받는다.
-            if(documentSnapshot.data != null) {
-                var url = documentSnapshot?.data!!["image"]
-                Glide.with(activity!!).load(url).apply(RequestOptions().circleCrop()).into(view?.plant_photo!!)
+                // null이 아닐 경우 이미지 주소 값을 받아와서 Glide로 다운로드 받는다.
+                if (documentSnapshot.data != null) {
+                    var url = documentSnapshot?.data!!["image"]
+                    Glide.with(activity!!).load(url).apply(RequestOptions().circleCrop())
+                        .into(view?.plant_photo!!)
+                }
             }
-        }
     }
 }

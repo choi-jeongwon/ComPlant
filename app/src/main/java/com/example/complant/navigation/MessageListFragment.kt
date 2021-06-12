@@ -39,16 +39,14 @@ class MessageListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view = LayoutInflater.from(activity).inflate(R.layout.fragment_message_list, container, false)
+        var view =
+            LayoutInflater.from(activity).inflate(R.layout.fragment_message_list, container, false)
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
         userUid = FirebaseAuth.getInstance().currentUser?.uid
 
-        //var messageInfo = MessageDTO()
-
         view.btn_new_message?.setOnClickListener {
             mainActivity?.goMessageSettingFragment()
-
         }
 
         view.fragment_message_recyclerview.adapter = MessageListRecyclerViewAdapter()
@@ -98,8 +96,6 @@ class MessageListFragment : Fragment() {
             var viewholder = (holder as CustomViewHolder).itemView
 
             viewholder.message_day.text = messageDTOs!![position].date
-//            viewholder.message_start_time.text = messageDTOs!![position].startTime
-//            viewholder.message_end_time.text = messageDTOs!![position].endTime
             viewholder.message_contents.text = messageDTOs!![position].content
 
             viewholder.recycle_message_item.setOnClickListener {
@@ -111,31 +107,6 @@ class MessageListFragment : Fragment() {
                 homeFragment.arguments = bundle
                 mainActivity?.goHomeFragment(homeFragment)
             }
-
-            //setMain이 true로 이미 설정되어 있는 것을 체크 표시 한다.
-//            if (messageDTOs!![position!!].setMain == true) {
-//                viewholder.message_check.visibility = View.VISIBLE
-//            }
-//
-            // 복수 선택 기능
-//            viewholder.recycle_message_item.setOnClickListener {
-//                var tsDoc = firestore?.collection("messages")?.document(messageDTOs!![position].timestamp.toString())
-//                firestore?.runTransaction { transaction ->
-//
-//                    var messageDTO = transaction.get(tsDoc!!).toObject(MessageDTO::class.java)
-//
-//                    if (messageDTO!!.setMain == false) {
-//                        messageDTO?.setMain = true
-//                        viewholder.message_check.visibility = View.VISIBLE
-//
-//                    }
-//                    else if (messageDTO!!.setMain == true) {
-//                        messageDTO?.setMain = false
-//                        viewholder.message_check.visibility = View.INVISIBLE
-//                    }
-//                    transaction.set(tsDoc, messageDTO)
-//                }
-//            }
         }
     }
 }

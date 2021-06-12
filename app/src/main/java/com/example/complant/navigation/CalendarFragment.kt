@@ -82,8 +82,6 @@ class CalendarFragment : Fragment() {
             toDayDecorator() // 오늘 날짜 크기를 키우고 굵은 색으로 표시
             //EventDecorator(Color.RED, Collections.singleton(CalendarDay.today())), // 특정 날짜 점 찍기
             //EventDecorator(Color.BLUE, Collections.singleton(CalendarDay.from(2021,6 - 1,12))) // 특정 날짜 점 찍기
-
-
         )
 
         view.calendar_view.setOnDateChangedListener { widget, date, selected ->
@@ -123,7 +121,6 @@ class CalendarFragment : Fragment() {
                                         currentYear.toString() + currentMonth.toString() + currentDate.toString()
                                 }
 
-
                                 if (wateredCalendarInfo.uid != null && wateredCalendarInfo.wateredYear != null && wateredCalendarInfo.wateredMonth != null && wateredCalendarInfo.wateredDay != null) {
                                     firestore?.collection("calendar")?.document(uid!!)
                                         ?.collection("userWatered")
@@ -135,7 +132,6 @@ class CalendarFragment : Fragment() {
                             DialogInterface.BUTTON_NEGATIVE -> {
                                 mainActivity?.goWateringFragment()
                             }
-
                         }
                     }
                 }
@@ -170,7 +166,6 @@ class CalendarFragment : Fragment() {
                 } else {
                     date =
                         "물 주기 시작 : " + wateringDTO.wateringStartYear.toString() + "-" + wateringDTO.wateringStartMonth.toString() + "-" + wateringDTO.wateringStartDay.toString()
-
                 }
 
                 view.calendar_date.setText(date)
@@ -178,11 +173,7 @@ class CalendarFragment : Fragment() {
                 var interval: String? =
                     wateringDTO.wateringIntervalDay.toString() + "일에 한 번 물을 줍니다."
                 view.calendar_interval.setText(interval)
-
-
             }
-
-
         }
 
         view.fragment_calendar.adapter = CalendarRecyclerViewAdaper()
@@ -250,7 +241,6 @@ class CalendarFragment : Fragment() {
 
         }
     }
-
 }
 
 // 토요일을 파란색으로 변경
@@ -315,14 +305,14 @@ class toDayDecorator : DayViewDecorator {
 //}
 
 // 특정 날짜에 점 표시
-class EventDecorator(var color: Int?, var dates: Set<CalendarDay>?) : DayViewDecorator {
-
-    override fun shouldDecorate(day: CalendarDay?): Boolean {
-        return dates!!.contains(day)
-    }
-
-    override fun decorate(view: DayViewFacade?) {
-        view?.addSpan(DotSpan(5F, color!!))
-    }
-}
+//class EventDecorator(var color: Int?, var dates: Set<CalendarDay>?) : DayViewDecorator {
+//
+//    override fun shouldDecorate(day: CalendarDay?): Boolean {
+//        return dates!!.contains(day)
+//    }
+//
+//    override fun decorate(view: DayViewFacade?) {
+//        view?.addSpan(DotSpan(5F, color!!))
+//    }
+//}
 

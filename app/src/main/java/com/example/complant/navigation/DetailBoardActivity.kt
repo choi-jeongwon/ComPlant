@@ -7,7 +7,6 @@ import com.example.complant.R
 import kotlinx.android.synthetic.main.activity_detail_board.*
 
 class DetailBoardActivity : AppCompatActivity() {
-
     var explainTitle: String? = null
     var explain: String? = null
     var imageUrl: String? = null
@@ -15,7 +14,6 @@ class DetailBoardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_board)
-
 
         explainTitle = intent.getStringExtra("explainTitle")
         explain = intent.getStringExtra("explain")
