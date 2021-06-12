@@ -215,4 +215,5 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             .addToBackStack("settingFragment").commit()
     }
 
+
 }

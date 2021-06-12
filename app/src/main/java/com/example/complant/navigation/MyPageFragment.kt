@@ -9,6 +9,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -249,11 +250,11 @@ class MyPageFragment : Fragment() {
                 notifyDataSetChanged() // 리사이클뷰 새로고침
             }
         }
-        override fun onCreateViewHolder(p0: ViewGroup, p1: Int): RecyclerView.ViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             // 화면 폭의 1/3 값을 가져옴.
             var width = resources.displayMetrics.widthPixels / 3
 
-            var imageview = ImageView(p0.context)
+            var imageview = ImageView(parent.context)
             imageview.layoutParams = LinearLayoutCompat.LayoutParams(width, width)
             return CustomViewHolder(imageview)
 
@@ -267,11 +268,30 @@ class MyPageFragment : Fragment() {
             return contentDTOs.size
         }
 
-        override fun onBindViewHolder(p0: RecyclerView.ViewHolder, p1: Int) {
-            var imageview = (p0 as CustomViewHolder).imageview
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+            var imageview = (holder as CustomViewHolder).imageview
 
             // Glide로 이미지 다운로드
-            Glide.with(p0.itemView.context).load(contentDTOs[p1].imageUrl).apply(RequestOptions().centerCrop()).into(imageview)
+            Glide.with(holder.itemView.context).load(contentDTOs[position].imageUrl).apply(RequestOptions().centerCrop()).into(imageview)
+
+            holder.imageview.setOnClickListener {
+
+                var myPagePostFragment = MyPagePostFragment()
+                val bundle = Bundle()
+
+                bundle.putString("explain", contentDTOs[position].explain)
+                bundle.putString("imageUrl", contentDTOs[position].imageUrl)
+                bundle.putString("userId", contentDTOs[position].userId)
+                bundle.putInt("favoriteCount", contentDTOs[position].favoriteCount)
+                bundle.putString("destinationUid", uid) // 각 유저 페이지의 정보 uid를 보낸다.
+                bundle.putLong("timestamp", contentDTOs[position].timestamp!!) // 구분자인 timestamp를 보낸다.
+                myPagePostFragment.arguments = bundle
+
+                activity?.supportFragmentManager?.beginTransaction()?.add(R.id.main_content, myPagePostFragment)
+                    ?.addToBackStack("settingFragment")?.commit()
+
+            }
+
         }
     }
 }
