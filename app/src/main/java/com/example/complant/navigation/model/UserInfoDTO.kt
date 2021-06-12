@@ -10,6 +10,9 @@ data class UserInfoDTO (
         var password : String? = null,
         var profileName : String? = null,
         var plantName : String? = null,
-        var plantType : String? = null
+        var plantType : String? = null,
+        var startYear : Int? = null, // 기르기 시작 날짜 년도
+        var startMonth : Int? = null, // 기르기 시작 날짜 월
+        var startDay : Int? = null // 기르기 시작 날짜 일
         )
 }

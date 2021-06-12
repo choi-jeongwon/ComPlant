@@ -1,5 +1,6 @@
 package com.example.complant.navigation
 
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -19,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.fragment_my_information.*
 import kotlinx.android.synthetic.main.fragment_my_information.view.*
 import kotlinx.android.synthetic.main.fragment_my_page.view.*
+import java.util.*
 
 class MyInformationFragment : Fragment() {
     var mainActivity: MainActivity? = null
@@ -49,7 +51,7 @@ class MyInformationFragment : Fragment() {
         uid = FirebaseAuth.getInstance().currentUser?.uid
         currentUserId = FirebaseAuth.getInstance().currentUser?.email
 
-      //  var userInfoDTO = UserInfoDTO.UserInfo()
+        var userInfoDTOs = UserInfoDTO.UserInfo()
 
         // 프래그먼트에 들어오면 현재 정보(정보 변경 전)를 보여준다.
         view.my_info_current_id.setText(currentUserId)
@@ -68,6 +70,23 @@ class MyInformationFragment : Fragment() {
                 view.edit_plant_name_setting.setText(userInfoDTO?.plantName)
                 view.my_info_current_plant_type.setText(userInfoDTO?.plantType)
                 view.edit_plant_type_setting.setText(userInfoDTO?.plantType)
+
+                if (userInfoDTO?.startMonth!! < 10 && userInfoDTO?.startDay!! < 10) {
+                    view.btn_start_day_setting.setText(userInfoDTO?.startYear.toString() + "-0" + userInfoDTO?.startMonth.toString() + "-0" + userInfoDTO?.startDay.toString())
+                    view.my_info_current_start_day.setText(userInfoDTO?.startYear.toString() + "-0" + userInfoDTO?.startMonth.toString() + "-0" + userInfoDTO?.startDay.toString())
+                }
+                else if (userInfoDTO?.startMonth!! + 1 < 10) {
+                    view.btn_start_day_setting.setText(userInfoDTO?.startYear.toString() + "-0" + userInfoDTO?.startMonth.toString() + "-" + userInfoDTO?.startDay.toString())
+                    view.my_info_current_start_day.setText(userInfoDTO?.startYear.toString() + "-0" + userInfoDTO?.startMonth.toString() + "-" + userInfoDTO?.startDay.toString())
+                }
+                else if (userInfoDTO?.startDay!! < 10) {
+                    view.btn_start_day_setting.setText(userInfoDTO?.startYear.toString() + "-" + userInfoDTO?.startMonth.toString() + "-0" + userInfoDTO?.startDay.toString())
+                    view.my_info_current_start_day.setText(userInfoDTO?.startYear.toString() + "-" + userInfoDTO?.startMonth.toString() + "-0" + userInfoDTO?.startDay.toString())
+                }
+                else {
+                    view.btn_start_day_setting.setText(userInfoDTO?.startYear.toString() + "-" + userInfoDTO?.startMonth.toString() + "-" + userInfoDTO?.startDay.toString())
+                    view.my_info_current_start_day.setText(userInfoDTO?.startYear.toString() + "-" + userInfoDTO?.startMonth.toString() + "-" + userInfoDTO?.startDay.toString())
+                }
             }
 
 
@@ -85,23 +104,74 @@ class MyInformationFragment : Fragment() {
 
         // 완료 버튼을 누르면 정보 DB에 업데이트
         view.btn_my_info_update.setOnClickListener {
-            var tsDocUserInfo = firestore?.collection("userInfo")
-                ?.document(uid!!)
-                ?.collection("info")
-                ?.document(uid!!)
+//            var tsDocUserInfo = firestore?.collection("userInfo")
+//                ?.document(uid!!)
+//                ?.collection("info")
+//                ?.document(uid!!)
 
-            firestore?.runTransaction { transaction ->
-                var userInfoDTO = transaction.get(tsDocUserInfo!!).toObject(UserInfoDTO.UserInfo::class.java)
+//            firestore?.runTransaction { transaction ->
+//                var userInfoDTO = transaction.get(tsDocUserInfo!!).toObject(UserInfoDTO.UserInfo::class.java)
+//
+//                userInfoDTO?.profileName = edit_profile_name_setting.text.toString()
+//                userInfoDTO?.plantName = edit_plant_name_setting.text.toString()
+//                userInfoDTO?.plantType = edit_plant_type_setting.text.toString()
+//
+//                if (userInfoDTO != null) {
+//                    transaction.set(tsDocUserInfo, userInfoDTO)
+//                }
+//            }
 
-                userInfoDTO?.profileName = edit_profile_name_setting.text.toString()
-                userInfoDTO?.plantName = edit_plant_name_setting.text.toString()
-                userInfoDTO?.plantType = edit_plant_type_setting.text.toString()
+            userInfoDTOs?.profileName = edit_profile_name_setting.text.toString()
+            userInfoDTOs?.plantName = edit_plant_name_setting.text.toString()
+            userInfoDTOs?.plantType = edit_plant_type_setting.text.toString()
+            userInfoDTOs?.uid = uid
+            userInfoDTOs?.userId = currentUserId
 
-                if (userInfoDTO != null) {
-                    transaction.set(tsDocUserInfo, userInfoDTO)
-                }
+            if (userInfoDTOs.startYear != null && userInfoDTOs.startMonth != null && userInfoDTOs.startDay != null) {
+                firestore?.collection("userInfo")?.document(uid!!)?.collection("info")?.document(uid!!)
+                    ?.set(userInfoDTOs)
             }
 
+            mainActivity?.goBack()
+
+        }
+
+        // 식물 기르기 시작한 날짜 버튼 클릭
+        view.btn_start_day_setting?.setOnClickListener {
+            var calendar = Calendar.getInstance()
+            var year = calendar.get(Calendar.YEAR)
+            var month = calendar.get(Calendar.MONTH)
+            var day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            var listener = DatePickerDialog.OnDateSetListener { datePicker, i, i2, i3 ->
+                if (i2 + 1 < 10 && i3 < 10) {
+                    view.btn_start_day_setting.setText("${i}-0${i2 + 1}-0${i3}")
+                    view.my_info_current_start_day.setText("${i}-0${i2 + 1}-0${i3}")
+                }
+                else if (i2 + 1 < 10) {
+                    view.btn_start_day_setting.setText("${i}-0${i2 + 1}-${i3}")
+                    view.my_info_current_start_day.setText("${i}-0${i2 + 1}-${i3}")
+                }
+                else if (i3 < 10) {
+                    view.btn_start_day_setting.setText("${i}-${i2 + 1}-0${i3}")
+                    view.my_info_current_start_day.setText("${i}-${i2 + 1}-0${i3}")
+                }
+                else {
+                    view.btn_start_day_setting.setText("${i}-${i2 + 1}-${i3}")
+                    view.my_info_current_start_day.setText("${i}-${i2 + 1}-${i3}")
+                }
+
+                userInfoDTOs?.startYear = i
+                userInfoDTOs?.startMonth = i2 + 1
+                userInfoDTOs?.startDay = i3
+
+//                selectedYear = i
+//                selectedMonth = i2 + 1
+//                selectedDay = i3
+            }
+
+            var picker = DatePickerDialog(view.context, listener, year, month, day)
+            picker.show()
         }
 
         return view
