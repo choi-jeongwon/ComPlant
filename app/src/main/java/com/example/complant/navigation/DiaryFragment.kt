@@ -187,8 +187,6 @@ class DiaryFragment : Fragment() {
                 }
                 transaction.set(tsDoc,contentDTO)
             }
-
-
         }
     }
 

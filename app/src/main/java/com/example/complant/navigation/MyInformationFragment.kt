@@ -52,7 +52,6 @@ class MyInformationFragment : Fragment() {
 
         // 프래그먼트에 들어오면 현재 정보(정보 변경 전)를 보여준다.
         view.my_info_current_id.setText(currentUserId)
-        view.edit_id_setting.setText(currentUserId)
 
         // DB에서 profile name과 plant name을 가져와서 현재 정보를 보여준다.
         firestore?.collection("userInfo")
@@ -66,6 +65,8 @@ class MyInformationFragment : Fragment() {
                 view.edit_profile_name_setting.setText(userInfoDTO?.profileName)
                 view.my_info_current_plant_name.setText(userInfoDTO?.plantName)
                 view.edit_plant_name_setting.setText(userInfoDTO?.plantName)
+                view.my_info_current_plant_type.setText(userInfoDTO?.plantType)
+                view.edit_plant_type_setting.setText(userInfoDTO?.plantType)
             }
 
 
