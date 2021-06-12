@@ -110,10 +110,10 @@ class MyInformationFragment : Fragment() {
             userInfoDTOs?.uid = uid
             userInfoDTOs?.userId = currentUserId
 
-            if (userInfoDTOs.startYear != null && userInfoDTOs.startMonth != null && userInfoDTOs.startDay != null) {
+            //if (userInfoDTOs.startYear != null && userInfoDTOs.startMonth != null && userInfoDTOs.startDay != null) {
                 firestore?.collection("userInfo")?.document(uid!!)?.collection("info")?.document(uid!!)
                     ?.set(userInfoDTOs)
-            }
+           // }
 
             mainActivity?.goBack()
         }
