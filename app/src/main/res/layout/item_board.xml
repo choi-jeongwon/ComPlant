@@ -5,7 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    /* 이 밑의 board_select는 item_dictionary.xml의 (id) dictionary_cardview부분 처럼 만든건데 이게 될까.. 이거 안되면 이 부분 cardview로 묶자*/
+
+    // 게시글 구분선
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorDivision"
+        android:orientation="horizontal" />
+
     <!--Content Layout-->
     <LinearLayout
         android:id="@+id/board_select"
@@ -13,6 +21,14 @@
         android:layout_height="80dp"
         android:orientation="horizontal"
         android:gravity="center_vertical">
+
+        // 게시글 사진 + 게시판 글 제목 부분
+        <LinearLayout
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
         <ImageView
             android:id="@+id/boarditem_profile_image"
             android:layout_width="50dp"
@@ -25,27 +41,46 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
+            android:textSize="20dp"
             android:text="게시판 글 제목" />
+
+        </LinearLayout>
+
+        // 공감 하트 + 공감 개수 부분
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
         <ImageView
             android:id="@+id/boarditem_favorite_imageview"
             android:src="@drawable/ic_favorite_border"
             android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginLeft="100dp"/>
+            android:layout_height="35dp"/>
+
         <TextView
             android:id="@+id/boarditem_favoritecounter_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="공감 0개" />
+
+        </LinearLayout>
     </LinearLayout>
 
     <!--Writer Layout-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        // 작성자 부분
+        <LinearLayout
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
@@ -56,13 +91,23 @@
         android:id="@+id/boarditem_profile_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
         android:text="User Name" />
+
+        </LinearLayout>
+
+        //덧글 작성 부분
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
         <Button
             android:id="@+id/boarditem_comment_imageview"
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:text="덧글작성"/>
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -30,7 +30,8 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/colorDivision"
-        android:orientation="horizontal"></LinearLayout>
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp"/>
 
     // BoardFragment 에 사용할 RecyclerView 를 만들어줌
     // 안에 들어갈 item 은 item_board.xml 파일

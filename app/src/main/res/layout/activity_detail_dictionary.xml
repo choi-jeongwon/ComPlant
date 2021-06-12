@@ -1,84 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".navigation.DetailDictionaryActivity">
+
+
+    <!--화면 로딩 진행바-->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".navigation.DetailDictionaryActivity">
-
-
-        <!--화면 로딩 진행바-->
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="gone" />
-
-        <!--Toolbar(상단 툴바)-->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/my_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_alignParentTop="true"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="3dp"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/logo_title" />
-        </androidx.appcompat.widget.Toolbar>
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
 
         <LinearLayout
-            android:id="@+id/toolbar_division"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/my_toolbar"
-            android:layout_marginBottom="10dp"
-            android:background="@color/colorDivision"
-            android:orientation="horizontal" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <!--Contents-->
+            <!--Toolbar(상단 툴바)-->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/my_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_alignParentTop="true"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    <TextView
-        android:id="@+id/plant_name_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar_division"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:textSize="25sp"
-        android:text="식물이름"
-        android:textStyle="bold"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="3dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/logo_title" />
+            </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/plant_water_cycle_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/plant_name_layout"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:textSize="15sp"
-        android:text="물 주는 시기" />
+            <LinearLayout
+                android:id="@+id/toolbar_division"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/my_toolbar"
+                android:layout_marginBottom="10dp"
+                android:background="@color/colorDivision"
+                android:orientation="horizontal" />
+
+            <!--Contents-->
+
+            <TextView
+                android:id="@+id/plant_name_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_below="@id/toolbar_division"
+                android:layout_marginTop="10dp"
+                android:text="식물이름"
+                android:textSize="27sp"
+                android:textStyle="italic"
+                android:textColor="#000000"/>
+
+            // 물 주는 주기
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/ic_watering" />
+
+                <TextView
+                    android:id="@+id/plant_water_cycle_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/plant_name_layout"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="30dp"
+                    android:text="물 주는 시기"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            // 햇빛 조건
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/ic_sunshine" />
+
+                <TextView
+                    android:id="@+id/plant_sunshine_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/plant_name_layout"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="30dp"
+                    android:text="햇빛 조건"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            //습도
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/ic_humidity" />
+
+                <TextView
+                    android:id="@+id/plant_humidity_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/plant_name_layout"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="30dp"
+                    android:text="습도"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
 
-    <ImageView
-        android:id="@+id/plant_image_layout"
-        android:layout_width="400dp"
-        android:layout_height="400dp"
-        android:layout_below="@id/plant_water_cycle_layout"
-        android:src="@mipmap/ic_launcher"/>
-    
-    <TextView
-        android:id="@+id/plant_explain_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/plant_image_layout"
-        android:textSize="20sp"
-        android:text="식물 설명" />
+            // 식물 이미지
+            <ImageView
+                android:id="@+id/plant_image_layout"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center"
+                android:layout_below="@id/plant_water_cycle_layout"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/plant_explain_layout"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/plant_image_layout"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
+                android:text="식물 설명"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+    </ScrollView>
 
 
-    </RelativeLayout>
+</RelativeLayout>

@@ -118,12 +118,14 @@ class DictionaryFragment : Fragment() {
 
 
 
-
+            // DetailDictionaryActivity 로 보내줄 데이터들
             viewholder.dictionary_cardview.setOnClickListener { v ->
                 var intent = Intent(v.context, DetailDictionaryActivity::class.java)
                 intent.putExtra("plant_name", plantDictionary!![position].plant_name)
                 intent.putExtra("plant_image", plantDictionary!![position].plant_image)
                 intent.putExtra("plant_water_cycle", plantDictionary!![position].plant_water_cycle)
+                intent.putExtra("plant_sunshine", plantDictionary!![position].plant_sunshine)
+                intent.putExtra("plant_humidity", plantDictionary!![position].plant_humidity)
                 intent.putExtra("plant_explain", plantDictionary!![position].plant_explain)
                 startActivity(intent)
             }

@@ -13,13 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
-            android:text="게시글 제목" />
+            android:text="[게시글 제목]" />
 
         <TextView
             android:id="@+id/boarditem_explain_textview_title"
@@ -27,22 +28,26 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="표시될 게시글 제목"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="#000000"/>
     </LinearLayout>
 
     <!--Content ImageView-->
     <ImageView
         android:id="@+id/boarditem_imageview_content"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:scaleType="fitXY" />
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_gravity="center"/>
 
     <!--Content TextView-->
     <TextView
         android:id="@+id/boarditem_explain_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:text="게시글 내용" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="게시글 내용"
+        android:textSize="18sp"/>
 
 </LinearLayout>

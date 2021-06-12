@@ -5,14 +5,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="20dp"
+        android:layout_marginLeft="100dp">
+    <ImageView
+        android:id="@+id/plant_dictionary_ic"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_planting"
+        android:layout_gravity="center_vertical|center_horizontal" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:text="식물 사전"
         android:textSize="20sp"
+        android:textStyle="italic"
         android:textColor="#000000"
-        android:gravity="center"
-        android:padding="20dp" />
+        android:layout_gravity="center_vertical|center_horizontal" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/searchLinearLayout"
