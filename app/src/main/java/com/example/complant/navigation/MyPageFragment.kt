@@ -254,7 +254,7 @@ class MyPageFragment : Fragment() {
 
                     // contentDTOs 사이즈 값에 따라 account_post_count 값 증가시킴.
                     fragmentView?.account_post_count?.text = contentDTOs.size.toString()
-                    notifyDataSetChanged() // 리사이클뷰 새로고침
+                    notifyDataSetChanged() // 리사이클러뷰 새로고침
                 }
         }
 
