@@ -145,7 +145,6 @@ class MyPageFragment : Fragment() {
             }
     }
 
-    // 나중에 수정할 것. requestFollow(), getFollowerAndFollowing() 수정하기
     fun requestFollow() {
         // Save data to my account
         var tsDocFollowing = firestore?.collection("users")?.document(currentUserUid!!)
